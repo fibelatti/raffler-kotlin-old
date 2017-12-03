@@ -4,4 +4,5 @@
     android:id="@+id/textView_dismissibleHintMessage"
     style="@style/TextPrimary"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_small"/>

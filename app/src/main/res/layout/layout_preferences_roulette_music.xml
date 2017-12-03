@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_rouletteMusic"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/textView_titleRouletteMusic"
+        style="@style/PreferencesTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/preferences_roulette_music_title"/>
+
+    <include
+        android:id="@+id/divider_rouletteMusic"
+        layout="@layout/layout_divider_default"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_size"
+        android:layout_below="@+id/textView_titleRouletteMusic"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/divider_rouletteMusic">
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/checkBox_rouletteMusic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textView_rouletteMusic"
+            style="@style/TextPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="fill"
+            android:layout_toEndOf="@id/checkBox_rouletteMusic"
+            android:gravity="center_vertical"
+            android:text="@string/preferences_roulette_music_description"/>
+    </RelativeLayout>
+</RelativeLayout>

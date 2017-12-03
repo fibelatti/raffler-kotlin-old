@@ -38,12 +38,18 @@
 
     <style name="AppButton">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/clickable_area</item>
+        <item name="android:layout_height">@dimen/button_height</item>
         <item name="android:paddingLeft">@dimen/padding_regular</item>
         <item name="android:paddingRight">@dimen/padding_regular</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">@dimen/text_size_regular</item>
+    </style>
+
+    <style name="AppButton.About" parent="AppButton">
+        <item name="colorButtonNormal">@color/colorWhite</item>
+        <item name="colorControlHighlight">@color/colorWhiteOpaque</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
     <style name="AppButton.Primary" parent="AppButton">
@@ -63,7 +69,6 @@
 
     <style name="TextPrimary">
         <item name="android:textColor">@color/textPrimary</item>
-        <item name="android:padding">@dimen/padding_small</item>
         <item name="android:textSize">@dimen/text_size_regular</item>
     </style>
 
@@ -71,8 +76,14 @@
         <item name="android:textColor">@color/colorWhiteOpaque</item>
     </style>
 
+    <style name="PreferencesTitle">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/text_size_regular</item>
+    </style>
+
     <style name="TextPrimary.Title" parent="TextPrimary">
         <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:padding">@dimen/padding_small</item>
         <item name="android:textStyle">bold</item>
     </style>
 

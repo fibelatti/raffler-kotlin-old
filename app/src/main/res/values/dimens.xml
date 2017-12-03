@@ -23,6 +23,7 @@
     <dimen name="margin_larger">40dp</dimen>
 
     <dimen name="clickable_area">40dp</dimen>
+    <dimen name="button_height">60dp</dimen>
 
     <dimen name="divider_size">1dp</dimen>
 
@@ -32,4 +33,7 @@
     <dimen name="rounded_button_corner_radius">2dp</dimen>
 
     <dimen name="list_item_card_height">100dp</dimen>
+
+    <dimen name="preferences_space_regular">10dp</dimen>
+    <dimen name="preferences_space_large">30dp</dimen>
 </resources>

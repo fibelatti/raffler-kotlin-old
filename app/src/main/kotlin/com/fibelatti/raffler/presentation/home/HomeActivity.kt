@@ -12,6 +12,7 @@ import com.fibelatti.raffler.R
 import com.fibelatti.raffler.presentation.base.BaseActivity
 import com.fibelatti.raffler.presentation.base.inTransaction
 import com.fibelatti.raffler.presentation.common.DialogHelper
+import com.fibelatti.raffler.presentation.preferences.PreferencesFragment
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.layout_toolbar_default.*
 import javax.inject.Inject
@@ -43,6 +44,8 @@ class HomeActivity :
     private var selectedItemId: Int = R.id.menuItem_quickDecisions
     @CurrentView
     private var currentView: Long = CURRENT_VIEW_NONE
+
+    private lateinit var preferencesFragment: PreferencesFragment
 
     override val rootLayout: FrameLayout?
         get() = layout_root
@@ -125,7 +128,7 @@ class HomeActivity :
     }
 
     private fun initFragments() {
-        //TODO
+        preferencesFragment = PreferencesFragment.newInstance()
     }
 
     private fun updateContent(@CurrentView currentView: Long) {
@@ -150,7 +153,7 @@ class HomeActivity :
                     title = getString(R.string.home_menu_item_preferences)
                     toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.colorGrayDark))
                     layout_bottomNavigation.itemBackgroundResource = R.color.colorGrayDark
-//                    pushFragment(loginFragment)
+                    pushFragment(preferencesFragment)
                 }
             }
         }
