@@ -67,6 +67,10 @@
         <item name="android:textSize">@dimen/text_size_regular</item>
     </style>
 
+    <style name="TextPrimary.White" parent="TextPrimary">
+        <item name="android:textColor">@color/colorWhiteOpaque</item>
+    </style>
+
     <style name="TextPrimary.Title" parent="TextPrimary">
         <item name="android:textSize">@dimen/text_size_large</item>
         <item name="android:textStyle">bold</item>

@@ -30,4 +30,6 @@
     <dimen name="card_radius">2dp</dimen>
 
     <dimen name="rounded_button_corner_radius">2dp</dimen>
+
+    <dimen name="list_item_card_height">100dp</dimen>
 </resources>
