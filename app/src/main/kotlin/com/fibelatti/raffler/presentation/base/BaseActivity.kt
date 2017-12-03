@@ -63,7 +63,7 @@ abstract class BaseActivity : AppCompatActivity(), BaseContract.View {
             }
         }
     }
-
+    
     protected fun showErrorLayout(retryButtonListener: () -> Unit, errorMessage: String = getString(R.string.generic_msg_error)) {
         rootLayout?.let {
             if (!errorLayoutAdded) {

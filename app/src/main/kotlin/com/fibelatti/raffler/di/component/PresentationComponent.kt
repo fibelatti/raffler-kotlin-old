@@ -4,6 +4,7 @@ import com.fibelatti.raffler.di.module.ActivityModule
 import com.fibelatti.raffler.di.module.PresenterModule
 import com.fibelatti.raffler.di.scope.PresentationScope
 import com.fibelatti.raffler.presentation.base.BaseActivity
+import com.fibelatti.raffler.presentation.home.HomeActivity
 import dagger.Subcomponent
 
 @Subcomponent(
@@ -12,4 +13,6 @@ import dagger.Subcomponent
 @PresentationScope
 interface PresentationComponent {
     fun inject(baseActivity: BaseActivity)
+
+    fun inject(homeActivity: HomeActivity)
 }
