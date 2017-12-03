@@ -39,7 +39,7 @@ abstract class BaseActivity : AppCompatActivity(), BaseContract.View {
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        progressBarLayout = layoutInflater.inflate(R.layout.progressbar_default, null)
+        progressBarLayout = layoutInflater.inflate(R.layout.layout_progress_bar_default, null)
         placeholderRetryLayout = layoutInflater.inflate(R.layout.layout_placeholder_retry_button, null)
     }
 
@@ -63,7 +63,7 @@ abstract class BaseActivity : AppCompatActivity(), BaseContract.View {
             }
         }
     }
-    
+
     protected fun showErrorLayout(retryButtonListener: () -> Unit, errorMessage: String = getString(R.string.generic_msg_error)) {
         rootLayout?.let {
             if (!errorLayoutAdded) {

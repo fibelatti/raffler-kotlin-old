@@ -18,7 +18,7 @@ abstract class BaseFragment : Fragment(), BaseContract.View {
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        progressBarLayout = layoutInflater.inflate(R.layout.progressbar_default, null)
+        progressBarLayout = layoutInflater.inflate(R.layout.layout_progress_bar_default, null)
         placeholderRetryLayout = layoutInflater.inflate(R.layout.layout_placeholder_retry_button, null)
     }
 

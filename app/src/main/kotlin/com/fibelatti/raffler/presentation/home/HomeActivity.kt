@@ -13,7 +13,7 @@ import com.fibelatti.raffler.presentation.base.BaseActivity
 import com.fibelatti.raffler.presentation.base.inTransaction
 import com.fibelatti.raffler.presentation.common.DialogHelper
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.toolbar_default.*
+import kotlinx.android.synthetic.main.layout_toolbar_default.*
 import javax.inject.Inject
 
 class HomeActivity :
