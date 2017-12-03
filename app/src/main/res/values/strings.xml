@@ -18,6 +18,8 @@
     <string name="hint_back">Navigate back</string>
     <string name="hint_try_again">Try again</string>
     <string name="hint_loading">Loading</string>
+    <string name="hint_dismiss">Dismiss</string>
+    <string name="hint_did_you_know">Did you know?</string>
 
     <string name="generic_log_error">Error in %1$s (%2$s)</string>
 
