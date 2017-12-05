@@ -53,7 +53,7 @@
     <string name="group_form_hint_remove_all">Remove all</string>
 
     <!-- Preferences -->
-    <string name="preferences_msg_save">Changes saved</string>
+    <string name="preferences_changes_saved">Changes saved</string>
 
     <string name="preferences_roulette_music_title">Sound Effects</string>
     <string name="preferences_roulette_music_description">Enable roulette music</string>
