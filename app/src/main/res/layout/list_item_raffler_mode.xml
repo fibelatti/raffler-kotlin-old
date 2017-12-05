@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:cardView="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_cardView"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/list_item_raffle_mode_height"
+    android:layout_margin="@dimen/card_margin"
+    android:padding="@dimen/padding_small"
+    cardView:cardBackgroundColor="@color/colorPrimaryDark"
+    cardView:cardCornerRadius="@dimen/card_radius">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical">
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.25"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.90"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textView_modeName"
+            style="@style/TextPrimary.White"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guideline_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Roulette"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textView_modeDescription"
+            style="@style/TextPrimary.White"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_icon"
+            app:layout_constraintStart_toEndOf="@id/guideline_title"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Pick a random item with a cool animation"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/imageView_go"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guideline_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_play_circle_filled_white_24dp"/>
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

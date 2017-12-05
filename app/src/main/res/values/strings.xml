@@ -35,6 +35,23 @@
     <!-- List Item -->
     <string name="list_item_add_new">Add new</string>
 
+    <!-- Group -->
+    <string name="group_hint_group_options">Group options</string>
+    <string name="group_hint_group_options_show">Show</string>
+    <string name="group_hint_group_options_hide">Hide</string>
+    <string name="group_hint_group_options_select_all_items">Select all</string>
+    <string name="group_hint_group_options_deselect_all_items">Deselect all</string>
+    <string name="group_hint_group_options_share">Share</string>
+    <string name="group_hint_group_options_delete">Delete</string>
+
+    <!-- Group Form -->
+    <string name="group_form_hint_group_name">Group name</string>
+    <string name="group_form_hint_item_name">Item name</string>
+    <string name="group_form_hint_add_item">Add item</string>
+    <string name="group_form_hint_edit_item">Edit</string>
+    <string name="group_form_hint_remove_item">Remove</string>
+    <string name="group_form_hint_remove_all">Remove all</string>
+
     <!-- Preferences -->
     <string name="preferences_msg_save">Changes saved</string>
 

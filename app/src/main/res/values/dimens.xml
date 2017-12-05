@@ -34,6 +34,11 @@
 
     <dimen name="list_item_card_height">100dp</dimen>
 
+    <dimen name="list_raffle_modes_height">150dp</dimen>
+    <dimen name="list_item_raffle_mode_height">50dp</dimen>
+
+    <dimen name="quick_decision_result_text_size">48sp</dimen>
+
     <dimen name="preferences_space_regular">10dp</dimen>
     <dimen name="preferences_space_large">30dp</dimen>
 </resources>

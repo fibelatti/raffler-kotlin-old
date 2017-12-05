@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.home.HomeActivity">
+
+    <include
+        layout="@layout/layout_toolbar_default"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputLayout_groupName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:theme="@style/Custom.InputLayoutPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/inputLayout_itemName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/editText_groupName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/group_form_hint_group_name"
+                android:imeOptions="actionNext"
+                android:inputType="textCapSentences"
+                android:maxLength="@integer/text_max_length_25"
+                android:singleLine="true"
+                android:textColor="@color/textPrimary"
+                android:textSize="@dimen/text_size_regular"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputLayout_itemName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:theme="@style/Custom.InputLayoutPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerView_groupItems"
+            app:layout_constraintEnd_toStartOf="@+id/button_addItem"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inputLayout_groupName">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/editText_itemName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/group_form_hint_item_name"
+                android:imeOptions="actionNext"
+                android:inputType="textCapSentences"
+                android:maxLength="@integer/text_max_length_25"
+                android:singleLine="true"
+                android:textColor="@color/textPrimary"
+                android:textSize="@dimen/text_size_regular"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/button_addItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/group_form_hint_add_item"
+            android:theme="@style/AppButton.Primary"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerView_groupItems"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/inputLayout_itemName"
+            app:layout_constraintTop_toBottomOf="@id/inputLayout_groupName"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView_groupItems"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/layout_divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <include
+            android:id="@+id/layout_divider"
+            style="@style/EdgeToEdgeDivider"
+            layout="@layout/layout_divider_default"
+            app:layout_constraintBottom_toTopOf="@+id/button_removeAll"
+            app:layout_constraintTop_toBottomOf="@id/recyclerView_groupItems"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/button_removeAll"
+            style="@style/ActionTextButton"
+            android:text="@string/group_form_hint_remove_all"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_divider"/>
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>
+
