@@ -24,7 +24,7 @@ class PreferencesRepository @Inject constructor(private val userPreferencesContr
     override fun getAnalyticsEnabled(): Single<Boolean> = Single.just(userPreferencesContract.getAnalyticsEnabled())
 
     override fun setAnalyticsEnabled(value: Boolean): Single<Boolean> {
-        userPreferencesContract.setAnalyticsEnabled(true)
+        userPreferencesContract.setAnalyticsEnabled(value)
 
         return Single.just(true)
     }

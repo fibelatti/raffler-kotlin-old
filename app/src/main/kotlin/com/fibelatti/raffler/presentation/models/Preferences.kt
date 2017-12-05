@@ -1,6 +1,6 @@
 package com.fibelatti.raffler.presentation.models
 
-data class Preferences(val rouletteMusicEnabled: Boolean,
-                       val crashReportEnabled: Boolean,
-                       val analyticsEnabled: Boolean,
-                       val numberRangeEnabled: Boolean)
+data class Preferences(var rouletteMusicEnabled: Boolean,
+                       var crashReportEnabled: Boolean,
+                       var analyticsEnabled: Boolean,
+                       var numberRangeEnabled: Boolean)
