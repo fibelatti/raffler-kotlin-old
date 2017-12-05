@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_resetHints"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/textView_titleResetHints"
+        style="@style/PreferencesTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/preferences_reset_hints_title"/>
+
+    <include
+        android:id="@+id/divider_resetHints"
+        layout="@layout/layout_divider_default"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_size"
+        android:layout_below="@+id/textView_titleResetHints"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/divider_resetHints"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/button_resetHints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/preferences_reset_hints_button"
+            android:theme="@style/AppButton.About"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textView_resetHints"
+            style="@style/TextPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="fill"
+            android:layout_toEndOf="@+id/button_resetHints"
+            android:gravity="center_vertical"
+            android:text="@string/preferences_reset_hints_description"/>
+    </RelativeLayout>
+</RelativeLayout>

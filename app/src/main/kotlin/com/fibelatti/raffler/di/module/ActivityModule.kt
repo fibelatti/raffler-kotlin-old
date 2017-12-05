@@ -3,6 +3,7 @@ package com.fibelatti.raffler.di.module
 import android.content.Context
 import android.support.v4.app.FragmentActivity
 import android.support.v7.app.AlertDialog
+import com.fibelatti.raffler.presentation.common.DialogHelper
 import dagger.Module
 import dagger.Provides
 
@@ -17,4 +18,7 @@ class ActivityModule(private val activity: FragmentActivity) {
 
     @Provides
     fun provideDialogBuilder(context: Context): AlertDialog.Builder = AlertDialog.Builder(context)
+
+    @Provides
+    fun provideDialogHelper(alertDialogBuilder: AlertDialog.Builder) = DialogHelper(alertDialogBuilder)
 }

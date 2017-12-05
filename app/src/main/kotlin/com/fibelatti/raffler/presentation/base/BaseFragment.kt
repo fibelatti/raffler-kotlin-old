@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.AppCompatButton
 import android.support.v7.widget.AppCompatTextView
 import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import com.fibelatti.raffler.R
 
 abstract class BaseFragment : Fragment(), BaseContract.View {
@@ -18,7 +20,7 @@ abstract class BaseFragment : Fragment(), BaseContract.View {
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        progressBarLayout = layoutInflater.inflate(R.layout.progressbar_default, null)
+        progressBarLayout = layoutInflater.inflate(R.layout.layout_progress_bar_default, null)
         placeholderRetryLayout = layoutInflater.inflate(R.layout.layout_placeholder_retry_button, null)
     }
 
@@ -69,6 +71,28 @@ abstract class BaseFragment : Fragment(), BaseContract.View {
         rootLayout?.let {
             it.removeView(placeholderRetryLayout)
             errorLayoutAdded = false
+        }
+    }
+
+    protected fun showDismissibleHint(container: ViewGroup, hintTitle: String = getString(R.string.hint_did_you_know), hintMessage: String) {
+        container.let {
+            val layoutHint = layoutInflater.inflate(R.layout.layout_dismissible_hint, null)
+
+            with(layoutHint) {
+                val textViewHintTitle = findViewById<AppCompatTextView>(R.id.textView_hintTitle)
+                val layoutHintBody = findViewById<FrameLayout>(R.id.layout_hintBody)
+                val buttonHintDismiss = findViewById<AppCompatTextView>(R.id.button_hintDismiss)
+                val textViewHintMessage = layoutInflater.inflate(R.layout.layout_dismissible_hint_text, null) as AppCompatTextView
+
+                textViewHintTitle.text = hintTitle
+                textViewHintMessage.text = hintMessage
+
+                layoutHintBody.addView(textViewHintMessage)
+
+                buttonHintDismiss.setOnClickListener { container.removeView(layoutHint) }
+            }
+
+            it.addView(layoutHint, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
         }
     }
 }

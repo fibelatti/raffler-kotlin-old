@@ -18,6 +18,9 @@
     <string name="hint_back">Navigate back</string>
     <string name="hint_try_again">Try again</string>
     <string name="hint_loading">Loading</string>
+    <string name="hint_dismiss">Dismiss</string>
+    <string name="hint_reset">Reset</string>
+    <string name="hint_did_you_know">Did you know?</string>
 
     <string name="generic_log_error">Error in %1$s (%2$s)</string>
 
@@ -28,4 +31,52 @@
     <string name="home_menu_item_quick_decisions">Quick Decisions</string>
     <string name="home_menu_item_my_groups">My Groups</string>
     <string name="home_menu_item_preferences">Preferences</string>
+
+    <!-- List Item -->
+    <string name="list_item_add_new">Add new</string>
+
+    <!-- Group -->
+    <string name="group_hint_group_options">Group options</string>
+    <string name="group_hint_group_options_show">Show</string>
+    <string name="group_hint_group_options_hide">Hide</string>
+    <string name="group_hint_group_options_select_all_items">Select all</string>
+    <string name="group_hint_group_options_deselect_all_items">Deselect all</string>
+    <string name="group_hint_group_options_share">Share</string>
+    <string name="group_hint_group_options_delete">Delete</string>
+
+    <!-- Group Form -->
+    <string name="group_form_hint_group_name">Group name</string>
+    <string name="group_form_hint_item_name">Item name</string>
+    <string name="group_form_hint_add_item">Add item</string>
+    <string name="group_form_hint_edit_item">Edit</string>
+    <string name="group_form_hint_remove_item">Remove</string>
+    <string name="group_form_hint_remove_all">Remove all</string>
+
+    <!-- Preferences -->
+    <string name="preferences_msg_save">Changes saved</string>
+
+    <string name="preferences_roulette_music_title">Sound Effects</string>
+    <string name="preferences_roulette_music_description">Enable roulette music</string>
+
+    <string name="preferences_crash_report_opt_out_title">Crash Report Opt-out</string>
+    <string name="preferences_crash_report_opt_out_description">This app uses Crashlytics to collect anonymized data about crashes and errors, which helps me make this app more stable. If you don\'t want your data to be sent uncheck this option
+        \n\nYou can read Crashlytics privacy policy <a href="http://try.crashlytics.com/terms/">here</a></string>
+
+    <string name="preferences_analytics_opt_out_title">Analytics Opt-out</string>
+    <string name="preferences_analytics_opt_out_description">This app uses Fabric to collect anonymized analytics data, which helps me to understand how people use the app to keep improving the user experience. No information about the groups you create is collected. If you don\'t want your data to be sent uncheck this option
+        \n\nYou can read Fabric privacy policy <a href="http://try.crashlytics.com/terms/">here</a></string>
+
+    <string name="preferences_reset_hints_title">App Hints</string>
+    <string name="preferences_reset_hints_button">Show again</string>
+    <string name="preferences_reset_hints_description">All the hints that you dismissed will be shown again</string>
+
+    <string name="preferences_include_range_title">Include Number Range</string>
+    <string name="preferences_include_range_description">When creating a new group, there will be an option to include a numeric range. This is useful to create lottery groups</string>
+
+    <string name="preferences_share">Share Raffler with a friend!</string>
+    <string name="preferences_share_title">Sharing &appname;</string>
+    <string name="preferences_share_text">Check out &appname; Making decisions never been so easy. Download at %s</string>
+    <string name="preferences_rate">Rate Raffler in the Play Store!</string>
+    <string name="preferences_about">Developed with ❤ by Filipe Belatti</string>
+    <string name="preferences_app_version">Version: %s</string>
 </resources>
