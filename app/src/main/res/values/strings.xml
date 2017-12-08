@@ -4,8 +4,6 @@
     ]>
 
 <resources>
-    <string name="app_name" translatable="false">&appname;</string>
-
     <string name="file_provider_authority" translatable="false">com.fibelatti.raffler.fileprovider</string>
 
     <!-- Generics -->

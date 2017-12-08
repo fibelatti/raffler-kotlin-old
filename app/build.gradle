@@ -21,9 +21,19 @@ android {
         manifestPlaceholders = [fabricApiKey: FABRIC_API_KEY]
     }
     buildTypes {
-        release {
+        debug {
+            applicationIdSuffix ".debug"
+            resValue "string", "app_name", rootProject.ext.appName + " Dev"
+
+            debuggable true
             minifyEnabled false
+        }
+
+        release {
+            resValue "string", "app_name", rootProject.ext.appName
+
             debuggable false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -31,9 +41,6 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
         test.java.srcDirs += 'src/test/kotlin'
         test.java.srcDirs += 'src/test/resources'
-    }
-    dataBinding {
-        enabled = true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -62,10 +69,10 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
 
     // Fabric
-    compile("com.crashlytics.sdk.android:crashlytics:$rootProject.ext.crashlyticsVersion@aar") {
+    implementation("com.crashlytics.sdk.android:crashlytics:$rootProject.ext.crashlyticsVersion@aar") {
         transitive = true
     }
-    compile("com.crashlytics.sdk.android:answers:$rootProject.ext.answersVersion@aar") {
+    implementation("com.crashlytics.sdk.android:answers:$rootProject.ext.answersVersion@aar") {
         transitive = true
     }
 

@@ -3,6 +3,7 @@ buildscript {
     ext {
         appInfo = [
                 // Application
+                appName = 'Raffler',
                 applicationId = 'com.fibelatti.raffler',
 
                 // Version information
@@ -22,13 +23,13 @@ buildscript {
                 minSdkVersion = 19,
                 targetSdkVersion = 26,
                 compileSdkVersion = 26,
-                buildToolsVersion = '27.0.1',
+                buildToolsVersion = '27.0.2',
 
                 // App dependencies
-                appCompatVersion = '27.0.1',
-                designVersion = '27.0.1',
+                appCompatVersion = '27.0.2',
+                designVersion = '27.0.2',
                 constraintLayoutVersion = '1.0.2',
-                cardViewVersion = '27.0.1'
+                cardViewVersion = '27.0.2'
         ]
 
         coreDependencies = [
