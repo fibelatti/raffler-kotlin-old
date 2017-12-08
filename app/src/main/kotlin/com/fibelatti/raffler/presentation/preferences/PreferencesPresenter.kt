@@ -1,6 +1,6 @@
 package com.fibelatti.raffler.presentation.preferences
 
-import com.fibelatti.raffler.core.ifNotNullThisElseThat
+import com.fibelatti.raffler.core.extensions.dropBreadcrumb
 import com.fibelatti.raffler.domain.preferences.GetPreferencesUseCase
 import com.fibelatti.raffler.domain.preferences.UpdatePreferencesUseCase
 import com.fibelatti.raffler.presentation.base.BasePresenter
@@ -17,6 +17,7 @@ class PreferencesPresenter(
         view?.showProgress()
 
         getPreferencesUseCase.getPreferences()
+                .dropBreadcrumb()
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.mainThread())
                 .subscribe(
@@ -27,6 +28,7 @@ class PreferencesPresenter(
 
     override fun updatePreferences(preferences: Preferences) {
         updatePreferencesUseCase.updatePreferences(preferences)
+                .dropBreadcrumb()
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.mainThread())
                 .subscribe(
@@ -36,9 +38,9 @@ class PreferencesPresenter(
 
     }
 
-    private fun handleGetSuccess(preferences: Preferences?) {
+    private fun handleGetSuccess(preferences: Preferences) {
         view?.hideProgress()
-        preferences.ifNotNullThisElseThat({ view?.onPreferencesFetched(it) }, { view?.handleError(null) })
+        view?.onPreferencesFetched(preferences)
     }
 
     private fun handleError(error: Throwable) {
