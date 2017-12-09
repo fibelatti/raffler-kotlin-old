@@ -7,10 +7,10 @@ import android.arch.persistence.room.migration.Migration
 import android.content.Context
 import com.fibelatti.raffler.data.group.GroupItemRepositoryContract
 import com.fibelatti.raffler.data.group.GroupRepositoryContract
-import com.fibelatti.raffler.data.group.QuickDecisionRespositoryContract
-import com.fibelatti.raffler.data.models.Group
-import com.fibelatti.raffler.data.models.GroupItem
-import com.fibelatti.raffler.data.models.QuickDecision
+import com.fibelatti.raffler.data.quickdecision.QuickDecisionRepositoryContract
+import com.fibelatti.raffler.data.group.Group
+import com.fibelatti.raffler.data.group.GroupItem
+import com.fibelatti.raffler.data.quickdecision.QuickDecision
 import com.fibelatti.raffler.di.qualifier.AppQualifier
 import javax.inject.Inject
 
@@ -24,7 +24,7 @@ abstract class AppDatabase @Inject constructor(@AppQualifier val context: Contex
 
     abstract fun getGroupRepository(): GroupRepositoryContract
     abstract fun getGroupItemRepository(): GroupItemRepositoryContract
-    abstract fun getQuickDecisionRepository(): QuickDecisionRespositoryContract
+    abstract fun getQuickDecisionRepository(): QuickDecisionRepositoryContract
 
     object RoomCallback : RoomDatabase.Callback() {
         override fun onCreate(db: SupportSQLiteDatabase) {

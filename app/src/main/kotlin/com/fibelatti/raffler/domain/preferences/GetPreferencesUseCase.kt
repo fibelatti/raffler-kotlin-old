@@ -1,7 +1,6 @@
 package com.fibelatti.raffler.domain.preferences
 
 import com.fibelatti.raffler.data.preferences.PreferencesRepositoryContract
-import com.fibelatti.raffler.domain.preferences.mapper.PreferencesMapper
 import com.fibelatti.raffler.presentation.models.Preferences
 import io.reactivex.Single
 import io.reactivex.functions.Function4
