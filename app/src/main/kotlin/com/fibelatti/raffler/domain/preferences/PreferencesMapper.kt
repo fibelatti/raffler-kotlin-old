@@ -1,4 +1,4 @@
-package com.fibelatti.raffler.domain.preferences.mapper
+package com.fibelatti.raffler.domain.preferences
 
 import com.fibelatti.raffler.presentation.models.Preferences
 
