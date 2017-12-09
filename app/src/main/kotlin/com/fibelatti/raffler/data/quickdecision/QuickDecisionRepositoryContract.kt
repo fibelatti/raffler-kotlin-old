@@ -1,4 +1,4 @@
-package com.fibelatti.raffler.data.group
+package com.fibelatti.raffler.data.quickdecision
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert

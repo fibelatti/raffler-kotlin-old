@@ -7,7 +7,7 @@ import android.arch.persistence.room.migration.Migration
 import android.content.Context
 import com.fibelatti.raffler.data.group.GroupItemRepositoryContract
 import com.fibelatti.raffler.data.group.GroupRepositoryContract
-import com.fibelatti.raffler.data.group.QuickDecisionRepositoryContract
+import com.fibelatti.raffler.data.quickdecision.QuickDecisionRepositoryContract
 import com.fibelatti.raffler.data.models.Group
 import com.fibelatti.raffler.data.models.GroupItem
 import com.fibelatti.raffler.data.models.QuickDecision
