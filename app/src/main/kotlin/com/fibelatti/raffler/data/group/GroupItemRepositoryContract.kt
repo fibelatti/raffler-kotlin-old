@@ -1,7 +1,6 @@
 package com.fibelatti.raffler.data.group
 
 import android.arch.persistence.room.*
-import com.fibelatti.raffler.data.models.GroupItem
 import io.reactivex.Single
 
 @Dao

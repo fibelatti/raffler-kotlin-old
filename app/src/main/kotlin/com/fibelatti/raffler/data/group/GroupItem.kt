@@ -1,4 +1,4 @@
-package com.fibelatti.raffler.data.models
+package com.fibelatti.raffler.data.group
 
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
@@ -8,11 +8,11 @@ import android.arch.persistence.room.PrimaryKey
 import android.os.Parcel
 import android.os.Parcelable
 import com.fibelatti.raffler.core.extensions.createParcel
-import com.fibelatti.raffler.data.models.GroupItem.Companion.TABLE_NAME
+import com.fibelatti.raffler.data.group.Group.Companion.TABLE_NAME
 
 @Entity(tableName = TABLE_NAME,
         foreignKeys = [
-            ForeignKey(entity = Group::class, parentColumns = [Group.COLUMN_ID], childColumns = [GroupItem.COLUMN_GROUP_ID], onDelete = CASCADE)])
+            ForeignKey(entity = Group::class, parentColumns = [Group.COLUMN_ID], childColumns = [(GroupItem.COLUMN_GROUP_ID)], onDelete = CASCADE)])
 data class GroupItem(
         @ColumnInfo(name = COLUMN_ID)
         @PrimaryKey(autoGenerate = true)

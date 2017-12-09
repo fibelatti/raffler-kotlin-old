@@ -8,9 +8,9 @@ import android.content.Context
 import com.fibelatti.raffler.data.group.GroupItemRepositoryContract
 import com.fibelatti.raffler.data.group.GroupRepositoryContract
 import com.fibelatti.raffler.data.quickdecision.QuickDecisionRepositoryContract
-import com.fibelatti.raffler.data.models.Group
-import com.fibelatti.raffler.data.models.GroupItem
-import com.fibelatti.raffler.data.models.QuickDecision
+import com.fibelatti.raffler.data.group.Group
+import com.fibelatti.raffler.data.group.GroupItem
+import com.fibelatti.raffler.data.quickdecision.QuickDecision
 import com.fibelatti.raffler.di.qualifier.AppQualifier
 import javax.inject.Inject
 

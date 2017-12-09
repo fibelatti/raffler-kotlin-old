@@ -2,7 +2,7 @@ package com.fibelatti.raffler.domain.quickdecision
 
 import com.fibelatti.raffler.core.Constants
 import com.fibelatti.raffler.data.localdatastorage.AppDatabase
-import com.fibelatti.raffler.data.models.QuickDecision
+import com.fibelatti.raffler.data.quickdecision.QuickDecision
 import io.reactivex.Single
 import java.util.*
 import javax.inject.Inject

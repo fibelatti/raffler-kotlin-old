@@ -1,13 +1,13 @@
-package com.fibelatti.raffler.data.models
+package com.fibelatti.raffler.data.quickdecision
 
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.os.Parcel
 import android.os.Parcelable
 import com.fibelatti.raffler.core.extensions.createParcel
-import com.fibelatti.raffler.data.models.QuickDecision.Companion.COLUMN_ID
-import com.fibelatti.raffler.data.models.QuickDecision.Companion.COLUMN_LOCALE
-import com.fibelatti.raffler.data.models.QuickDecision.Companion.TABLE_NAME
+import com.fibelatti.raffler.data.quickdecision.QuickDecision.Companion.COLUMN_ID
+import com.fibelatti.raffler.data.quickdecision.QuickDecision.Companion.COLUMN_LOCALE
+import com.fibelatti.raffler.data.quickdecision.QuickDecision.Companion.TABLE_NAME
 
 @Entity(tableName = TABLE_NAME,
         primaryKeys = [COLUMN_ID, COLUMN_LOCALE])
