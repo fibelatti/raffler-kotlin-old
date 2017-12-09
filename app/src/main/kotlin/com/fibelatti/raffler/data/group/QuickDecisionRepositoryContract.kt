@@ -8,7 +8,7 @@ import com.fibelatti.raffler.data.models.QuickDecision
 import io.reactivex.Single
 
 @Dao
-interface QuickDecisionRespositoryContract {
+interface QuickDecisionRepositoryContract {
     @Query("select * from " + QuickDecision.TABLE_NAME)
     fun fetchAllQuickDecisions(): Single<List<QuickDecision>>
 
