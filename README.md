@@ -19,3 +19,4 @@ This project is used to study and demonstrate many topics related to Android dev
 - Kotlin
 - Dagger 2
 - RxJava 2
+- Clean Architecture
