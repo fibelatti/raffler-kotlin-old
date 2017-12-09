@@ -17,7 +17,7 @@ data class Group(
         @ColumnInfo(name = COLUMN_NAME)
         val name: String,
         @Relation(parentColumn = COLUMN_ID, entityColumn = GroupItem.COLUMN_GROUP_ID)
-        val items: MutableList<GroupItem>
+        val items: List<GroupItem>
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readValue(Long::class.java.classLoader) as Long,

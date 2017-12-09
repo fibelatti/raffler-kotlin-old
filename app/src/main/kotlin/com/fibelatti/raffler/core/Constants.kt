@@ -11,6 +11,6 @@ class Constants {
         const val LOCALE_PT = "pt"
         const val LOCALE_ES = "es"
 
-        val SUPPORTED_LOCALES = Arrays.asList(LOCALE_EN, LOCALE_PT, LOCALE_ES)
+        val SUPPORTED_LOCALES: List<String> = Arrays.asList(LOCALE_EN, LOCALE_PT, LOCALE_ES)
     }
 }
