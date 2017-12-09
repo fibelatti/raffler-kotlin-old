@@ -1,6 +1,7 @@
 package com.fibelatti.raffler.core
 
 import android.content.SharedPreferences
+import com.fibelatti.raffler.core.extensions.applyWithEditor
 
 class UserPreferencesManager(private val sharedPreferences: SharedPreferences) : UserPreferencesContract {
     companion object {

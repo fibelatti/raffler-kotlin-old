@@ -10,8 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.fibelatti.raffler.R
-import com.fibelatti.raffler.core.snackbar
-import com.fibelatti.raffler.core.withItIfNotNull
+import com.fibelatti.raffler.core.extensions.snackbar
+import com.fibelatti.raffler.core.extensions.withItIfNotNull
 import com.fibelatti.raffler.presentation.base.BaseFragment
 import com.fibelatti.raffler.presentation.models.Preferences
 import kotlinx.android.synthetic.main.fragment_preferences.*
