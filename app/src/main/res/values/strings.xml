@@ -33,6 +33,10 @@
     <!-- List Item -->
     <string name="list_item_add_new">Add new</string>
 
+    <!-- Quick Decision -->
+    <string name="quick_decision_dismissible_hint">The answer for your questions is now 1 tap away!
+        \n\nIn Quick Decisions you will find buttons for simples tasks like flipping a coin or rolling a dice.</string>
+
     <!-- Group -->
     <string name="group_hint_group_options">Group options</string>
     <string name="group_hint_group_options_show">Show</string>
