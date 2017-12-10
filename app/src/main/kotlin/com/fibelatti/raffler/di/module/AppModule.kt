@@ -40,6 +40,7 @@ class AppModule(private var app: App) {
                 AppDatabase::class.java, AppDatabase.DATABASE_NAME)
                 .addMigrations(AppDatabase.MigrationTo4, AppDatabase.MigrationTo5)
                 .addCallback(AppDatabase.RoomCallback)
+                .fallbackToDestructiveMigration()
                 .build()
     }
 }

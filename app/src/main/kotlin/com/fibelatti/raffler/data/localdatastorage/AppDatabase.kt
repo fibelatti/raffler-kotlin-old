@@ -4,19 +4,17 @@ import android.arch.persistence.db.SupportSQLiteDatabase
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.migration.Migration
-import android.content.Context
-import com.fibelatti.raffler.data.group.GroupItemRepositoryContract
-import com.fibelatti.raffler.data.group.GroupRepositoryContract
-import com.fibelatti.raffler.data.quickdecision.QuickDecisionRepositoryContract
 import com.fibelatti.raffler.data.group.Group
 import com.fibelatti.raffler.data.group.GroupItem
+import com.fibelatti.raffler.data.group.GroupItemRepositoryContract
+import com.fibelatti.raffler.data.group.GroupRepositoryContract
 import com.fibelatti.raffler.data.quickdecision.QuickDecision
-import com.fibelatti.raffler.di.qualifier.AppQualifier
-import javax.inject.Inject
+import com.fibelatti.raffler.data.quickdecision.QuickDecisionRepositoryContract
 
 @Database(entities = [Group::class, GroupItem::class, QuickDecision::class],
-        version = AppDatabase.DATABASE_VERSION)
-abstract class AppDatabase @Inject constructor(@AppQualifier val context: Context) : RoomDatabase() {
+        version = AppDatabase.DATABASE_VERSION,
+        exportSchema = false)
+abstract class AppDatabase : RoomDatabase() {
     companion object {
         const val DATABASE_NAME = "com.fibelatti.raffler.data.db"
         const val DATABASE_VERSION = 5
