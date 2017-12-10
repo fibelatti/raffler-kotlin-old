@@ -1,6 +1,6 @@
 package com.fibelatti.raffler.domain.group
 
-import com.fibelatti.raffler.data.group.Group
+import com.fibelatti.raffler.data.group.GroupWithItems
 import com.fibelatti.raffler.data.localdatastorage.AppDatabase
 import io.reactivex.Single
 import javax.inject.Inject
@@ -10,7 +10,7 @@ class GetGroupsUseCase @Inject constructor(private val database: AppDatabase) {
     fun getAllGroups(): Single<List<PresentationModel>> {
         return database.getGroupRepository()
                 .getAllGroups()
-                .flattenAsObservable<Group> { list -> list }
+                .flattenAsObservable<GroupWithItems> { list -> list }
                 .map { group ->
                     GroupMapper.toPresentationModel(group)
                 }

@@ -12,5 +12,5 @@ interface QuickDecisionRepositoryContract {
     fun fetchAllQuickDecisions(): Single<List<QuickDecision>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addQuickDecision(quickDecision: QuickDecision): Single<Boolean>
+    fun addQuickDecision(quickDecision: QuickDecision)
 }
