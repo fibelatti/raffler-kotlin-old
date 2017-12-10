@@ -16,7 +16,9 @@ class AddGroupAsQuickDecisionUseCase @Inject constructor(private val database: A
                 group.name,
                 group.concatenatedGroupItemNames)
 
-        return database.getQuickDecisionRepository()
+        database.getQuickDecisionRepository()
                 .addQuickDecision(quickDecision)
+
+        return Single.just(true)
     }
 }

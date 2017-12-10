@@ -7,7 +7,9 @@ import javax.inject.Inject
 
 class DeleteGroupUseCase @Inject constructor(private val database: AppDatabase) {
     fun deleteGroup(group: Group): Single<Boolean> {
-        return database.getGroupRepository()
+         database.getGroupRepository()
                 .deleteGroupById(group.id)
+
+        return Single.just(true)
     }
 }
