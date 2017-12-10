@@ -11,6 +11,7 @@ import com.fibelatti.raffler.R
 import com.fibelatti.raffler.core.extensions.inTransaction
 import com.fibelatti.raffler.presentation.base.BaseActivity
 import com.fibelatti.raffler.presentation.preferences.PreferencesFragment
+import com.fibelatti.raffler.presentation.quickdecisions.QuickDecisionsFragment
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.layout_toolbar_default.*
 import javax.inject.Inject
@@ -41,6 +42,7 @@ class HomeActivity :
     @CurrentView
     private var currentView: Long = CURRENT_VIEW_NONE
 
+    private lateinit var quickDecisionsFragment: QuickDecisionsFragment
     private lateinit var preferencesFragment: PreferencesFragment
 
     override val rootLayout: FrameLayout?
@@ -114,6 +116,7 @@ class HomeActivity :
     }
 
     private fun initFragments() {
+        quickDecisionsFragment = QuickDecisionsFragment.newInstance()
         preferencesFragment = PreferencesFragment.newInstance()
     }
 
@@ -127,7 +130,7 @@ class HomeActivity :
                     title = getString(R.string.home_menu_item_quick_decisions)
                     toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.colorAccent))
                     layout_bottomNavigation.itemBackgroundResource = R.color.colorAccent
-//                    pushFragment(popularMoviesFragment)
+                    pushFragment(quickDecisionsFragment)
                 }
                 CURRENT_VIEW_GROUPS -> {
                     title = getString(R.string.home_menu_item_my_groups)
