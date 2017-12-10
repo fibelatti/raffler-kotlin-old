@@ -1,10 +1,9 @@
 package com.fibelatti.raffler.presentation.base
 
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.support.annotation.CallSuper
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatButton
 import android.support.v7.widget.AppCompatTextView
@@ -12,12 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
-import android.widget.Toast
 import com.fibelatti.raffler.R
-
-fun AppCompatActivity.toast(message: String, duration: Int = Toast.LENGTH_LONG) {
-    Toast.makeText(this, message, duration).show()
-}
+import com.fibelatti.raffler.presentation.common.DialogHelper
+import javax.inject.Inject
 
 fun AppCompatActivity.hideKeyboard() {
     val view = this.currentFocus
@@ -27,11 +23,10 @@ fun AppCompatActivity.hideKeyboard() {
     }
 }
 
-inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) {
-    beginTransaction().func().commitAllowingStateLoss()
-}
-
 abstract class BaseActivity : AppCompatActivity(), BaseContract.View {
+    @Inject
+    lateinit protected var dialogHelper: DialogHelper
+
     private lateinit var progressBarLayout: View
     private lateinit var placeholderRetryLayout: View
 
@@ -41,8 +36,11 @@ abstract class BaseActivity : AppCompatActivity(), BaseContract.View {
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        progressBarLayout = layoutInflater.inflate(R.layout.layout_progress_bar_default, null)
-        placeholderRetryLayout = layoutInflater.inflate(R.layout.layout_placeholder_retry_button, null)
+
+        getPresentationComponent(this).inject(this)
+
+        progressBarLayout = layoutInflater.inflate(R.layout.layout_progress_bar_default, rootLayout, false)
+        placeholderRetryLayout = layoutInflater.inflate(R.layout.layout_placeholder_retry_button, rootLayout, false)
     }
 
     override fun showProgress() {
@@ -64,6 +62,16 @@ abstract class BaseActivity : AppCompatActivity(), BaseContract.View {
                 progressBarLayoutAdded = false
             }
         }
+    }
+
+    override fun handleError(errorMessage: String?) {
+        dialogHelper.newOkDialog(errorMessage ?: getString(R.string.generic_msg_error), getErrorDialogListener())
+                .show()
+    }
+
+    override fun onNetworkError() {
+        dialogHelper.newOkDialog(getString(R.string.network_msg_error), getErrorDialogListener())
+                .show()
     }
 
     protected fun showErrorLayout(retryButtonListener: () -> Unit, errorMessage: String = getString(R.string.generic_msg_error)) {
@@ -97,13 +105,13 @@ abstract class BaseActivity : AppCompatActivity(), BaseContract.View {
 
     protected fun showDismissibleHint(container: ViewGroup, hintTitle: String = getString(R.string.hint_did_you_know), hintMessage: String) {
         container.let {
-            val layoutHint = layoutInflater.inflate(R.layout.layout_dismissible_hint, null)
+            val layoutHint = layoutInflater.inflate(R.layout.layout_dismissible_hint, container, false)
 
             with(layoutHint) {
                 val textViewHintTitle = findViewById<AppCompatTextView>(R.id.textView_hintTitle)
                 val layoutHintBody = findViewById<FrameLayout>(R.id.layout_hintBody)
                 val buttonHintDismiss = findViewById<AppCompatTextView>(R.id.button_hintDismiss)
-                val textViewHintMessage = layoutInflater.inflate(R.layout.layout_dismissible_hint_text, null) as AppCompatTextView
+                val textViewHintMessage = layoutInflater.inflate(R.layout.layout_dismissible_hint_text, layoutHintBody, false) as AppCompatTextView
 
                 textViewHintTitle.text = hintTitle
                 textViewHintMessage.text = hintMessage
@@ -113,7 +121,15 @@ abstract class BaseActivity : AppCompatActivity(), BaseContract.View {
                 buttonHintDismiss.setOnClickListener { container.removeView(layoutHint) }
             }
 
-            it.addView(layoutHint, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+            it.addView(layoutHint)
+        }
+    }
+
+    private fun getErrorDialogListener(): DialogInterface.OnClickListener {
+        return DialogInterface.OnClickListener { dialog, _ ->
+            with(dialog) {
+                dismiss()
+            }
         }
     }
 }

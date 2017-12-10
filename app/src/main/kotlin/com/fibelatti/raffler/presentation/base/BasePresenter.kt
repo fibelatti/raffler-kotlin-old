@@ -10,4 +10,9 @@ abstract class BasePresenter<V : BaseContract.View>(protected val schedulerProvi
     override fun detachView() {
         view = null
     }
+
+    protected fun handleError(error: Throwable = Exception()) {
+        view?.hideProgress()
+        view?.handleError(error.message)
+    }
 }
