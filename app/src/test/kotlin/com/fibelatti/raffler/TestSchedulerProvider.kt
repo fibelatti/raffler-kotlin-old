@@ -1,6 +1,6 @@
 package com.fibelatti.raffler
 
-import com.fibelatti.raffler.presentation.base.SchedulerProvider
+import com.fibelatti.raffler.presentation.common.SchedulerProvider
 import io.reactivex.Scheduler
 import io.reactivex.schedulers.Schedulers
 

@@ -1,6 +1,6 @@
 package com.fibelatti.raffler.data.preferences
 
-import com.fibelatti.raffler.core.UserPreferencesContract
+import com.fibelatti.raffler.data.localdatastorage.UserPreferencesContract
 import io.reactivex.Single
 import javax.inject.Inject
 

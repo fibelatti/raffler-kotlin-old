@@ -4,9 +4,8 @@ import com.fibelatti.raffler.core.extensions.dropBreadcrumb
 import com.fibelatti.raffler.domain.preferences.GetPreferencesUseCase
 import com.fibelatti.raffler.domain.preferences.UpdatePreferencesUseCase
 import com.fibelatti.raffler.presentation.base.BasePresenter
-import com.fibelatti.raffler.presentation.base.SchedulerProvider
+import com.fibelatti.raffler.presentation.common.SchedulerProvider
 import com.fibelatti.raffler.presentation.models.Preferences
-
 
 class PreferencesPresenter(
         schedulerProvider: SchedulerProvider,
@@ -43,16 +42,11 @@ class PreferencesPresenter(
         view?.onPreferencesFetched(preferences)
     }
 
-    private fun handleError(error: Throwable) {
-        view?.hideProgress()
-        view?.handleError(error.message)
-    }
-
     private fun handleUpdateSuccess(success: Boolean) {
         if (success) {
             view?.onPreferencesUpdated()
         } else {
-            view?.handleError(null)
+            handleError()
         }
     }
 }

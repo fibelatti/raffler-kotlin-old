@@ -1,6 +1,5 @@
 package com.fibelatti.raffler.presentation.home
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.support.annotation.IntDef
 import android.support.design.widget.BottomNavigationView
@@ -9,9 +8,8 @@ import android.support.v4.content.ContextCompat
 import android.view.MenuItem
 import android.widget.FrameLayout
 import com.fibelatti.raffler.R
+import com.fibelatti.raffler.core.extensions.inTransaction
 import com.fibelatti.raffler.presentation.base.BaseActivity
-import com.fibelatti.raffler.presentation.base.inTransaction
-import com.fibelatti.raffler.presentation.common.DialogHelper
 import com.fibelatti.raffler.presentation.preferences.PreferencesFragment
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.layout_toolbar_default.*
@@ -38,8 +36,6 @@ class HomeActivity :
 
     @Inject
     lateinit var presenter: NavigationContract.Presenter
-    @Inject
-    lateinit var dialogHelper: DialogHelper
 
     private var selectedItemId: Int = R.id.menuItem_quickDecisions
     @CurrentView
@@ -89,16 +85,6 @@ class HomeActivity :
         }
 
         return true
-    }
-
-    override fun handleError(errorMessage: String?) {
-        dialogHelper.newOkDialog(errorMessage ?: getString(R.string.generic_msg_error), getNetworkErrorDialogListener())
-                .show()
-    }
-
-    override fun onNetworkError() {
-        dialogHelper.newOkDialog(getString(R.string.network_msg_error), getNetworkErrorDialogListener())
-                .show()
     }
 
     override fun goToQuickDecisions() {
@@ -162,14 +148,6 @@ class HomeActivity :
     private fun pushFragment(fragment: Fragment) {
         supportFragmentManager.inTransaction {
             replace(R.id.layout_fragmentContainer, fragment)
-        }
-    }
-
-    private fun getNetworkErrorDialogListener(): DialogInterface.OnClickListener {
-        return DialogInterface.OnClickListener { dialog, _ ->
-            with(dialog) {
-                dismiss()
-            }
         }
     }
 }

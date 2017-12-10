@@ -2,8 +2,8 @@ package com.fibelatti.raffler.di.module
 
 import com.fibelatti.raffler.domain.preferences.GetPreferencesUseCase
 import com.fibelatti.raffler.domain.preferences.UpdatePreferencesUseCase
-import com.fibelatti.raffler.presentation.base.AppSchedulerProvider
-import com.fibelatti.raffler.presentation.base.SchedulerProvider
+import com.fibelatti.raffler.presentation.common.AppSchedulerProvider
+import com.fibelatti.raffler.presentation.common.SchedulerProvider
 import com.fibelatti.raffler.presentation.home.NavigationContract
 import com.fibelatti.raffler.presentation.home.NavigationPresenter
 import com.fibelatti.raffler.presentation.preferences.PreferencesContract
