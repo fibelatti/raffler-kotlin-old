@@ -7,7 +7,6 @@
     android:id="@+id/layout_cardView"
     android:layout_width="match_parent"
     android:layout_height="@dimen/list_item_card_height"
-    android:layout_margin="@dimen/card_margin"
     android:padding="@dimen/padding_small"
     cardView:cardCornerRadius="@dimen/card_radius"
     tools:cardBackgroundColor="@color/colorAccent"
