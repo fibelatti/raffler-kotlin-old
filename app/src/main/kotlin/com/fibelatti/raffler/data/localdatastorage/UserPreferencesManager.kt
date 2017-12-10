@@ -1,4 +1,4 @@
-package com.fibelatti.raffler.core
+package com.fibelatti.raffler.data.localdatastorage
 
 import android.content.SharedPreferences
 import com.fibelatti.raffler.core.extensions.applyWithEditor

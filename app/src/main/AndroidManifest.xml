@@ -28,6 +28,16 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".presentation.quickdecisions.QuickDecisionResultActivity"
+            android:configChanges="orientation"
+            android:parentActivityName=".presentation.home.HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".presentation.home.HomeActivity"/>
+        </activity>
     </application>
 
 </manifest>

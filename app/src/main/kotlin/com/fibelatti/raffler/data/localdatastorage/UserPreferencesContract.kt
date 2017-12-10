@@ -1,4 +1,4 @@
-package com.fibelatti.raffler.core
+package com.fibelatti.raffler.data.localdatastorage
 
 interface UserPreferencesContract {
     fun getRouletteMusicEnabled(): Boolean

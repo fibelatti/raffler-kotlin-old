@@ -5,8 +5,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.fibelatti.raffler.App
-import com.fibelatti.raffler.core.UserPreferencesContract
-import com.fibelatti.raffler.core.UserPreferencesManager
+import com.fibelatti.raffler.data.localdatastorage.UserPreferencesContract
+import com.fibelatti.raffler.data.localdatastorage.UserPreferencesManager
 import com.fibelatti.raffler.data.localdatastorage.AppDatabase
 import com.fibelatti.raffler.di.qualifier.AppQualifier
 import com.fibelatti.raffler.di.scope.AppScope

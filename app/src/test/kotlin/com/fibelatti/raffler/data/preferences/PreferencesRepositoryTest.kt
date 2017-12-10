@@ -1,7 +1,7 @@
 package com.fibelatti.raffler.data.preferences
 
 import com.fibelatti.raffler.BaseTest
-import com.fibelatti.raffler.core.UserPreferencesContract
+import com.fibelatti.raffler.data.localdatastorage.UserPreferencesContract
 import io.reactivex.observers.TestObserver
 import junit.framework.Assert.assertTrue
 import org.junit.Test

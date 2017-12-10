@@ -1,5 +1,7 @@
 package com.fibelatti.raffler.presentation.base
 
+import com.fibelatti.raffler.presentation.common.SchedulerProvider
+
 abstract class BasePresenter<V : BaseContract.View>(protected val schedulerProvider: SchedulerProvider) : BaseContract.Presenter<V> {
     protected var view: V? = null
 
@@ -9,5 +11,10 @@ abstract class BasePresenter<V : BaseContract.View>(protected val schedulerProvi
 
     override fun detachView() {
         view = null
+    }
+
+    protected fun handleError(error: Throwable = Exception()) {
+        view?.hideProgress()
+        view?.handleError(error.message)
     }
 }

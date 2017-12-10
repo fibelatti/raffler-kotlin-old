@@ -3,14 +3,19 @@ package com.fibelatti.raffler.presentation.models
 import android.os.Parcel
 import android.os.Parcelable
 import com.fibelatti.raffler.core.extensions.createParcel
+import com.fibelatti.raffler.presentation.quickdecisions.adapter.ViewType
 
-data class QuickDecision(var name: String, var items: List<String>) : Parcelable {
+data class QuickDecision(
+        var name: String,
+        var items: List<String>
+) : Parcelable, ViewType {
     constructor(parcel: Parcel) : this(
             parcel.readString(),
             mutableListOf<String>().apply {
                 parcel.readList(this, String::class.java.classLoader)
             })
 
+    override fun getViewType() = ViewType.QUICK_DECISION
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
