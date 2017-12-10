@@ -2,9 +2,7 @@ package com.fibelatti.raffler.data.quickdecision
 
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
-import android.os.Parcel
-import android.os.Parcelable
-import com.fibelatti.raffler.core.extensions.createParcel
+import android.arch.persistence.room.Ignore
 import com.fibelatti.raffler.data.quickdecision.QuickDecision.Companion.COLUMN_ID
 import com.fibelatti.raffler.data.quickdecision.QuickDecision.Companion.COLUMN_LOCALE
 import com.fibelatti.raffler.data.quickdecision.QuickDecision.Companion.TABLE_NAME
@@ -13,32 +11,17 @@ import com.fibelatti.raffler.data.quickdecision.QuickDecision.Companion.TABLE_NA
         primaryKeys = [COLUMN_ID, COLUMN_LOCALE])
 data class QuickDecision(
         @ColumnInfo(name = COLUMN_ID)
-        val id: String,
+        var id: String = "",
         @ColumnInfo(name = COLUMN_LOCALE)
-        val locale: String,
+        var locale: String = "",
         @ColumnInfo(name = COLUMN_NAME)
-        val name: String,
+        var name: String = "",
         @ColumnInfo(name = COLUMN_VALUES)
-        val values: String
-) : Parcelable {
-    constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString())
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(id)
-        parcel.writeString(locale)
-        parcel.writeString(name)
-        parcel.writeString(values)
-    }
-
-    override fun describeContents() = 0
+        var values: String = ""
+) {
+    @Ignore constructor() : this("", "", "", "")
 
     companion object {
-        val CREATOR = createParcel { QuickDecision(it) }
-
         const val TABLE_NAME = "quick_decision"
         const val COLUMN_ID = "quick_decision_key"
         const val COLUMN_LOCALE = "quick_decision_locale"
@@ -58,7 +41,6 @@ data class QuickDecision(
                 + " TEXT NOT NULL,"
                 + " PRIMARY KEY (" + COLUMN_ID + "," + COLUMN_LOCALE + ")"
                 + ");")
-
 
         const val DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME
 
