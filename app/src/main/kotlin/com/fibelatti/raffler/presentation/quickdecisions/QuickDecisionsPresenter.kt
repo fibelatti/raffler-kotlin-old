@@ -62,10 +62,9 @@ class QuickDecisionsPresenter(schedulerProvider: SchedulerProvider,
     }
 
     private fun handleAddGroupsAsQuickDecisionSuccess(result: Boolean) {
-        if (result) {
-            getUpdatedQuickDecisions()
-        } else {
-            handleError()
+        when (result) {
+            true -> getUpdatedQuickDecisions()
+            false -> handleError()
         }
     }
 

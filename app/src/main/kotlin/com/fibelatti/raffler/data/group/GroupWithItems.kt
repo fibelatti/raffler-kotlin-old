@@ -3,7 +3,7 @@ package com.fibelatti.raffler.data.group
 import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Relation
 
-class GroupWithItems() {
+class GroupWithItems {
     @Embedded
     var group: Group = Group()
 

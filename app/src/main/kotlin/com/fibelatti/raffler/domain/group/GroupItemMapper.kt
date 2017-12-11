@@ -4,11 +4,9 @@ import com.fibelatti.raffler.data.group.GroupItem as DataModel
 import com.fibelatti.raffler.presentation.models.GroupItem as PresentationModel
 
 object GroupItemMapper {
-    fun toPresentationModel(groupItem: DataModel): PresentationModel {
-        return PresentationModel(groupItem.id, groupItem.name, true)
-    }
+    fun toPresentationModel(groupItem: DataModel) =
+            PresentationModel(groupItem.id, groupItem.name, true)
 
-    fun toDataModel(groupItem: PresentationModel, groupId: Long): DataModel {
-        return DataModel(groupItem.id, groupId, groupItem.name)
-    }
+    fun toDataModel(groupItem: PresentationModel, groupId: Long) =
+            DataModel(groupItem.id, groupId, groupItem.name)
 }
