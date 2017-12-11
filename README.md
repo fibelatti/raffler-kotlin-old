@@ -20,3 +20,9 @@ This project is used to study and demonstrate many topics related to Android dev
 - Dagger 2
 - RxJava 2
 - Clean Architecture
+
+## Build Status
+#### master:
+[![Build Status](https://travis-ci.org/fibelatti/raffler-kotlin.svg?branch=master)](https://travis-ci.org/fibelatti/raffler-kotlin)
+#### develop:
+[![Build Status](https://travis-ci.org/fibelatti/raffler-kotlin.svg?branch=develop)](https://travis-ci.org/fibelatti/raffler-kotlin)
