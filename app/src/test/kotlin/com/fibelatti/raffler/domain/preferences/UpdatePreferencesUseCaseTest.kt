@@ -3,14 +3,15 @@ package com.fibelatti.raffler.domain.preferences
 import com.fibelatti.raffler.BaseTest
 import com.fibelatti.raffler.data.preferences.PreferencesRepository
 import com.fibelatti.raffler.presentation.models.Preferences
+import io.reactivex.Single
 import io.reactivex.observers.TestObserver
-import junit.framework.Assert
 import org.junit.Test
-import org.mockito.Mockito
+import org.mockito.BDDMockito.given
+import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 
 class UpdatePreferencesUseCaseTest : BaseTest() {
-    private val mockPreferencesRepository = Mockito.mock(PreferencesRepository::class.java)
+    private val mockPreferencesRepository = mock(PreferencesRepository::class.java)
 
     private val updatePreferencesUseCase = UpdatePreferencesUseCase(mockPreferencesRepository)
 
@@ -19,6 +20,7 @@ class UpdatePreferencesUseCaseTest : BaseTest() {
         // Arrange
         val testObserver = TestObserver<Boolean>()
         val preferences = arrangePreferences(true)
+        arrangeRepository(true)
 
         // Act
         updatePreferencesUseCase.updatePreferences(preferences)
@@ -28,7 +30,7 @@ class UpdatePreferencesUseCaseTest : BaseTest() {
 
         // Assert
         assertCompleteAndNoErrors(testObserver)
-        Assert.assertTrue(testObserver.values()[0])
+        assert(testObserver.values()[0])
         verifyRepository(true)
     }
 
@@ -37,6 +39,7 @@ class UpdatePreferencesUseCaseTest : BaseTest() {
         // Arrange
         val testObserver = TestObserver<Boolean>()
         val preferences = arrangePreferences(false)
+        arrangeRepository(false)
 
         // Act
         updatePreferencesUseCase.updatePreferences(preferences)
@@ -46,12 +49,21 @@ class UpdatePreferencesUseCaseTest : BaseTest() {
 
         // Assert
         assertCompleteAndNoErrors(testObserver)
-        Assert.assertTrue(testObserver.values()[0])
+        assert(testObserver.values()[0])
         verifyRepository(false)
     }
 
-    private fun arrangePreferences(value: Boolean): Preferences {
-        return Preferences(value, value, value, value)
+    private fun arrangePreferences(value: Boolean) = Preferences(value, value, value, value)
+
+    private fun arrangeRepository(value: Boolean) {
+        given(mockPreferencesRepository.setRouletteMusicEnabled(value))
+                .willReturn(Single.just(true))
+        given(mockPreferencesRepository.setCrashReportEnabled(value))
+                .willReturn(Single.just(true))
+        given(mockPreferencesRepository.setAnalyticsEnabled(value))
+                .willReturn(Single.just(true))
+        given(mockPreferencesRepository.setNumberRangeEnabled(value))
+                .willReturn(Single.just(true))
     }
 
     private fun verifyRepository(value: Boolean) {

@@ -5,8 +5,6 @@ import com.fibelatti.raffler.data.preferences.PreferencesRepository
 import com.fibelatti.raffler.presentation.models.Preferences
 import io.reactivex.Single
 import io.reactivex.observers.TestObserver
-import junit.framework.Assert.assertFalse
-import junit.framework.Assert.assertTrue
 import org.junit.Test
 import org.mockito.BDDMockito.given
 import org.mockito.Mockito.mock
@@ -34,10 +32,10 @@ class GetPreferencesUseCaseTest : BaseTest() {
 
         val preferences = testObserver.values()[0]
 
-        assertTrue(preferences.rouletteMusicEnabled)
-        assertTrue(preferences.crashReportEnabled)
-        assertTrue(preferences.analyticsEnabled)
-        assertTrue(preferences.numberRangeEnabled)
+        assert(preferences.rouletteMusicEnabled)
+        assert(preferences.crashReportEnabled)
+        assert(preferences.analyticsEnabled)
+        assert(preferences.numberRangeEnabled)
     }
 
     @Test
@@ -58,10 +56,10 @@ class GetPreferencesUseCaseTest : BaseTest() {
 
         val preferences = testObserver.values()[0]
 
-        assertFalse(preferences.rouletteMusicEnabled)
-        assertFalse(preferences.crashReportEnabled)
-        assertFalse(preferences.analyticsEnabled)
-        assertFalse(preferences.numberRangeEnabled)
+        assert(!preferences.rouletteMusicEnabled)
+        assert(!preferences.crashReportEnabled)
+        assert(!preferences.analyticsEnabled)
+        assert(!preferences.numberRangeEnabled)
     }
 
     private fun arrangeRepository(value: Boolean) {

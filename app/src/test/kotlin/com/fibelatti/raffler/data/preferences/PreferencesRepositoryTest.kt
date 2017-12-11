@@ -3,7 +3,6 @@ package com.fibelatti.raffler.data.preferences
 import com.fibelatti.raffler.BaseTest
 import com.fibelatti.raffler.data.localdatastorage.UserPreferencesContract
 import io.reactivex.observers.TestObserver
-import junit.framework.Assert.assertTrue
 import org.junit.Test
 import org.mockito.BDDMockito.given
 import org.mockito.Mockito.mock
@@ -29,7 +28,7 @@ class PreferencesRepositoryTest : BaseTest() {
 
         // Assert
         assertCompleteAndNoErrors(testObserver)
-        assertTrue(testObserver.values()[0])
+        assert(testObserver.values()[0])
     }
 
     @Test
@@ -45,7 +44,7 @@ class PreferencesRepositoryTest : BaseTest() {
 
         // Assert
         assertCompleteAndNoErrors(testObserver)
-        assertTrue(testObserver.values()[0])
+        assert(testObserver.values()[0])
         verify(mockUserPreferences).setRouletteMusicEnabled(true)
     }
 
@@ -65,7 +64,7 @@ class PreferencesRepositoryTest : BaseTest() {
 
         // Assert
         assertCompleteAndNoErrors(testObserver)
-        assertTrue(testObserver.values()[0])
+        assert(testObserver.values()[0])
     }
 
     @Test
@@ -81,7 +80,7 @@ class PreferencesRepositoryTest : BaseTest() {
 
         // Assert
         assertCompleteAndNoErrors(testObserver)
-        assertTrue(testObserver.values()[0])
+        assert(testObserver.values()[0])
         verify(mockUserPreferences).setCrashReportEnabled(true)
     }
 
@@ -101,7 +100,7 @@ class PreferencesRepositoryTest : BaseTest() {
 
         // Assert
         assertCompleteAndNoErrors(testObserver)
-        assertTrue(testObserver.values()[0])
+        assert(testObserver.values()[0])
     }
 
     @Test
@@ -117,7 +116,7 @@ class PreferencesRepositoryTest : BaseTest() {
 
         // Assert
         assertCompleteAndNoErrors(testObserver)
-        assertTrue(testObserver.values()[0])
+        assert(testObserver.values()[0])
         verify(mockUserPreferences).setAnalyticsEnabled(true)
     }
 
@@ -137,7 +136,7 @@ class PreferencesRepositoryTest : BaseTest() {
 
         // Assert
         assertCompleteAndNoErrors(testObserver)
-        assertTrue(testObserver.values()[0])
+        assert(testObserver.values()[0])
     }
 
     @Test
@@ -153,7 +152,7 @@ class PreferencesRepositoryTest : BaseTest() {
 
         // Assert
         assertCompleteAndNoErrors(testObserver)
-        assertTrue(testObserver.values()[0])
+        assert(testObserver.values()[0])
         verify(mockUserPreferences).setNumberRangeEnabled(true)
     }
 }
