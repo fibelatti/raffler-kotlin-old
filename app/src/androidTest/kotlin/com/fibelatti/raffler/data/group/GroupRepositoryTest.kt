@@ -1,7 +1,7 @@
 package com.fibelatti.raffler.data.group
 
 import android.support.test.runner.AndroidJUnit4
-import com.fibelatti.raffler.BaseDbTest
+import com.fibelatti.raffler.data.BaseDbTest
 import io.reactivex.observers.TestObserver
 import org.junit.Test
 import org.junit.runner.RunWith

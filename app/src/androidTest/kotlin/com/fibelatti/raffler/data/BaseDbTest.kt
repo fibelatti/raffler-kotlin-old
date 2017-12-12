@@ -1,7 +1,8 @@
-package com.fibelatti.raffler
+package com.fibelatti.raffler.data
 
 import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
+import com.fibelatti.raffler.BaseTest
 import com.fibelatti.raffler.data.localdatastorage.AppDatabase
 import org.junit.After
 import org.junit.Before
