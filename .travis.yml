@@ -13,7 +13,7 @@ android:
     - platform-tools
     - tools
     - build-tools-27.0.2
-    - android-26
+    - android-22
 
     # Additional components
     - extra-google-m2repository
