@@ -8,10 +8,10 @@ import java.util.*
 import javax.inject.Inject
 import com.fibelatti.raffler.presentation.models.QuickDecision as PresentationModel
 
-class GetQuickDecisionsUseCase @Inject constructor(private val database: AppDatabase) {
+class GetQuickDecisionsUseCase @Inject constructor(private val database: AppDatabase, private val locale: Locale) {
     fun getAllQuickDecisions(): Single<List<PresentationModel>> {
-        val locale = if (Constants.SUPPORTED_LOCALES.contains(Locale.getDefault().language))
-            Locale.getDefault().language
+        val locale = if (Constants.SUPPORTED_LOCALES.contains(locale.language.toLowerCase()))
+            locale.language
         else
             Constants.LOCALE_EN
 
