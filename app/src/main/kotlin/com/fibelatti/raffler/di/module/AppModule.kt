@@ -44,5 +44,5 @@ class AppModule(private var app: App) {
             .build()
 
     @Provides
-    fun provideLocaleDefault() = Locale.getDefault()
+    fun provideLocaleDefault(): Locale = Locale.getDefault()
 }
