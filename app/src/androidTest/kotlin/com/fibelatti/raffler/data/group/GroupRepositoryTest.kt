@@ -31,7 +31,7 @@ class GroupRepositoryTest : BaseDbTest() {
                 .subscribe(testObserver)
 
         // Assert
-        assertCompleteAndNoErrors(testObserver)
+        assertSingleOnCompleteWithNoErrors(testObserver)
         assertGroup(testObserver)
     }
 
@@ -50,7 +50,7 @@ class GroupRepositoryTest : BaseDbTest() {
                 .subscribe(testObserver)
 
         // Assert
-        assertCompleteAndNoErrors(testObserver)
+        assertSingleOnCompleteWithNoErrors(testObserver)
         assertGroup(testObserver)
         assertGroupItems(testObserver)
     }
@@ -71,7 +71,7 @@ class GroupRepositoryTest : BaseDbTest() {
                 .observeOn(testSchedulerProvider.mainThread())
                 .subscribe(testObserver)
 
-        assertCompleteAndNoErrors(testObserver)
+        assertSingleOnCompleteWithNoErrors(testObserver)
         assertTrue(testObserver.values()[0].isEmpty())
     }
 
@@ -88,7 +88,7 @@ class GroupRepositoryTest : BaseDbTest() {
                 .subscribe(testObserver)
 
         // Assert
-        assertCompleteAndNoErrors(testObserver)
+        assertSingleOnCompleteWithNoErrors(testObserver)
         assertTrue(testObserver.values()[0].isEmpty())
     }
 
@@ -106,7 +106,7 @@ class GroupRepositoryTest : BaseDbTest() {
                 .subscribe(testObserver)
 
         // Assert
-        assertCompleteAndNoErrors(testObserver)
+        assertSingleOnCompleteWithNoErrors(testObserver)
         assertTrue(testObserver.values()[0].isNotEmpty())
     }
 

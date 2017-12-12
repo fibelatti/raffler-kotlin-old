@@ -35,7 +35,7 @@ class QuickDecisionRepositoryTest : BaseDbTest() {
                 .observeOn(testSchedulerProvider.mainThread())
                 .subscribe(testObserver)
 
-        assertCompleteAndNoErrors(testObserver)
+        assertSingleOnCompleteWithNoErrors(testObserver)
         assertTrue(testObserver.values()[0].isNotEmpty())
         val filteredList = testObserver.values()[0].filter { value -> value.id == QUICK_DECISION_ID }
         assertTrue(filteredList.isNotEmpty())

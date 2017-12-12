@@ -59,7 +59,7 @@ class GetQuickDecisionsUseCaseTest : BaseTest() {
                 .subscribe(testObserver)
 
         // Assert
-        assertCompleteAndNoErrors(testObserver)
+        assertSingleOnCompleteWithNoErrors(testObserver)
         val result = testObserver.values()[0]
         assertEquals(2, result.size)
         assertNotNull(result.find { quickDecision -> quickDecision.name == QUICK_DECISION_NAME_EN })
@@ -79,7 +79,7 @@ class GetQuickDecisionsUseCaseTest : BaseTest() {
                 .subscribe(testObserver)
 
         // Assert
-        assertCompleteAndNoErrors(testObserver)
+        assertSingleOnCompleteWithNoErrors(testObserver)
         val result = testObserver.values()[0]
         assertEquals(2, result.size)
         assertNotNull(result.find { quickDecision -> quickDecision.name == QUICK_DECISION_NAME_ES })
@@ -99,7 +99,7 @@ class GetQuickDecisionsUseCaseTest : BaseTest() {
                 .subscribe(testObserver)
 
         // Assert
-        assertCompleteAndNoErrors(testObserver)
+        assertSingleOnCompleteWithNoErrors(testObserver)
         val result = testObserver.values()[0]
         assertEquals(2, result.size)
         assertNotNull(result.find { quickDecision -> quickDecision.name == QUICK_DECISION_NAME_EN })

@@ -27,7 +27,7 @@ class PreferencesRepositoryTest : BaseTest() {
                 .subscribe(testObserver)
 
         // Assert
-        assertCompleteAndNoErrors(testObserver)
+        assertSingleOnCompleteWithNoErrors(testObserver)
         assert(testObserver.values()[0])
     }
 
@@ -43,8 +43,7 @@ class PreferencesRepositoryTest : BaseTest() {
                 .subscribe(testObserver)
 
         // Assert
-        assertCompleteAndNoErrors(testObserver)
-        assert(testObserver.values()[0])
+        assertCompletableOnComplete(testObserver)
         verify(mockUserPreferences).setRouletteMusicEnabled(true)
     }
 
@@ -63,7 +62,7 @@ class PreferencesRepositoryTest : BaseTest() {
                 .subscribe(testObserver)
 
         // Assert
-        assertCompleteAndNoErrors(testObserver)
+        assertSingleOnCompleteWithNoErrors(testObserver)
         assert(testObserver.values()[0])
     }
 
@@ -79,8 +78,7 @@ class PreferencesRepositoryTest : BaseTest() {
                 .subscribe(testObserver)
 
         // Assert
-        assertCompleteAndNoErrors(testObserver)
-        assert(testObserver.values()[0])
+        assertCompletableOnComplete(testObserver)
         verify(mockUserPreferences).setCrashReportEnabled(true)
     }
 
@@ -99,7 +97,7 @@ class PreferencesRepositoryTest : BaseTest() {
                 .subscribe(testObserver)
 
         // Assert
-        assertCompleteAndNoErrors(testObserver)
+        assertSingleOnCompleteWithNoErrors(testObserver)
         assert(testObserver.values()[0])
     }
 
@@ -115,8 +113,7 @@ class PreferencesRepositoryTest : BaseTest() {
                 .subscribe(testObserver)
 
         // Assert
-        assertCompleteAndNoErrors(testObserver)
-        assert(testObserver.values()[0])
+        assertCompletableOnComplete(testObserver)
         verify(mockUserPreferences).setAnalyticsEnabled(true)
     }
 
@@ -135,7 +132,7 @@ class PreferencesRepositoryTest : BaseTest() {
                 .subscribe(testObserver)
 
         // Assert
-        assertCompleteAndNoErrors(testObserver)
+        assertSingleOnCompleteWithNoErrors(testObserver)
         assert(testObserver.values()[0])
     }
 
@@ -151,8 +148,7 @@ class PreferencesRepositoryTest : BaseTest() {
                 .subscribe(testObserver)
 
         // Assert
-        assertCompleteAndNoErrors(testObserver)
-        assert(testObserver.values()[0])
+        assertCompletableOnComplete(testObserver)
         verify(mockUserPreferences).setNumberRangeEnabled(true)
     }
 }

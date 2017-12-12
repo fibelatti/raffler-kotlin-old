@@ -4,6 +4,7 @@ import com.fibelatti.raffler.BaseTest
 import com.fibelatti.raffler.domain.preferences.GetPreferencesUseCase
 import com.fibelatti.raffler.domain.preferences.UpdatePreferencesUseCase
 import com.fibelatti.raffler.presentation.models.Preferences
+import io.reactivex.Completable
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
@@ -61,7 +62,7 @@ class PreferencesPresenterTest: BaseTest() {
     fun testUpdatePreferencesIsSuccessful() {
         // Arrange
         given(mockUpdatePreferencesUseCase.updatePreferences(mockPreferences))
-                .willReturn(Single.just(true))
+                .willReturn(Completable.complete())
 
         // Act
         preferencesPresenter.updatePreferences(mockPreferences)
@@ -74,7 +75,7 @@ class PreferencesPresenterTest: BaseTest() {
     fun testUpdatePreferencesError() {
         // Arrange
         given(mockUpdatePreferencesUseCase.updatePreferences(mockPreferences))
-                .willReturn(Single.error(mockException))
+                .willReturn(Completable.error(mockException))
         given(mockException.message)
                 .willReturn("Error")
 

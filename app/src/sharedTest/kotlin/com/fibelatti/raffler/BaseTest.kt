@@ -5,7 +5,12 @@ import io.reactivex.observers.TestObserver
 abstract class BaseTest {
     protected val testSchedulerProvider = TestSchedulerProvider()
 
-    protected fun <T> assertCompleteAndNoErrors(testObserver: TestObserver<T>) {
+    protected fun <T> assertCompletableOnComplete(testObserver: TestObserver<T>) {
+        testObserver.assertComplete()
+        testObserver.assertNoErrors()
+    }
+
+    protected fun <T> assertSingleOnCompleteWithNoErrors(testObserver: TestObserver<T>) {
         testObserver.assertComplete()
         testObserver.assertNoErrors()
         testObserver.assertValueCount(1)

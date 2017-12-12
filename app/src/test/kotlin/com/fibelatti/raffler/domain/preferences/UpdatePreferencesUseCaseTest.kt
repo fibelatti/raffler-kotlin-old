@@ -3,7 +3,7 @@ package com.fibelatti.raffler.domain.preferences
 import com.fibelatti.raffler.BaseTest
 import com.fibelatti.raffler.data.preferences.PreferencesRepository
 import com.fibelatti.raffler.presentation.models.Preferences
-import io.reactivex.Single
+import io.reactivex.Completable
 import io.reactivex.observers.TestObserver
 import org.junit.Test
 import org.mockito.BDDMockito.given
@@ -29,8 +29,7 @@ class UpdatePreferencesUseCaseTest : BaseTest() {
                 .subscribe(testObserver)
 
         // Assert
-        assertCompleteAndNoErrors(testObserver)
-        assert(testObserver.values()[0])
+        assertCompletableOnComplete(testObserver)
         verifyRepository(true)
     }
 
@@ -48,8 +47,7 @@ class UpdatePreferencesUseCaseTest : BaseTest() {
                 .subscribe(testObserver)
 
         // Assert
-        assertCompleteAndNoErrors(testObserver)
-        assert(testObserver.values()[0])
+        assertCompletableOnComplete(testObserver)
         verifyRepository(false)
     }
 
@@ -57,13 +55,13 @@ class UpdatePreferencesUseCaseTest : BaseTest() {
 
     private fun arrangeRepository(value: Boolean) {
         given(mockPreferencesRepository.setRouletteMusicEnabled(value))
-                .willReturn(Single.just(true))
+                .willReturn(Completable.complete())
         given(mockPreferencesRepository.setCrashReportEnabled(value))
-                .willReturn(Single.just(true))
+                .willReturn(Completable.complete())
         given(mockPreferencesRepository.setAnalyticsEnabled(value))
-                .willReturn(Single.just(true))
+                .willReturn(Completable.complete())
         given(mockPreferencesRepository.setNumberRangeEnabled(value))
-                .willReturn(Single.just(true))
+                .willReturn(Completable.complete())
     }
 
     private fun verifyRepository(value: Boolean) {

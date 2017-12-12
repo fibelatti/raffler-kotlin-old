@@ -41,7 +41,7 @@ class GroupItemRepositoryTest : BaseDbTest() {
         // Assert
         val result = testObserver.values()[0]
 
-        assertCompleteAndNoErrors(testObserver)
+        assertSingleOnCompleteWithNoErrors(testObserver)
         assertTrue(result.isNotEmpty())
         assertEquals(2, result.size)
     }
@@ -65,7 +65,7 @@ class GroupItemRepositoryTest : BaseDbTest() {
                 .subscribe(testObserver)
         val result = testObserver.values()[0]
 
-        assertCompleteAndNoErrors(testObserver)
+        assertSingleOnCompleteWithNoErrors(testObserver)
         assertEquals(0, result.size)
 
         appDatabase.getGroupItemRepository()
@@ -75,7 +75,7 @@ class GroupItemRepositoryTest : BaseDbTest() {
                 .subscribe(testObserverOther)
         val resultOther = testObserverOther.values()[0]
 
-        assertCompleteAndNoErrors(testObserverOther)
+        assertSingleOnCompleteWithNoErrors(testObserverOther)
         assertEquals(1, resultOther.size)
     }
 
@@ -97,7 +97,7 @@ class GroupItemRepositoryTest : BaseDbTest() {
                 .subscribe(testObserver)
         val result = testObserver.values()[0]
 
-        assertCompleteAndNoErrors(testObserver)
+        assertSingleOnCompleteWithNoErrors(testObserver)
         assertEquals(1, result.size)
     }
 
