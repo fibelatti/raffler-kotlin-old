@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.fibelatti.raffler.R
+import com.fibelatti.raffler.core.Constants
 import com.fibelatti.raffler.core.extensions.snackbar
 import com.fibelatti.raffler.core.extensions.withItIfNotNull
 import com.fibelatti.raffler.presentation.base.BaseFragment
@@ -129,7 +130,7 @@ class PreferencesFragment :
         button_share.setOnClickListener {
             //analyticsHelper.fireShareAppEvent()
 
-            val message = getString(R.string.preferences_share_text, String.format("%s?id=%s", "http://play.google.com/store/apps/details", activity?.packageName))
+            val message = getString(R.string.preferences_share_text, String.format("%s?id=%s", Constants.PLAY_STORE_BASE_URL, activity?.packageName))
             val share = Intent(Intent.ACTION_SEND)
             share.type = "text/plain"
             share.putExtra(Intent.EXTRA_TEXT, message)
