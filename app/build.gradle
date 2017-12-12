@@ -39,8 +39,19 @@ android {
     }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
-        test.java.srcDirs += 'src/test/kotlin'
-        test.java.srcDirs += 'src/test/resources'
+
+        String sharedTestDir = 'src/sharedTest/kotlin'
+
+        test {
+            java.srcDir sharedTestDir
+            java.srcDirs += 'src/test/kotlin'
+            java.srcDirs += 'src/test/resources'
+        }
+
+        androidTest {
+            java.srcDir sharedTestDir
+            java.srcDirs += 'src/androidTest/kotlin'
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
