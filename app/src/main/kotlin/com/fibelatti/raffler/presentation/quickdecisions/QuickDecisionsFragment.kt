@@ -77,13 +77,10 @@ class QuickDecisionsFragment :
         handleError(getString(R.string.network_msg_error))
     }
 
-    override fun onDataLoaded(quickDecisions: List<QuickDecision>, groups: List<Group>) {
+    override fun onDataLoaded(quickDecisions: List<QuickDecision>) {
         val dataSet = ArrayList<ViewType>()
 
-        if (groups.isNotEmpty()) {
-            dataSet.add(AddNewPlaceholder())
-        }
-
+        dataSet.add(AddNewPlaceholder())
         dataSet.addAll(quickDecisions)
 
         context?.let {
@@ -108,12 +105,20 @@ class QuickDecisionsFragment :
         }
     }
 
+    override fun onDisplayUserGroups(groups: List<Group>) {
+        // TODO implement after implementing groups
+    }
+
+    override fun onGroupCreationRequired() {
+        // TODO implement after implementing groups
+    }
+
     override fun onQuickDecisionsUpdated(quickDecisions: List<QuickDecision>) {
         // TODO implement after implementing groups
     }
 
     override fun onAddQuickDecisionClicked() {
-        // TODO implement after implementing groups
+        quickDecisionsPresenter.addNewQuickDecision()
     }
 
     override fun onQuickDecisionClicked(quickDecision: QuickDecision) {
