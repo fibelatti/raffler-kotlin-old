@@ -33,8 +33,4 @@ class SaveGroupUseCaseTest : BaseGroupDomainTest() {
         verify(mockGroupRepository).saveGroup(getSampleDataGroup())
         verify(mockGroupItemRepository).saveGroupItems(getSampleDataGroupItem1(), getSampleDataGroupItem2())
     }
-
-    private fun mockedRunnable(body: Runnable) {
-        body.run()
-    }
 }

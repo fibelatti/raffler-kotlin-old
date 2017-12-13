@@ -7,8 +7,12 @@ import javax.inject.Inject
 
 class DeleteGroupUseCase @Inject constructor(private val database: AppDatabase) {
     fun deleteGroup(group: Group): Completable {
-         database.getGroupRepository()
-                .deleteGroupById(group.id)
+        database.runInTransaction({
+            database.getGroupRepository()
+                    .deleteGroupById(group.id)
+            database.getQuickDecisionRepository()
+                    .deleteQuickDecisionById(group.id.toString())
+        })
 
         return Completable.complete()
     }

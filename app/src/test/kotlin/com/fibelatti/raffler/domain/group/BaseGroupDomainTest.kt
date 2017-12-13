@@ -4,6 +4,7 @@ import com.fibelatti.raffler.BaseTest
 import com.fibelatti.raffler.data.group.GroupItemRepositoryContract
 import com.fibelatti.raffler.data.group.GroupRepositoryContract
 import com.fibelatti.raffler.data.localdatastorage.AppDatabase
+import com.fibelatti.raffler.data.quickdecision.QuickDecisionRepositoryContract
 import com.fibelatti.raffler.presentation.models.Group
 import com.fibelatti.raffler.presentation.models.GroupItem
 import org.junit.Before
@@ -14,6 +15,7 @@ abstract class BaseGroupDomainTest: BaseTest() {
     protected val mockDatabase: AppDatabase = mock(AppDatabase::class.java)
     protected val mockGroupRepository: GroupRepositoryContract = mock(GroupRepositoryContract::class.java)
     protected val mockGroupItemRepository: GroupItemRepositoryContract = mock(GroupItemRepositoryContract::class.java)
+    protected val mockQuickDecisionRepository: QuickDecisionRepositoryContract = mock(QuickDecisionRepositoryContract::class.java)
 
     companion object {
         const val GROUP_ID = 1L

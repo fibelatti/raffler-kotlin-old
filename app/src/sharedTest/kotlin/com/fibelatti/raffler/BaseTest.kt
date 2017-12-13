@@ -15,4 +15,8 @@ abstract class BaseTest {
         testObserver.assertNoErrors()
         testObserver.assertValueCount(1)
     }
+
+    protected fun mockedRunnable(body: Runnable) {
+        body.run()
+    }
 }
