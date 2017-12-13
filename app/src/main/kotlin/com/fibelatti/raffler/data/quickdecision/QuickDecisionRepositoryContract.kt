@@ -13,4 +13,7 @@ interface QuickDecisionRepositoryContract {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addQuickDecision(quickDecision: QuickDecision)
+
+    @Query("delete from " + QuickDecision.TABLE_NAME + " where " + QuickDecision.COLUMN_ID + " = :quickDecisionId")
+    fun deleteQuickDecisionById(quickDecisionId: String)
 }

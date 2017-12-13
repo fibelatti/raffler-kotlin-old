@@ -44,4 +44,38 @@ class QuickDecisionRepositoryTest : BaseDbTest() {
         assertEquals(QUICK_DECISION_NAME, filteredList[0].name)
         assertEquals(QUICK_DECISION_VALUES, filteredList[0].values)
     }
+
+    @Test
+    fun deleteQuickDecision() {
+        // Arrange
+        val testObserverArrange = TestObserver<List<QuickDecision>>()
+        val testObserverAssert = TestObserver<List<QuickDecision>>()
+        val quickDecision = QuickDecision(QUICK_DECISION_ID, QUICK_DECISION_LOCALE, QUICK_DECISION_NAME, QUICK_DECISION_VALUES)
+
+        appDatabase.getQuickDecisionRepository()
+                .addQuickDecision(quickDecision)
+
+        appDatabase.getQuickDecisionRepository()
+                .fetchAllQuickDecisions()
+                .subscribeOn(testSchedulerProvider.io())
+                .observeOn(testSchedulerProvider.mainThread())
+                .subscribe(testObserverArrange)
+
+        assertSingleOnCompleteWithNoErrors(testObserverArrange)
+        assertTrue(testObserverArrange.values()[0].isNotEmpty())
+
+        // Act
+        appDatabase.getQuickDecisionRepository()
+                .deleteQuickDecisionById(QUICK_DECISION_ID)
+
+        // Assert
+        appDatabase.getQuickDecisionRepository()
+                .fetchAllQuickDecisions()
+                .subscribeOn(testSchedulerProvider.io())
+                .observeOn(testSchedulerProvider.mainThread())
+                .subscribe(testObserverAssert)
+
+        assertSingleOnCompleteWithNoErrors(testObserverAssert)
+        assertTrue(testObserverAssert.values()[0].isEmpty())
+    }
 }
