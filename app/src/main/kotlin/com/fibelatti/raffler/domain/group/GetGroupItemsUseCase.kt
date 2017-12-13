@@ -10,6 +10,7 @@ class GetGroupItemsUseCase @Inject constructor(private val database: AppDatabase
     fun getAllGroupItemsByGroupId(groupId: Long): Single<List<PresentationModel>> {
         return database.getGroupItemRepository()
                 .getAllGroupItemsByGroupId(groupId)
+                .onErrorReturn { emptyList() }
                 .flattenAsObservable<GroupItem> { list -> list }
                 .map { groupItem ->
                     GroupItemMapper.toPresentationModel(groupItem)

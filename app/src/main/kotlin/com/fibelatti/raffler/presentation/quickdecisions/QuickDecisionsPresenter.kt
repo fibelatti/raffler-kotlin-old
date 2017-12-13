@@ -56,16 +56,9 @@ class QuickDecisionsPresenter(schedulerProvider: SchedulerProvider,
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.mainThread())
                 .subscribe(
-                        ::handleAddGroupsAsQuickDecisionSuccess,
+                        ::getUpdatedQuickDecisions,
                         ::handleError
                 )
-    }
-
-    private fun handleAddGroupsAsQuickDecisionSuccess(result: Boolean) {
-        when (result) {
-            true -> getUpdatedQuickDecisions()
-            false -> handleError()
-        }
     }
 
     private fun getUpdatedQuickDecisions() {

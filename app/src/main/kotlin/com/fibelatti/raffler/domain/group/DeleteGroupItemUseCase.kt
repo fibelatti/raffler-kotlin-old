@@ -1,7 +1,7 @@
 package com.fibelatti.raffler.domain.group
 
-import com.fibelatti.raffler.data.group.GroupItem
 import com.fibelatti.raffler.data.localdatastorage.AppDatabase
+import com.fibelatti.raffler.presentation.models.GroupItem
 import io.reactivex.Completable
 import javax.inject.Inject
 
