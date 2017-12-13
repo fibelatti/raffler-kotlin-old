@@ -17,12 +17,14 @@ class PreferencesPresenterTest: BaseTest() {
     private val mockUpdatePreferencesUseCase = mock(UpdatePreferencesUseCase::class.java)
     private val mockView = mock(PreferencesContract.View::class.java)
     private val mockPreferences = mock(Preferences::class.java)
-    private val mockException = mock(Exception::class.java)
+    private val mockException: Exception = mock(Exception::class.java)
 
     private val preferencesPresenter = PreferencesPresenter(testSchedulerProvider, mockGetPreferencesUseCase, mockUpdatePreferencesUseCase)
 
     @Before
-    fun setUp() {
+    fun setup() {
+        given(mockException.message)
+                .willReturn(GENERIC_ERROR_MESSAGE)
         preferencesPresenter.attachView(mockView)
     }
 
@@ -46,8 +48,6 @@ class PreferencesPresenterTest: BaseTest() {
         // Arrange
         given(mockGetPreferencesUseCase.getPreferences())
                 .willReturn(Single.error(mockException))
-        given(mockException.message)
-                .willReturn("Error")
 
         // Act
         preferencesPresenter.getPreferences()
@@ -55,7 +55,7 @@ class PreferencesPresenterTest: BaseTest() {
         // Assert
         verify(mockView).showProgress()
         verify(mockView).hideProgress()
-        verify(mockView).handleError("Error")
+        verify(mockView).handleError(GENERIC_ERROR_MESSAGE)
     }
 
     @Test
@@ -77,13 +77,13 @@ class PreferencesPresenterTest: BaseTest() {
         given(mockUpdatePreferencesUseCase.updatePreferences(mockPreferences))
                 .willReturn(Completable.error(mockException))
         given(mockException.message)
-                .willReturn("Error")
+                .willReturn(GENERIC_ERROR_MESSAGE)
 
         // Act
         preferencesPresenter.updatePreferences(mockPreferences)
 
         // Assert
         verify(mockView).hideProgress()
-        verify(mockView).handleError("Error")
+        verify(mockView).handleError(GENERIC_ERROR_MESSAGE)
     }
 }

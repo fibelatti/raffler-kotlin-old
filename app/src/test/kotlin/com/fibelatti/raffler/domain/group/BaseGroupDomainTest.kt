@@ -8,7 +8,8 @@ import com.fibelatti.raffler.data.quickdecision.QuickDecisionRepositoryContract
 import com.fibelatti.raffler.presentation.models.Group
 import com.fibelatti.raffler.presentation.models.GroupItem
 import org.junit.Before
-import org.mockito.BDDMockito
+import org.mockito.BDDMockito.given
+import org.mockito.Mockito
 import org.mockito.Mockito.mock
 
 abstract class BaseGroupDomainTest: BaseTest() {
@@ -16,6 +17,7 @@ abstract class BaseGroupDomainTest: BaseTest() {
     protected val mockGroupRepository: GroupRepositoryContract = mock(GroupRepositoryContract::class.java)
     protected val mockGroupItemRepository: GroupItemRepositoryContract = mock(GroupItemRepositoryContract::class.java)
     protected val mockQuickDecisionRepository: QuickDecisionRepositoryContract = mock(QuickDecisionRepositoryContract::class.java)
+    protected val mockException: Exception = Mockito.mock(Exception::class.java)
 
     companion object {
         const val GROUP_ID = 1L
@@ -30,10 +32,14 @@ abstract class BaseGroupDomainTest: BaseTest() {
 
     @Before
     fun setup() {
-        BDDMockito.given(mockDatabase.getGroupRepository())
+        given(mockDatabase.getGroupRepository())
                 .willReturn(mockGroupRepository)
-        BDDMockito.given(mockDatabase.getGroupItemRepository())
+        given(mockDatabase.getGroupItemRepository())
                 .willReturn(mockGroupItemRepository)
+        given(mockDatabase.getQuickDecisionRepository())
+                .willReturn(mockQuickDecisionRepository)
+        given(mockException.message)
+                .willReturn(GENERIC_ERROR_MESSAGE)
     }
 
     protected fun getSamplePresentationGroup(): Group {

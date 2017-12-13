@@ -8,11 +8,8 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.mockito.BDDMockito.given
-import org.mockito.Mockito
 
 class GetGroupsUseCaseTest : BaseGroupDomainTest() {
-    private val mockException = Mockito.mock(Exception::class.java)
-
     private val getGroupUseCase = GetGroupsUseCase(mockDatabase)
     private val testObserverList = TestObserver<List<Group>>()
     private val testObserver = TestObserver<Group>()
