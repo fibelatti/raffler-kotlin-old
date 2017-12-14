@@ -39,10 +39,7 @@ class PreferencesPresenter(
         view?.onPreferencesFetched(preferences)
     }
 
-    private fun handleUpdateSuccess(success: Boolean) {
-        when (success) {
-            true -> view?.onPreferencesUpdated()
-            false -> handleError()
-        }
+    private fun handleUpdateSuccess() {
+        view?.onPreferencesUpdated()
     }
 }

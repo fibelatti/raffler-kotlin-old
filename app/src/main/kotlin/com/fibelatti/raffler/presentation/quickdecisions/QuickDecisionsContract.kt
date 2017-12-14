@@ -10,13 +10,19 @@ interface QuickDecisionsContract {
 
         fun getQuickDecisionResult(quickDecision: QuickDecision)
 
+        fun addNewQuickDecision()
+
         fun addGroupToQuickDecisions(group: Group)
     }
 
     interface View : BaseContract.View {
-        fun onDataLoaded(quickDecisions: List<QuickDecision>, groups: List<Group>)
+        fun onDataLoaded(quickDecisions: List<QuickDecision>)
 
         fun onQuickDecisionResult(result: String, isOdd: Boolean)
+
+        fun onDisplayUserGroups(groups: List<Group>)
+
+        fun onGroupCreationRequired()
 
         fun onQuickDecisionsUpdated(quickDecisions: List<QuickDecision>)
     }

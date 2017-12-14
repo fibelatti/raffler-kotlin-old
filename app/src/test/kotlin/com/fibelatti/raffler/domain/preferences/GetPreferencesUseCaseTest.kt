@@ -28,7 +28,7 @@ class GetPreferencesUseCaseTest : BaseTest() {
                 .subscribe(testObserver)
 
         // Assert
-        assertCompleteAndNoErrors(testObserver)
+        assertSingleOnCompleteWithNoErrors(testObserver)
 
         val preferences = testObserver.values()[0]
 
@@ -52,7 +52,7 @@ class GetPreferencesUseCaseTest : BaseTest() {
                 .subscribe(testObserver)
 
         // Assert
-        assertCompleteAndNoErrors(testObserver)
+        assertSingleOnCompleteWithNoErrors(testObserver)
 
         val preferences = testObserver.values()[0]
 

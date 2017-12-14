@@ -1,7 +1,7 @@
 package com.fibelatti.raffler.data.quickdecisions
 
 import android.support.test.runner.AndroidJUnit4
-import com.fibelatti.raffler.BaseDbTest
+import com.fibelatti.raffler.data.BaseDbTest
 import com.fibelatti.raffler.data.quickdecision.QuickDecision
 import io.reactivex.observers.TestObserver
 import org.junit.Test
@@ -35,7 +35,7 @@ class QuickDecisionRepositoryTest : BaseDbTest() {
                 .observeOn(testSchedulerProvider.mainThread())
                 .subscribe(testObserver)
 
-        assertCompleteAndNoErrors(testObserver)
+        assertSingleOnCompleteWithNoErrors(testObserver)
         assertTrue(testObserver.values()[0].isNotEmpty())
         val filteredList = testObserver.values()[0].filter { value -> value.id == QUICK_DECISION_ID }
         assertTrue(filteredList.isNotEmpty())
@@ -43,5 +43,39 @@ class QuickDecisionRepositoryTest : BaseDbTest() {
         assertEquals(QUICK_DECISION_LOCALE, filteredList[0].locale)
         assertEquals(QUICK_DECISION_NAME, filteredList[0].name)
         assertEquals(QUICK_DECISION_VALUES, filteredList[0].values)
+    }
+
+    @Test
+    fun deleteQuickDecision() {
+        // Arrange
+        val testObserverArrange = TestObserver<List<QuickDecision>>()
+        val testObserverAssert = TestObserver<List<QuickDecision>>()
+        val quickDecision = QuickDecision(QUICK_DECISION_ID, QUICK_DECISION_LOCALE, QUICK_DECISION_NAME, QUICK_DECISION_VALUES)
+
+        appDatabase.getQuickDecisionRepository()
+                .addQuickDecision(quickDecision)
+
+        appDatabase.getQuickDecisionRepository()
+                .fetchAllQuickDecisions()
+                .subscribeOn(testSchedulerProvider.io())
+                .observeOn(testSchedulerProvider.mainThread())
+                .subscribe(testObserverArrange)
+
+        assertSingleOnCompleteWithNoErrors(testObserverArrange)
+        assertTrue(testObserverArrange.values()[0].isNotEmpty())
+
+        // Act
+        appDatabase.getQuickDecisionRepository()
+                .deleteQuickDecisionById(QUICK_DECISION_ID)
+
+        // Assert
+        appDatabase.getQuickDecisionRepository()
+                .fetchAllQuickDecisions()
+                .subscribeOn(testSchedulerProvider.io())
+                .observeOn(testSchedulerProvider.mainThread())
+                .subscribe(testObserverAssert)
+
+        assertSingleOnCompleteWithNoErrors(testObserverAssert)
+        assertTrue(testObserverAssert.values()[0].isEmpty())
     }
 }

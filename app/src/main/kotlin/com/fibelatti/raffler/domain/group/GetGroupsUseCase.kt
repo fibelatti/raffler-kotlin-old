@@ -10,6 +10,7 @@ class GetGroupsUseCase @Inject constructor(private val database: AppDatabase) {
     fun getAllGroups(): Single<List<PresentationModel>> {
         return database.getGroupRepository()
                 .getAllGroups()
+                .onErrorReturn { emptyList() }
                 .flattenAsObservable<GroupWithItems> { list -> list }
                 .map { group ->
                     GroupMapper.toPresentationModel(group)

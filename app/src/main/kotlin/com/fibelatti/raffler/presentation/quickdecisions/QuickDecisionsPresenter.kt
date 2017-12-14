@@ -7,8 +7,6 @@ import com.fibelatti.raffler.presentation.base.BasePresenter
 import com.fibelatti.raffler.presentation.common.SchedulerProvider
 import com.fibelatti.raffler.presentation.models.Group
 import com.fibelatti.raffler.presentation.models.QuickDecision
-import io.reactivex.Single
-import io.reactivex.functions.BiFunction
 import java.util.*
 
 class QuickDecisionsPresenter(schedulerProvider: SchedulerProvider,
@@ -19,25 +17,11 @@ class QuickDecisionsPresenter(schedulerProvider: SchedulerProvider,
     override fun bootstrap() {
         view?.showProgress()
 
-        val quickDecisionsSingle = getQuickDecisionsUseCase.getAllQuickDecisions()
+        getQuickDecisionsUseCase.getAllQuickDecisions()
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.mainThread())
-
-        val groupsSingle = getGroupsUseCase.getAllGroups()
-                .subscribeOn(schedulerProvider.io())
-                .observeOn(schedulerProvider.mainThread())
-
-        Single.zip(
-                quickDecisionsSingle,
-                groupsSingle,
-                BiFunction { quickDecisions: List<QuickDecision>, groups: List<Group> ->
-                    Pair(quickDecisions, groups)
-                })
                 .subscribe(
-                        { pair ->
-                            view?.hideProgress()
-                            view?.onDataLoaded(pair.first, pair.second)
-                        },
+                        ::handleGetAllQuickDecisionsSuccess,
                         ::handleError
                 )
     }
@@ -49,6 +33,16 @@ class QuickDecisionsPresenter(schedulerProvider: SchedulerProvider,
         view?.onQuickDecisionResult(quickDecision.items[(randomIndex)], isOdd)
     }
 
+    override fun addNewQuickDecision() {
+        getGroupsUseCase.getAllGroups()
+                .subscribeOn(schedulerProvider.io())
+                .observeOn(schedulerProvider.mainThread())
+                .subscribe(
+                        ::handleGetAllGroupsSuccess,
+                        ::handleError
+                )
+    }
+
     override fun addGroupToQuickDecisions(group: Group) {
         view?.showProgress()
 
@@ -56,15 +50,20 @@ class QuickDecisionsPresenter(schedulerProvider: SchedulerProvider,
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.mainThread())
                 .subscribe(
-                        ::handleAddGroupsAsQuickDecisionSuccess,
+                        ::getUpdatedQuickDecisions,
                         ::handleError
                 )
     }
 
-    private fun handleAddGroupsAsQuickDecisionSuccess(result: Boolean) {
-        when (result) {
-            true -> getUpdatedQuickDecisions()
-            false -> handleError()
+    private fun handleGetAllQuickDecisionsSuccess(quickDecisions: List<QuickDecision>) {
+        view?.hideProgress()
+        view?.onDataLoaded(quickDecisions)
+    }
+
+    private fun handleGetAllGroupsSuccess(groups: List<Group>) {
+        when (groups.size) {
+            0 -> view?.onGroupCreationRequired()
+            else -> view?.onDisplayUserGroups(groups)
         }
     }
 

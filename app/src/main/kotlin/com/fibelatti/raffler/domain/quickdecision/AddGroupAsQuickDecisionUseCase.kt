@@ -4,12 +4,12 @@ import com.fibelatti.raffler.core.Constants
 import com.fibelatti.raffler.data.localdatastorage.AppDatabase
 import com.fibelatti.raffler.data.quickdecision.QuickDecision
 import com.fibelatti.raffler.presentation.models.Group
-import io.reactivex.Single
+import io.reactivex.Completable
 import javax.inject.Inject
 import com.fibelatti.raffler.presentation.models.QuickDecision as PresentationModel
 
 class AddGroupAsQuickDecisionUseCase @Inject constructor(private val database: AppDatabase) {
-    fun addGroupAsQuickDecision(group: Group): Single<Boolean> {
+    fun addGroupAsQuickDecision(group: Group): Completable {
         val quickDecision = QuickDecision(
                 group.id.toString(),
                 Constants.LOCALE_NONE,
@@ -19,6 +19,6 @@ class AddGroupAsQuickDecisionUseCase @Inject constructor(private val database: A
         database.getQuickDecisionRepository()
                 .addQuickDecision(quickDecision)
 
-        return Single.just(true)
+        return Completable.complete()
     }
 }

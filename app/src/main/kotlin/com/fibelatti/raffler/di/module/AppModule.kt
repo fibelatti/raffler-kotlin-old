@@ -12,6 +12,7 @@ import com.fibelatti.raffler.di.qualifier.AppQualifier
 import com.fibelatti.raffler.di.scope.AppScope
 import dagger.Module
 import dagger.Provides
+import java.util.*
 
 @Module
 class AppModule(private var app: App) {
@@ -41,4 +42,7 @@ class AppModule(private var app: App) {
             .addCallback(AppDatabase.RoomCallback)
             .fallbackToDestructiveMigration()
             .build()
+
+    @Provides
+    fun provideLocaleDefault(): Locale = Locale.getDefault()
 }
