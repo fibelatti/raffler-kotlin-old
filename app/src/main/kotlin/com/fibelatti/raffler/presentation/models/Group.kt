@@ -4,7 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.fibelatti.raffler.core.extensions.createParcel
 
-data class Group(val id: Long, var name: String, var items: List<GroupItem>) : Parcelable {
+data class Group(val id: Long, val name: String, val items: List<GroupItem>) : Parcelable {
     val groupItemNames: List<String>
         get() = items.map { item -> item.name }
 

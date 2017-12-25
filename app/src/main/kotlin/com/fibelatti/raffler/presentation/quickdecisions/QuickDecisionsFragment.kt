@@ -10,8 +10,8 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.fibelatti.raffler.R
 import com.fibelatti.raffler.presentation.base.BaseFragment
-import com.fibelatti.raffler.presentation.common.ColorUtils
 import com.fibelatti.raffler.presentation.common.ItemOffsetDecoration
+import com.fibelatti.raffler.presentation.common.calculateColorGradient
 import com.fibelatti.raffler.presentation.models.AddNewPlaceholder
 import com.fibelatti.raffler.presentation.models.Group
 import com.fibelatti.raffler.presentation.models.QuickDecision
@@ -84,7 +84,7 @@ class QuickDecisionsFragment :
         dataSet.addAll(quickDecisions)
 
         context?.let {
-            val colorList = ColorUtils.calculateColorGradient(
+            val colorList = calculateColorGradient(
                     getColor(it, R.color.colorAccent),
                     getColor(it, R.color.colorPrimary),
                     dataSet.size - 1)

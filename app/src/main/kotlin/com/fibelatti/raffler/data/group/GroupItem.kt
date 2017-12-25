@@ -10,11 +10,11 @@ import com.fibelatti.raffler.data.group.GroupItem.Companion.TABLE_NAME
 data class GroupItem(
         @ColumnInfo(name = COLUMN_ID)
         @PrimaryKey(autoGenerate = true)
-        var id: Long = 0,
+        val id: Long,
         @ColumnInfo(name = COLUMN_GROUP_ID)
-        var groupId: Long = 0,
+        val groupId: Long,
         @ColumnInfo(name = COLUMN_NAME)
-        var name: String = ""
+        val name: String
 ) {
     @Ignore constructor() : this(0, 0, "")
 

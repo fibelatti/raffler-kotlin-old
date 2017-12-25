@@ -3,14 +3,12 @@ package com.fibelatti.raffler.data.localdatastorage
 import android.content.SharedPreferences
 import com.fibelatti.raffler.core.extensions.applyWithEditor
 
-class UserPreferencesManager(private val sharedPreferences: SharedPreferences) : UserPreferencesContract {
-    companion object {
-        private const val USER_PREFERENCES_ROULETTE_MUSIC_ENABLED = "user_preferences_roulette_music_enabled"
-        private const val USER_PREFERENCES_CRASH_REPORT_ENABLED = "user_preferences_crash_report_enabled"
-        private const val USER_PREFERENCES_ANALYTICS_ENABLED = "user_preferences_analytics_enabled"
-        private const val USER_PREFERENCES_NUMBER_RANGE_ENABLED = "user_preferences_number_range_enabled"
-    }
+private const val USER_PREFERENCES_ROULETTE_MUSIC_ENABLED = "user_preferences_roulette_music_enabled"
+private const val USER_PREFERENCES_CRASH_REPORT_ENABLED = "user_preferences_crash_report_enabled"
+private const val USER_PREFERENCES_ANALYTICS_ENABLED = "user_preferences_analytics_enabled"
+private const val USER_PREFERENCES_NUMBER_RANGE_ENABLED = "user_preferences_number_range_enabled"
 
+class UserPreferencesManager(private val sharedPreferences: SharedPreferences) : UserPreferencesContract {
     override fun getRouletteMusicEnabled(): Boolean
             = sharedPreferences.getBoolean(USER_PREFERENCES_ROULETTE_MUSIC_ENABLED, true)
 

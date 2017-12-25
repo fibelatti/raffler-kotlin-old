@@ -11,15 +11,13 @@ import com.fibelatti.raffler.data.group.GroupRepositoryContract
 import com.fibelatti.raffler.data.quickdecision.QuickDecision
 import com.fibelatti.raffler.data.quickdecision.QuickDecisionRepositoryContract
 
+const val DATABASE_NAME = "com.fibelatti.raffler.data.db"
+const val DATABASE_VERSION = 5
+
 @Database(entities = [Group::class, GroupItem::class, QuickDecision::class],
-        version = AppDatabase.DATABASE_VERSION,
+        version = DATABASE_VERSION,
         exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
-    companion object {
-        const val DATABASE_NAME = "com.fibelatti.raffler.data.db"
-        const val DATABASE_VERSION = 5
-    }
-
     abstract fun getGroupRepository(): GroupRepositoryContract
     abstract fun getGroupItemRepository(): GroupItemRepositoryContract
     abstract fun getQuickDecisionRepository(): QuickDecisionRepositoryContract

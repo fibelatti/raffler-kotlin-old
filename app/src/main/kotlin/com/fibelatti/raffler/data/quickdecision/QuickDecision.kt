@@ -11,13 +11,13 @@ import com.fibelatti.raffler.data.quickdecision.QuickDecision.Companion.TABLE_NA
         primaryKeys = [COLUMN_ID, COLUMN_LOCALE])
 data class QuickDecision(
         @ColumnInfo(name = COLUMN_ID)
-        var id: String = "",
+        val id: String,
         @ColumnInfo(name = COLUMN_LOCALE)
-        var locale: String = "",
+        val locale: String,
         @ColumnInfo(name = COLUMN_NAME)
-        var name: String = "",
+        val name: String,
         @ColumnInfo(name = COLUMN_VALUES)
-        var values: String = ""
+        val values: String
 ) {
     @Ignore constructor() : this("", "", "", "")
 

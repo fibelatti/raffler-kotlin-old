@@ -4,7 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.fibelatti.raffler.core.extensions.createParcel
 
-data class GroupItem(val id: Long, var name: String, var isIncluded: Boolean = true) : Parcelable {
+data class GroupItem(val id: Long, val name: String, val isIncluded: Boolean = true) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readValue(Long::class.java.classLoader) as Long,
             parcel.readString(),

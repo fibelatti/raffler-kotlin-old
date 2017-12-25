@@ -10,9 +10,9 @@ import com.fibelatti.raffler.data.group.Group.Companion.TABLE_NAME
 data class Group(
         @ColumnInfo(name = COLUMN_ID)
         @PrimaryKey(autoGenerate = true)
-        var id: Long = 0,
+        val id: Long,
         @ColumnInfo(name = COLUMN_NAME)
-        var name: String = "") {
+        val name: String) {
     @Ignore constructor() : this(0, "")
 
     companion object {

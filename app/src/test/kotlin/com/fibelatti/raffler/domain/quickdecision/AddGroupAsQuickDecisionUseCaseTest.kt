@@ -1,7 +1,7 @@
 package com.fibelatti.raffler.domain.quickdecision
 
 import com.fibelatti.raffler.BaseTest
-import com.fibelatti.raffler.core.Constants
+import com.fibelatti.raffler.core.LOCALE_NONE
 import com.fibelatti.raffler.data.localdatastorage.AppDatabase
 import com.fibelatti.raffler.data.quickdecision.QuickDecision
 import com.fibelatti.raffler.data.quickdecision.QuickDecisionRepositoryContract
@@ -32,7 +32,7 @@ class AddGroupAsQuickDecisionUseCaseTest : BaseTest() {
         val groupItem1 = GroupItem(10L, "Item 1", true)
         val groupItem2 = GroupItem(20L, "Item 2", true)
         val group = Group(1L, "Group Name", listOf(groupItem1, groupItem2))
-        val expectedQuickDecision = QuickDecision("1", Constants.LOCALE_NONE, "Group Name", "Item 1,Item 2")
+        val expectedQuickDecision = QuickDecision("1", LOCALE_NONE, "Group Name", "Item 1,Item 2")
 
         val testObserver = TestObserver<Completable>()
 

@@ -1,7 +1,9 @@
 package com.fibelatti.raffler.domain.quickdecision
 
 import com.fibelatti.raffler.BaseTest
-import com.fibelatti.raffler.core.Constants
+import com.fibelatti.raffler.core.LOCALE_EN
+import com.fibelatti.raffler.core.LOCALE_ES
+import com.fibelatti.raffler.core.LOCALE_NONE
 import com.fibelatti.raffler.data.localdatastorage.AppDatabase
 import com.fibelatti.raffler.data.quickdecision.QuickDecisionRepositoryContract
 import io.reactivex.Single
@@ -50,7 +52,7 @@ class GetQuickDecisionsUseCaseTest : BaseTest() {
     fun getAllQuickDecisionsLocaleEn() {
         // Arrange
         given(mockLocale.language)
-                .willReturn(Constants.LOCALE_EN)
+                .willReturn(LOCALE_EN)
 
         // Act
         getQuickDecisionsUseCase.getAllQuickDecisions()
@@ -70,7 +72,7 @@ class GetQuickDecisionsUseCaseTest : BaseTest() {
     fun getAllQuickDecisionsLocaleEs() {
         // Arrange
         given(mockLocale.language)
-                .willReturn(Constants.LOCALE_ES)
+                .willReturn(LOCALE_ES)
 
         // Act
         getQuickDecisionsUseCase.getAllQuickDecisions()
@@ -107,9 +109,9 @@ class GetQuickDecisionsUseCaseTest : BaseTest() {
     }
 
     private fun getSampleData(): List<DataModel> {
-        val quickDecisionEn = DataModel(QUICK_DECISION_ID_EN, Constants.LOCALE_EN, QUICK_DECISION_NAME_EN, QUICK_DECISION_VALUES)
-        val quickDecisionEs = DataModel(QUICK_DECISION_ID_ES, Constants.LOCALE_ES, QUICK_DECISION_NAME_ES, QUICK_DECISION_VALUES)
-        val quickDecisionCustom = DataModel(QUICK_DECISION_ID_CUSTOM, Constants.LOCALE_NONE, QUICK_DECISION_NAME_CUSTOM, QUICK_DECISION_VALUES)
+        val quickDecisionEn = DataModel(QUICK_DECISION_ID_EN, LOCALE_EN, QUICK_DECISION_NAME_EN, QUICK_DECISION_VALUES)
+        val quickDecisionEs = DataModel(QUICK_DECISION_ID_ES, LOCALE_ES, QUICK_DECISION_NAME_ES, QUICK_DECISION_VALUES)
+        val quickDecisionCustom = DataModel(QUICK_DECISION_ID_CUSTOM, LOCALE_NONE, QUICK_DECISION_NAME_CUSTOM, QUICK_DECISION_VALUES)
 
         return listOf(quickDecisionEn, quickDecisionEs, quickDecisionCustom)
     }

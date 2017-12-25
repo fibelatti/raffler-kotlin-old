@@ -1,6 +1,6 @@
 package com.fibelatti.raffler.domain.quickdecision
 
-import com.fibelatti.raffler.core.Constants
+import com.fibelatti.raffler.core.LOCALE_NONE
 import com.fibelatti.raffler.data.localdatastorage.AppDatabase
 import com.fibelatti.raffler.data.quickdecision.QuickDecision
 import com.fibelatti.raffler.presentation.models.Group
@@ -12,7 +12,7 @@ class AddGroupAsQuickDecisionUseCase @Inject constructor(private val database: A
     fun addGroupAsQuickDecision(group: Group): Completable {
         val quickDecision = QuickDecision(
                 group.id.toString(),
-                Constants.LOCALE_NONE,
+                LOCALE_NONE,
                 group.name,
                 group.concatenatedGroupItemNames)
 

@@ -7,22 +7,20 @@ import javax.inject.Inject
 import com.fibelatti.raffler.presentation.models.Group as PresentationModel
 
 class GetGroupsUseCase @Inject constructor(private val database: AppDatabase) {
-    fun getAllGroups(): Single<List<PresentationModel>> {
-        return database.getGroupRepository()
-                .getAllGroups()
-                .onErrorReturn { emptyList() }
-                .flattenAsObservable<GroupWithItems> { list -> list }
-                .map { group ->
-                    GroupMapper.toPresentationModel(group)
-                }
-                .toList()
-    }
+    fun getAllGroups(): Single<List<PresentationModel>> =
+            database.getGroupRepository()
+                    .getAllGroups()
+                    .onErrorReturn { emptyList() }
+                    .flattenAsObservable<GroupWithItems> { list -> list }
+                    .map { group ->
+                        GroupMapper.toPresentationModel(group)
+                    }
+                    .toList()
 
-    fun getGroupById(id: Long): Single<PresentationModel> {
-        return database.getGroupRepository()
-                .getGroupById(id)
-                .map { group ->
-                    GroupMapper.toPresentationModel(group)
-                }
-    }
+    fun getGroupById(id: Long): Single<PresentationModel> =
+            database.getGroupRepository()
+                    .getGroupById(id)
+                    .map { group ->
+                        GroupMapper.toPresentationModel(group)
+                    }
 }

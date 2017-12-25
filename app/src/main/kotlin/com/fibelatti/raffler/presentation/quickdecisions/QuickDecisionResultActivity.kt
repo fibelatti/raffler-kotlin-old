@@ -7,10 +7,11 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.widget.FrameLayout
 import com.fibelatti.raffler.R
-import com.fibelatti.raffler.presentation.common.ColorUtils
 import com.fibelatti.raffler.core.extensions.ifNotNullThisElseThat
 import com.fibelatti.raffler.presentation.base.BaseActivity
 import com.fibelatti.raffler.presentation.base.BaseIntentBuilder
+import com.fibelatti.raffler.presentation.common.changeImageColor
+import com.fibelatti.raffler.presentation.common.convertDrawableToBitmap
 import kotlinx.android.synthetic.main.activity_quick_decision_result.*
 
 class QuickDecisionResultActivity
@@ -64,8 +65,8 @@ class QuickDecisionResultActivity
         val sourceDrawable = ContextCompat.getDrawable(this, R.drawable.ic_close_white_24dp)
 
         sourceDrawable?.let {
-            val sourceBitmap = ColorUtils.convertDrawableToBitmap(it)
-            val changedBitmap = ColorUtils.changeImageColor(sourceBitmap, color)
+            val sourceBitmap = convertDrawableToBitmap(it)
+            val changedBitmap = changeImageColor(sourceBitmap, color)
 
             fab_close.setImageBitmap(changedBitmap)
         }

@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.fibelatti.raffler.App
 import com.fibelatti.raffler.data.localdatastorage.AppDatabase
+import com.fibelatti.raffler.data.localdatastorage.DATABASE_NAME
 import com.fibelatti.raffler.data.localdatastorage.UserPreferencesContract
 import com.fibelatti.raffler.data.localdatastorage.UserPreferencesManager
 import com.fibelatti.raffler.di.qualifier.AppQualifier
@@ -37,7 +38,7 @@ class AppModule(private var app: App) {
     @Provides
     @AppScope
     fun providesDatabase(@AppQualifier context: Context) = Room.databaseBuilder(context,
-            AppDatabase::class.java, AppDatabase.DATABASE_NAME)
+            AppDatabase::class.java, DATABASE_NAME)
             .addMigrations(AppDatabase.MigrationTo4, AppDatabase.MigrationTo5)
             .addCallback(AppDatabase.RoomCallback)
             .fallbackToDestructiveMigration()
