@@ -33,7 +33,7 @@ buildscript {
         ]
 
         coreDependencies = [
-            daggerVersion = '2.7',
+            koinVersion = '0.8.0',
 
             rxJavaVersion = '2.1.6',
             rxAndroidVersion = '2.0.1',
