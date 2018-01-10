@@ -11,7 +11,7 @@ import io.reactivex.Single
 interface GroupRepositoryContract {
     @Transaction
     @Query("select * from " + Group.TABLE_NAME +
-            " where " + Group.COLUMN_ID + " = :groupId ")
+        " where " + Group.COLUMN_ID + " = :groupId ")
     fun getGroupById(groupId: Long): Single<GroupWithItems>
 
     @Transaction

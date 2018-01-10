@@ -7,5 +7,5 @@ object PreferencesMapper {
                             crashReportEnabled: Boolean,
                             analyticsEnabled: Boolean,
                             numberRangeEnabled: Boolean) =
-            Preferences(rouletteMusicEnabled, crashReportEnabled, analyticsEnabled, numberRangeEnabled)
+        Preferences(rouletteMusicEnabled, crashReportEnabled, analyticsEnabled, numberRangeEnabled)
 }

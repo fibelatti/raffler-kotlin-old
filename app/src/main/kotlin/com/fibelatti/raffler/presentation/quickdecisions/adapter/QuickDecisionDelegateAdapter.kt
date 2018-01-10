@@ -24,7 +24,7 @@ class QuickDecisionDelegateAdapter : BaseDelegateAdapter {
     }
 
     internal inner class DataViewHolder(parent: ViewGroup) :
-            RecyclerView.ViewHolder(parent.inflate(R.layout.list_item_quick_decision)) {
+        RecyclerView.ViewHolder(parent.inflate(R.layout.list_item_quick_decision)) {
         fun bind(item: QuickDecision) = with(itemView) {
             layout_cardView.setCardBackgroundColor(colorList[layoutPosition % colorList.size])
 

@@ -18,12 +18,12 @@ class QuickDecisionsPresenter(schedulerProvider: SchedulerProvider,
         view?.showProgress()
 
         getQuickDecisionsUseCase.getAllQuickDecisions()
-                .subscribeOn(schedulerProvider.io())
-                .observeOn(schedulerProvider.mainThread())
-                .subscribe(
-                        ::handleGetAllQuickDecisionsSuccess,
-                        ::handleError
-                )
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.mainThread())
+            .subscribe(
+                ::handleGetAllQuickDecisionsSuccess,
+                ::handleError
+            )
     }
 
     override fun getQuickDecisionResult(quickDecision: QuickDecision) {
@@ -35,24 +35,24 @@ class QuickDecisionsPresenter(schedulerProvider: SchedulerProvider,
 
     override fun addNewQuickDecision() {
         getGroupsUseCase.getAllGroups()
-                .subscribeOn(schedulerProvider.io())
-                .observeOn(schedulerProvider.mainThread())
-                .subscribe(
-                        ::handleGetAllGroupsSuccess,
-                        ::handleError
-                )
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.mainThread())
+            .subscribe(
+                ::handleGetAllGroupsSuccess,
+                ::handleError
+            )
     }
 
     override fun addGroupToQuickDecisions(group: Group) {
         view?.showProgress()
 
         addGroupAsQuickDecisionUseCase.addGroupAsQuickDecision(group)
-                .subscribeOn(schedulerProvider.io())
-                .observeOn(schedulerProvider.mainThread())
-                .subscribe(
-                        ::getUpdatedQuickDecisions,
-                        ::handleError
-                )
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.mainThread())
+            .subscribe(
+                ::getUpdatedQuickDecisions,
+                ::handleError
+            )
     }
 
     private fun handleGetAllQuickDecisionsSuccess(quickDecisions: List<QuickDecision>) {
@@ -69,12 +69,12 @@ class QuickDecisionsPresenter(schedulerProvider: SchedulerProvider,
 
     private fun getUpdatedQuickDecisions() {
         getQuickDecisionsUseCase.getAllQuickDecisions()
-                .subscribeOn(schedulerProvider.io())
-                .observeOn(schedulerProvider.mainThread())
-                .subscribe(
-                        ::handleGetUpdatedQuickDecisionsSuccess,
-                        ::handleError
-                )
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.mainThread())
+            .subscribe(
+                ::handleGetUpdatedQuickDecisionsSuccess,
+                ::handleError
+            )
     }
 
     private fun handleGetUpdatedQuickDecisionsSuccess(quickDecisions: List<QuickDecision>) {

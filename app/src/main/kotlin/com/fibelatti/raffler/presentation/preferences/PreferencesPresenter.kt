@@ -7,30 +7,30 @@ import com.fibelatti.raffler.presentation.common.SchedulerProvider
 import com.fibelatti.raffler.presentation.models.Preferences
 
 class PreferencesPresenter(
-        schedulerProvider: SchedulerProvider,
-        private val getPreferencesUseCase: GetPreferencesUseCase,
-        private val updatePreferencesUseCase: UpdatePreferencesUseCase
+    schedulerProvider: SchedulerProvider,
+    private val getPreferencesUseCase: GetPreferencesUseCase,
+    private val updatePreferencesUseCase: UpdatePreferencesUseCase
 ) : PreferencesContract.Presenter, BasePresenter<PreferencesContract.View>(schedulerProvider) {
     override fun getPreferences() {
         view?.showProgress()
 
         getPreferencesUseCase.getPreferences()
-                .subscribeOn(schedulerProvider.io())
-                .observeOn(schedulerProvider.mainThread())
-                .subscribe(
-                        ::handleGetSuccess,
-                        ::handleError
-                )
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.mainThread())
+            .subscribe(
+                ::handleGetSuccess,
+                ::handleError
+            )
     }
 
     override fun updatePreferences(preferences: Preferences) {
         updatePreferencesUseCase.updatePreferences(preferences)
-                .subscribeOn(schedulerProvider.io())
-                .observeOn(schedulerProvider.mainThread())
-                .subscribe(
-                        ::handleUpdateSuccess,
-                        ::handleError
-                )
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.mainThread())
+            .subscribe(
+                ::handleUpdateSuccess,
+                ::handleError
+            )
 
     }
 

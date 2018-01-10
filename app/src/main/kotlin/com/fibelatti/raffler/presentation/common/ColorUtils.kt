@@ -23,7 +23,7 @@ fun calculateColorGradient(startColor: Int, endColor: Int, steps: Int): List<Int
 
 fun changeImageColor(sourceBitmap: Bitmap, color: Int): Bitmap {
     val resultBitmap = Bitmap.createBitmap(sourceBitmap, 0, 0,
-            sourceBitmap.width - 1, sourceBitmap.height - 1)
+        sourceBitmap.width - 1, sourceBitmap.height - 1)
     val p = Paint()
     val filter = LightingColorFilter(color, 1)
     p.colorFilter = filter
@@ -43,7 +43,7 @@ fun convertDrawableToBitmap(drawable: Drawable): Bitmap {
     }
 
     val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth,
-            drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+        drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
     val canvas = Canvas(bitmap)
     drawable.setBounds(0, 0, canvas.width, canvas.height)
     drawable.draw(canvas)

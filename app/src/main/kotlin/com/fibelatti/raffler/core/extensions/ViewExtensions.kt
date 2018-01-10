@@ -16,7 +16,7 @@ inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Fragmen
 
 @JvmOverloads
 fun ViewGroup.inflate(@LayoutRes layoutResource: Int, attachToRoot: Boolean = false): View =
-        LayoutInflater.from(context).inflate(layoutResource, this, attachToRoot)
+    LayoutInflater.from(context).inflate(layoutResource, this, attachToRoot)
 
 @JvmOverloads
 fun View.snackbar(message: String, duration: Int = Snackbar.LENGTH_SHORT) {

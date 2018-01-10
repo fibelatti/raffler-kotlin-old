@@ -5,5 +5,5 @@ import com.fibelatti.raffler.presentation.models.QuickDecision as PresentationMo
 
 object QuickDecisionMapper {
     fun toPresentationModel(quickDecision: QuickDecision) =
-            PresentationModel(quickDecision.name, quickDecision.values.split(","))
+        PresentationModel(quickDecision.name, quickDecision.values.split(","))
 }

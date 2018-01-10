@@ -5,16 +5,16 @@ import android.arch.persistence.room.ForeignKey.CASCADE
 import com.fibelatti.raffler.data.group.GroupItem.Companion.TABLE_NAME
 
 @Entity(tableName = TABLE_NAME,
-        foreignKeys = [
-            ForeignKey(entity = Group::class, parentColumns = [Group.COLUMN_ID], childColumns = [(GroupItem.COLUMN_GROUP_ID)], onDelete = CASCADE)])
+    foreignKeys = [
+    ForeignKey(entity = Group::class, parentColumns = [Group.COLUMN_ID], childColumns = [(GroupItem.COLUMN_GROUP_ID)], onDelete = CASCADE)])
 data class GroupItem(
-        @ColumnInfo(name = COLUMN_ID)
-        @PrimaryKey(autoGenerate = true)
-        val id: Long,
-        @ColumnInfo(name = COLUMN_GROUP_ID)
-        val groupId: Long,
-        @ColumnInfo(name = COLUMN_NAME)
-        val name: String
+    @ColumnInfo(name = COLUMN_ID)
+    @PrimaryKey(autoGenerate = true)
+    val id: Long,
+    @ColumnInfo(name = COLUMN_GROUP_ID)
+    val groupId: Long,
+    @ColumnInfo(name = COLUMN_NAME)
+    val name: String
 ) {
     @Ignore constructor() : this(0, 0, "")
 

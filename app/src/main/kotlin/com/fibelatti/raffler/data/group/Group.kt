@@ -8,11 +8,11 @@ import com.fibelatti.raffler.data.group.Group.Companion.TABLE_NAME
 
 @Entity(tableName = TABLE_NAME)
 data class Group(
-        @ColumnInfo(name = COLUMN_ID)
-        @PrimaryKey(autoGenerate = true)
-        val id: Long,
-        @ColumnInfo(name = COLUMN_NAME)
-        val name: String) {
+    @ColumnInfo(name = COLUMN_ID)
+    @PrimaryKey(autoGenerate = true)
+    val id: Long,
+    @ColumnInfo(name = COLUMN_NAME)
+    val name: String) {
     @Ignore constructor() : this(0, "")
 
     companion object {

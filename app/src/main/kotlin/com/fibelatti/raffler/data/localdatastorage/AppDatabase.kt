@@ -15,8 +15,8 @@ const val DATABASE_NAME = "com.fibelatti.raffler.data.db"
 const val DATABASE_VERSION = 5
 
 @Database(entities = [Group::class, GroupItem::class, QuickDecision::class],
-        version = DATABASE_VERSION,
-        exportSchema = false)
+    version = DATABASE_VERSION,
+    exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun getGroupRepository(): GroupRepositoryContract
     abstract fun getGroupItemRepository(): GroupItemRepositoryContract

@@ -9,7 +9,7 @@ import io.reactivex.Single
 @Dao
 interface GroupItemRepositoryContract {
     @Query("select * from " + GroupItem.TABLE_NAME +
-            " where " + GroupItem.COLUMN_GROUP_ID + " = :groupId")
+        " where " + GroupItem.COLUMN_GROUP_ID + " = :groupId")
     fun getAllGroupItemsByGroupId(groupId: Long): Single<List<GroupItem>>
 
     @Query("delete from " + GroupItem.TABLE_NAME + " where " + GroupItem.COLUMN_GROUP_ID + " = :groupId")

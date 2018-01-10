@@ -10,7 +10,7 @@ private const val USER_PREFERENCES_NUMBER_RANGE_ENABLED = "user_preferences_numb
 
 class UserPreferencesManager(private val sharedPreferences: SharedPreferences) : UserPreferencesContract {
     override fun getRouletteMusicEnabled(): Boolean
-            = sharedPreferences.getBoolean(USER_PREFERENCES_ROULETTE_MUSIC_ENABLED, true)
+        = sharedPreferences.getBoolean(USER_PREFERENCES_ROULETTE_MUSIC_ENABLED, true)
 
     override fun setRouletteMusicEnabled(value: Boolean): UserPreferencesContract {
         sharedPreferences.applyWithEditor {
@@ -21,7 +21,7 @@ class UserPreferencesManager(private val sharedPreferences: SharedPreferences) :
     }
 
     override fun getCrashReportEnabled(): Boolean
-            = sharedPreferences.getBoolean(USER_PREFERENCES_CRASH_REPORT_ENABLED, true)
+        = sharedPreferences.getBoolean(USER_PREFERENCES_CRASH_REPORT_ENABLED, true)
 
     override fun setCrashReportEnabled(value: Boolean): UserPreferencesContract {
         sharedPreferences.applyWithEditor {
@@ -32,7 +32,7 @@ class UserPreferencesManager(private val sharedPreferences: SharedPreferences) :
     }
 
     override fun getAnalyticsEnabled(): Boolean
-            = sharedPreferences.getBoolean(USER_PREFERENCES_ANALYTICS_ENABLED, true)
+        = sharedPreferences.getBoolean(USER_PREFERENCES_ANALYTICS_ENABLED, true)
 
     override fun setAnalyticsEnabled(value: Boolean): UserPreferencesContract {
         sharedPreferences.applyWithEditor {
@@ -43,7 +43,7 @@ class UserPreferencesManager(private val sharedPreferences: SharedPreferences) :
     }
 
     override fun getNumberRangeEnabled(): Boolean
-            = sharedPreferences.getBoolean(USER_PREFERENCES_NUMBER_RANGE_ENABLED, true)
+        = sharedPreferences.getBoolean(USER_PREFERENCES_NUMBER_RANGE_ENABLED, true)
 
     override fun setNumberRangeEnabled(value: Boolean): UserPreferencesContract {
         sharedPreferences.applyWithEditor {

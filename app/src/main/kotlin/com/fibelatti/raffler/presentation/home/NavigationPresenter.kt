@@ -4,8 +4,8 @@ import com.fibelatti.raffler.presentation.base.BasePresenter
 import com.fibelatti.raffler.presentation.common.SchedulerProvider
 
 class NavigationPresenter(schedulerProvider: SchedulerProvider) :
-        BasePresenter<NavigationContract.View>(schedulerProvider),
-        NavigationContract.Presenter {
+    BasePresenter<NavigationContract.View>(schedulerProvider),
+    NavigationContract.Presenter {
 
     override fun onQuickDecisionsClicked() {
         view?.goToQuickDecisions()

@@ -23,7 +23,7 @@ class AddNewDelegateAdapter : BaseDelegateAdapter {
     }
 
     internal inner class ViewHolder(parent: ViewGroup) :
-            RecyclerView.ViewHolder(parent.inflate(R.layout.list_item_add_new)) {
+        RecyclerView.ViewHolder(parent.inflate(R.layout.list_item_add_new)) {
         fun bind() = with(itemView) {
             layout_cardView.setCardBackgroundColor(colorList[layoutPosition % colorList.size])
 
