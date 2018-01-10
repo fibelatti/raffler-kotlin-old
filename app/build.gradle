@@ -72,7 +72,7 @@ dependencies {
     implementation "com.android.support:cardview-v7:$rootProject.ext.cardViewVersion"
 
     // Dependency Injection
-    implementation "org.koin:koin-core:$rootProject.ext.koinVersion"
+    implementation "org.koin:koin-android:$rootProject.ext.koinVersion"
 
     // Rx
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxJavaVersion"
