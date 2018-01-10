@@ -20,11 +20,11 @@ import kotlinx.android.synthetic.main.layout_preferences_analytics_opt_out.*
 import kotlinx.android.synthetic.main.layout_preferences_crash_report_opt_out.*
 import kotlinx.android.synthetic.main.layout_preferences_include_range.*
 import kotlinx.android.synthetic.main.layout_preferences_roulette_music.*
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
 
 class PreferencesFragment :
-        BaseFragment(),
-        PreferencesContract.View {
+    BaseFragment(),
+    PreferencesContract.View {
 
     companion object {
         val TAG: String = PreferencesFragment::class.java.simpleName
@@ -32,26 +32,19 @@ class PreferencesFragment :
         fun newInstance() = PreferencesFragment()
     }
 
-    @Inject
-    lateinit var preferencesPresenter: PreferencesContract.Presenter
-
-    lateinit var preferences: Preferences
+    private lateinit var preferences: Preferences
+    private val preferencesPresenter: PreferencesContract.Presenter by inject()
 
     override val rootLayout: FrameLayout?
         get() = layout_root
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-
-        activity?.let {
-            getPresentationComponent(it).inject(this)
-        }
-
         preferencesPresenter.attachView(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater.inflate(R.layout.fragment_preferences, container, false)
+        inflater.inflate(R.layout.fragment_preferences, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -13,7 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import com.fibelatti.raffler.R
 import com.fibelatti.raffler.presentation.common.DialogHelper
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
 
 fun AppCompatActivity.hideKeyboard() {
     val view = this.currentFocus
@@ -24,8 +24,7 @@ fun AppCompatActivity.hideKeyboard() {
 }
 
 abstract class BaseActivity : AppCompatActivity(), BaseContract.View {
-    @Inject
-    lateinit protected var dialogHelper: DialogHelper
+    private val dialogHelper: DialogHelper by inject()
 
     private lateinit var progressBarLayout: View
     private lateinit var placeholderRetryLayout: View
@@ -36,8 +35,6 @@ abstract class BaseActivity : AppCompatActivity(), BaseContract.View {
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        getPresentationComponent(this).inject(this)
 
         progressBarLayout = layoutInflater.inflate(R.layout.layout_progress_bar_default, rootLayout, false)
         placeholderRetryLayout = layoutInflater.inflate(R.layout.layout_placeholder_retry_button, rootLayout, false)
@@ -66,12 +63,12 @@ abstract class BaseActivity : AppCompatActivity(), BaseContract.View {
 
     override fun handleError(errorMessage: String?) {
         dialogHelper.newOkDialog(errorMessage ?: getString(R.string.generic_msg_error), getErrorDialogListener())
-                .show()
+            .show()
     }
 
     override fun onNetworkError() {
         dialogHelper.newOkDialog(getString(R.string.network_msg_error), getErrorDialogListener())
-                .show()
+            .show()
     }
 
     protected fun showErrorLayout(retryButtonListener: () -> Unit, errorMessage: String = getString(R.string.generic_msg_error)) {

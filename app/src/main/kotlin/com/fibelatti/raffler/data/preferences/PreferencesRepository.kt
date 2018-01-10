@@ -3,9 +3,8 @@ package com.fibelatti.raffler.data.preferences
 import com.fibelatti.raffler.data.localdatastorage.UserPreferencesContract
 import io.reactivex.Completable
 import io.reactivex.Single
-import javax.inject.Inject
 
-class PreferencesRepository @Inject constructor(private val userPreferencesContract: UserPreferencesContract) : PreferencesRepositoryContract {
+class PreferencesRepository(private val userPreferencesContract: UserPreferencesContract) : PreferencesRepositoryContract {
     override fun getRouletteMusicEnabled(): Single<Boolean> = Single.just(userPreferencesContract.getRouletteMusicEnabled())
 
     override fun setRouletteMusicEnabled(value: Boolean): Completable {

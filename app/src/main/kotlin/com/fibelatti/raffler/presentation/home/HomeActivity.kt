@@ -14,12 +14,12 @@ import com.fibelatti.raffler.presentation.preferences.PreferencesFragment
 import com.fibelatti.raffler.presentation.quickdecisions.QuickDecisionsFragment
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.layout_toolbar_default.*
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
 
 class HomeActivity :
-        BaseActivity(),
-        NavigationContract.View,
-        BottomNavigationView.OnNavigationItemSelectedListener {
+    BaseActivity(),
+    NavigationContract.View,
+    BottomNavigationView.OnNavigationItemSelectedListener {
 
     companion object {
         private const val BUNDLE_SELECTED_ITEM_ID = "SELECTED_ITEM_ID"
@@ -35,8 +35,7 @@ class HomeActivity :
         private const val CURRENT_VIEW_PREFERENCES = 2L
     }
 
-    @Inject
-    lateinit var presenter: NavigationContract.Presenter
+    private val presenter: NavigationContract.Presenter by inject()
 
     private var selectedItemId: Int = R.id.menuItem_quickDecisions
     @CurrentView
@@ -51,8 +50,6 @@ class HomeActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
-        getPresentationComponent(this).inject(this)
 
         savedInstanceState?.let { restoreFromState(it) }
 

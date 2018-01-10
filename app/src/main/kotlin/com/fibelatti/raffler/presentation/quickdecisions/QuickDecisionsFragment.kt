@@ -18,12 +18,12 @@ import com.fibelatti.raffler.presentation.models.QuickDecision
 import com.fibelatti.raffler.presentation.quickdecisions.adapter.QuickDecisionsAdapter
 import com.fibelatti.raffler.presentation.quickdecisions.adapter.ViewType
 import kotlinx.android.synthetic.main.fragment_recycler_view.*
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
 
 class QuickDecisionsFragment :
-        BaseFragment(),
-        QuickDecisionsContract.View,
-        QuickDecisionsAdapter.Listener {
+    BaseFragment(),
+    QuickDecisionsContract.View,
+    QuickDecisionsAdapter.Listener {
 
     companion object {
         val TAG: String = QuickDecisionsFragment::class.java.simpleName
@@ -31,27 +31,20 @@ class QuickDecisionsFragment :
         fun newInstance() = QuickDecisionsFragment()
     }
 
-    @Inject
-    lateinit var quickDecisionsPresenter: QuickDecisionsContract.Presenter
-    @Inject
-    lateinit var adapter: QuickDecisionsAdapter
+    private val quickDecisionsPresenter: QuickDecisionsContract.Presenter by inject()
+    private val adapter: QuickDecisionsAdapter by inject()
 
     override val rootLayout: FrameLayout?
         get() = layout_root
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-
-        activity?.let {
-            getPresentationComponent(it).inject(this)
-        }
-
         quickDecisionsPresenter.attachView(this)
         adapter.listener = this
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater.inflate(R.layout.fragment_recycler_view, container, false)
+        inflater.inflate(R.layout.fragment_recycler_view, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -85,9 +78,9 @@ class QuickDecisionsFragment :
 
         context?.let {
             val colorList = calculateColorGradient(
-                    getColor(it, R.color.colorAccent),
-                    getColor(it, R.color.colorPrimary),
-                    dataSet.size - 1)
+                getColor(it, R.color.colorAccent),
+                getColor(it, R.color.colorPrimary),
+                dataSet.size - 1)
 
             adapter.colorList = colorList
         }
@@ -98,8 +91,8 @@ class QuickDecisionsFragment :
     override fun onQuickDecisionResult(result: String, isOdd: Boolean) {
         context?.let {
             val intentBuilder: QuickDecisionResultActivity.IntentBuilder = QuickDecisionResultActivity.IntentBuilder(it)
-                    .addExtraResult(result)
-                    .addExtraIsOdd(isOdd)
+                .addExtraResult(result)
+                .addExtraIsOdd(isOdd)
 
             startActivity(intentBuilder.build())
         }
