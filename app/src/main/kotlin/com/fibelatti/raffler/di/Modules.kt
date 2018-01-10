@@ -55,35 +55,35 @@ val repositoryModule = applicationContext {
 }
 
 val useCaseModule = applicationContext {
-    provide { DeleteGroupItemUseCase(get(DATABASE)) }
-    provide { DeleteGroupUseCase(get(DATABASE)) }
-    provide { GetGroupItemsUseCase(get(DATABASE)) }
-    provide { GetGroupsUseCase(get(DATABASE)) }
-    provide { SaveGroupUseCase(get(DATABASE)) }
+    factory { DeleteGroupItemUseCase(get(DATABASE)) }
+    factory { DeleteGroupUseCase(get(DATABASE)) }
+    factory { GetGroupItemsUseCase(get(DATABASE)) }
+    factory { GetGroupsUseCase(get(DATABASE)) }
+    factory { SaveGroupUseCase(get(DATABASE)) }
 
-    provide { GetPreferencesUseCase(get()) }
-    provide { UpdatePreferencesUseCase(get()) }
+    factory { GetPreferencesUseCase(get()) }
+    factory { UpdatePreferencesUseCase(get()) }
 
-    provide { AddGroupAsQuickDecisionUseCase(get(DATABASE)) }
-    provide { GetQuickDecisionsUseCase(get(DATABASE), get(LOCALE_DEFAULT)) }
+    factory { AddGroupAsQuickDecisionUseCase(get(DATABASE)) }
+    factory { GetQuickDecisionsUseCase(get(DATABASE), get(LOCALE_DEFAULT)) }
 }
 
 val presenterModule = applicationContext {
-    provide { AppSchedulerProvider() as SchedulerProvider }
-    provide { NavigationPresenter(get()) as NavigationContract.Presenter }
-    provide { QuickDecisionsPresenter(get(), get(), get(), get()) as QuickDecisionsContract.Presenter }
-    provide { PreferencesPresenter(get(), get(), get()) as PreferencesContract.Presenter }
+    factory { AppSchedulerProvider() as SchedulerProvider }
+    factory { NavigationPresenter(get()) as NavigationContract.Presenter }
+    factory { QuickDecisionsPresenter(get(), get(), get(), get()) as QuickDecisionsContract.Presenter }
+    factory { PreferencesPresenter(get(), get(), get()) as PreferencesContract.Presenter }
 }
 
 val adapterModule = applicationContext {
-    provide { QuickDecisionsAdapter(get(), get()) }
-    provide { QuickDecisionDelegateAdapter() }
-    provide { AddNewDelegateAdapter() }
+    factory { QuickDecisionsAdapter(get(), get()) }
+    factory { QuickDecisionDelegateAdapter() }
+    factory { AddNewDelegateAdapter() }
 }
 
 val activityModule = applicationContext {
-    provide { AlertDialog.Builder(get()) }
-    provide { DialogHelper(get()) }
+    factory { AlertDialog.Builder(get()) }
+    factory { DialogHelper(get()) }
 }
 
 val allModules = listOf(
