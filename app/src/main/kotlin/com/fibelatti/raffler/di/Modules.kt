@@ -1,7 +1,9 @@
 package com.fibelatti.raffler.di
 
+import android.app.Application
 import android.arch.persistence.room.Room
-import android.preference.PreferenceManager
+import android.content.Context
+import android.content.SharedPreferences
 import android.support.v7.app.AlertDialog
 import com.fibelatti.raffler.data.localdatastorage.AppDatabase
 import com.fibelatti.raffler.data.localdatastorage.DATABASE_NAME
@@ -31,14 +33,17 @@ import org.koin.dsl.module.applicationContext
 import java.util.*
 
 const val APP_CONTEXT = "AppContext"
+const val APP_SHARED_PREFERENCES = "AppSharedPreferences"
 const val DATABASE = "Database"
 const val DEFAULT_SHARED_PREFERENCES = "DefaultSharedPreferences"
+const val DIALOG_BUILDER = "DialogBuilder"
 const val LOCALE_DEFAULT = "LocaleDefault"
 const val USER_PREFERENCES = "UserPreferences"
 
 val appModule = applicationContext {
-    provide(name = APP_CONTEXT) { androidApplication().applicationContext }
-    provide(name = DEFAULT_SHARED_PREFERENCES) { PreferenceManager.getDefaultSharedPreferences(get(APP_CONTEXT)) }
+    provide { androidApplication() }
+    provide(name = APP_CONTEXT) { get<Application>().applicationContext }
+    provide(name = DEFAULT_SHARED_PREFERENCES) { get<Context>(APP_CONTEXT).getSharedPreferences(APP_SHARED_PREFERENCES, Context.MODE_PRIVATE) as SharedPreferences }
     provide(name = USER_PREFERENCES) { UserPreferencesManager(get(DEFAULT_SHARED_PREFERENCES)) as UserPreferencesContract }
     provide(name = DATABASE) {
         Room.databaseBuilder(get(APP_CONTEXT), AppDatabase::class.java, DATABASE_NAME)
@@ -81,9 +86,12 @@ val adapterModule = applicationContext {
     factory { AddNewDelegateAdapter() }
 }
 
-val activityModule = applicationContext {
-    factory { AlertDialog.Builder(get()) }
-    factory { DialogHelper(get()) }
+val uiModule = applicationContext {
+    factory { DialogHelper(get(DIALOG_BUILDER)) }
+}
+
+val androidFrameworkModule = applicationContext {
+    factory(name = DIALOG_BUILDER) { AlertDialog.Builder(get(APP_CONTEXT)) }
 }
 
 val allModules = listOf(
@@ -92,5 +100,6 @@ val allModules = listOf(
     useCaseModule,
     presenterModule,
     adapterModule,
-    activityModule
+    uiModule,
+    androidFrameworkModule
 )
