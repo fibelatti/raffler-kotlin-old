@@ -5,15 +5,15 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'io.fabric'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion versions.compileSdkVersion
+    buildToolsVersion versions.buildToolsVersion
 
     defaultConfig {
-        applicationId rootProject.ext.applicationId
-        versionCode rootProject.ext.versionMajor * 10000 + rootProject.ext.versionMinor * 100 + rootProject.ext.versionPatch
-        versionName "$rootProject.ext.versionMajor.$rootProject.ext.versionMinor.$rootProject.ext.versionPatch"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        applicationId appInfo.applicationId
+        versionCode appInfo.versionMajor * 10000 + appInfo.versionMinor * 100 + appInfo.versionPatch
+        versionName "$appInfo.versionMajor.$appInfo.versionMinor.$appInfo.versionPatch"
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -23,14 +23,14 @@ android {
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
-            resValue "string", "app_name", rootProject.ext.appName + " Dev"
+            resValue "string", "app_name", appInfo.appName + " Dev"
 
             debuggable true
             minifyEnabled false
         }
 
         release {
-            resValue "string", "app_name", rootProject.ext.appName
+            resValue "string", "app_name", appInfo.appName
 
             debuggable false
             minifyEnabled false
@@ -53,53 +53,49 @@ android {
             java.srcDirs += 'src/androidTest/kotlin'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$rootProject.ext.kotlinVersion"
+    implementation libraries.kotlin
 
-    // Material Design
-    implementation "com.android.support:appcompat-v7:$rootProject.ext.appCompatVersion"
-    implementation "com.android.support:design:$rootProject.ext.designVersion"
-    implementation "com.android.support.constraint:constraint-layout:$rootProject.ext.constraintLayoutVersion"
-    implementation "com.android.support:cardview-v7:$rootProject.ext.cardViewVersion"
+    // Support Library
+    implementation libraries.supportLibrary
+    implementation libraries.designLibrary
+    implementation libraries.constraintLayout
+    implementation libraries.cardView
 
     // Dagger
-    implementation "com.google.dagger:dagger:$rootProject.ext.daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
+    implementation libraries.dagger
+    kapt libraries.daggerCompiler
 
     // Rx
-    implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxJavaVersion"
-    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
+    implementation libraries.rxJava
+    implementation libraries.rxAndroid
 
     // Persistence
-    implementation "android.arch.persistence.room:rxjava2:$rootProject.ext.roomVersion"
-    kapt "android.arch.persistence.room:compiler:$rootProject.ext.roomVersion"
+    implementation libraries.room
+    kapt libraries.roomCompiler
 
     // Fabric
-    implementation("com.crashlytics.sdk.android:crashlytics:$rootProject.ext.crashlyticsVersion@aar") {
+    implementation(libraries.crashlytics) {
         transitive = true
     }
-    implementation("com.crashlytics.sdk.android:answers:$rootProject.ext.answersVersion@aar") {
+    implementation(libraries.answers) {
         transitive = true
     }
 
     // Testing
-    testImplementation "junit:junit:$rootProject.ext.jUnitVersion"
-    testImplementation "org.mockito:mockito-core:$rootProject.ext.mockitoVersion"
+    testImplementation libraries.junit
+    testImplementation libraries.mockitoCore
 
-    androidTestImplementation "com.android.support:support-annotations:$rootProject.ext.supportAnnotationsVersion"
-    androidTestImplementation "com.android.support.test:runner:$rootProject.ext.testRunnerVersion"
-    androidTestImplementation "org.jetbrains.kotlin:kotlin-test-junit:$rootProject.ext.kotlinVersion"
+    androidTestImplementation libraries.supportAnnotations
+    androidTestImplementation libraries.testRunner
+    androidTestImplementation libraries.kotlinTest
 
     // 3rd Party Libraries
     // Charts
-    implementation "me.itangqi.waveloadingview:library:$rootProject.ext.chartsVersion"
+    implementation libraries.waveCharts
 }

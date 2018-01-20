@@ -1,60 +1,10 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: 'versions.gradle'
+apply from: 'app-info.gradle'
+
 buildscript {
-    ext {
-        appInfo = [
-                // Application
-                appName = 'Raffler',
-                applicationId = 'com.fibelatti.raffler',
-
-                // Version information
-                versionMajor = 2,
-                versionMinor = 0,
-                versionPatch = 0
-        ]
-
-        buildVersions = [
-                // Gradle
-                gradleVersion = '3.0.1',
-
-                // Kotlin
-                kotlinVersion = '1.2.0',
-
-                // Sdk and tools
-                minSdkVersion = 19,
-                targetSdkVersion = 26,
-                compileSdkVersion = 26,
-                buildToolsVersion = '27.0.2',
-
-                // App dependencies
-                appCompatVersion = '27.0.2',
-                designVersion = '27.0.2',
-                constraintLayoutVersion = '1.0.2',
-                cardViewVersion = '27.0.2'
-        ]
-
-        coreDependencies = [
-                daggerVersion = '2.7',
-
-                rxJavaVersion = '2.1.6',
-                rxAndroidVersion = '2.0.1',
-
-                roomVersion = '1.0.0',
-
-                crashlyticsVersion = '2.8.0',
-                answersVersion = '1.4.1'
-        ]
-
-        appDependencies = [
-                chartsVersion = '0.3.2'
-        ]
-
-        testingDependencies = [
-                jUnitVersion = '4.12',
-                mockitoVersion = '2.10.0',
-                supportAnnotationsVersion = '27.0.2',
-                testRunnerVersion = '1.0.1'
-        ]
-    }
+    apply from: 'versions.gradle'
+    apply from: 'app-info.gradle'
 
     repositories {
         mavenCentral()
@@ -64,8 +14,8 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:$gradleVersion"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "com.android.tools.build:gradle:$versions.gradleVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlinVersion"
         classpath 'io.fabric.tools:gradle:1.+'
 
         // NOTE: Do not place your application dependencies here; they belong
