@@ -79,6 +79,9 @@ dependencies {
     implementation libraries.rxJava
     implementation libraries.rxAndroid
 
+    implementation libraries.rxBinding
+    implementation libraries.rxBindingKotlin
+
     // Persistence
     implementation libraries.room
     kapt libraries.roomCompiler
