@@ -22,19 +22,16 @@ class PresenterModule {
     fun provideSchedulerProvider(): SchedulerProvider = AppSchedulerProvider()
 
     @Provides
-    fun provideNavigationPresenter(schedulerProvider: SchedulerProvider): NavigationContract.Presenter
-            = NavigationPresenter(schedulerProvider)
+    fun provideNavigationPresenter(schedulerProvider: SchedulerProvider): NavigationContract.Presenter = NavigationPresenter(schedulerProvider)
 
     @Provides
     fun provideQuickDecisionsPresenter(schedulerProvider: SchedulerProvider,
                                        getQuickDecisionsUseCase: GetQuickDecisionsUseCase,
                                        addGroupAsQuickDecisionUseCase: AddGroupAsQuickDecisionUseCase,
-                                       getGroupsUseCase: GetGroupsUseCase): QuickDecisionsContract.Presenter
-            = QuickDecisionsPresenter(schedulerProvider, getQuickDecisionsUseCase, addGroupAsQuickDecisionUseCase, getGroupsUseCase)
+                                       getGroupsUseCase: GetGroupsUseCase): QuickDecisionsContract.Presenter = QuickDecisionsPresenter(schedulerProvider, getQuickDecisionsUseCase, addGroupAsQuickDecisionUseCase, getGroupsUseCase)
 
     @Provides
     fun providePreferencesPresenter(schedulerProvider: SchedulerProvider,
                                     getPreferencesUseCase: GetPreferencesUseCase,
-                                    updatePreferencesUseCase: UpdatePreferencesUseCase): PreferencesContract.Presenter
-            = PreferencesPresenter(schedulerProvider, getPreferencesUseCase, updatePreferencesUseCase)
+                                    updatePreferencesUseCase: UpdatePreferencesUseCase): PreferencesContract.Presenter = PreferencesPresenter(schedulerProvider, getPreferencesUseCase, updatePreferencesUseCase)
 }

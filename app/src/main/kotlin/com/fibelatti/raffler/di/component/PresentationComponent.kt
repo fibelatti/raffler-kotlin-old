@@ -11,7 +11,7 @@ import com.fibelatti.raffler.presentation.quickdecisions.QuickDecisionsFragment
 import dagger.Subcomponent
 
 @Subcomponent(
-        modules = [ActivityModule::class, AdapterModule::class, PresenterModule::class]
+    modules = [ActivityModule::class, AdapterModule::class, PresenterModule::class]
 )
 @PresentationScope
 interface PresentationComponent {

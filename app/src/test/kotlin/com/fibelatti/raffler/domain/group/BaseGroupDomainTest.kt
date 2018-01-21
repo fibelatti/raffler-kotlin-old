@@ -12,7 +12,7 @@ import org.mockito.BDDMockito.given
 import org.mockito.Mockito
 import org.mockito.Mockito.mock
 
-abstract class BaseGroupDomainTest: BaseTest() {
+abstract class BaseGroupDomainTest : BaseTest() {
     protected val mockDatabase: AppDatabase = mock(AppDatabase::class.java)
     protected val mockGroupRepository: GroupRepositoryContract = mock(GroupRepositoryContract::class.java)
     protected val mockGroupItemRepository: GroupItemRepositoryContract = mock(GroupItemRepositoryContract::class.java)
@@ -33,13 +33,13 @@ abstract class BaseGroupDomainTest: BaseTest() {
     @Before
     fun setup() {
         given(mockDatabase.getGroupRepository())
-                .willReturn(mockGroupRepository)
+            .willReturn(mockGroupRepository)
         given(mockDatabase.getGroupItemRepository())
-                .willReturn(mockGroupItemRepository)
+            .willReturn(mockGroupItemRepository)
         given(mockDatabase.getQuickDecisionRepository())
-                .willReturn(mockQuickDecisionRepository)
+            .willReturn(mockQuickDecisionRepository)
         given(mockException.message)
-                .willReturn(GENERIC_ERROR_MESSAGE)
+            .willReturn(GENERIC_ERROR_MESSAGE)
     }
 
     protected fun getSamplePresentationGroup(): Group {

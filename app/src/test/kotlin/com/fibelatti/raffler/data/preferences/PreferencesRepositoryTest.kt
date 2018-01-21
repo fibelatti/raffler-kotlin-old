@@ -18,13 +18,13 @@ class PreferencesRepositoryTest : BaseTest() {
         val testObserver = TestObserver<Boolean>()
 
         given(mockUserPreferences.getRouletteMusicEnabled())
-                .willReturn(true)
+            .willReturn(true)
 
         // Act
         preferencesRepository.getRouletteMusicEnabled()
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertSingleOnCompleteWithNoErrors(testObserver)
@@ -38,9 +38,9 @@ class PreferencesRepositoryTest : BaseTest() {
 
         // Act
         preferencesRepository.setRouletteMusicEnabled(true)
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertCompletableOnComplete(testObserver)
@@ -53,13 +53,13 @@ class PreferencesRepositoryTest : BaseTest() {
         val testObserver = TestObserver<Boolean>()
 
         given(mockUserPreferences.getCrashReportEnabled())
-                .willReturn(true)
+            .willReturn(true)
 
         // Act
         preferencesRepository.getCrashReportEnabled()
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertSingleOnCompleteWithNoErrors(testObserver)
@@ -73,9 +73,9 @@ class PreferencesRepositoryTest : BaseTest() {
 
         // Act
         preferencesRepository.setCrashReportEnabled(true)
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertCompletableOnComplete(testObserver)
@@ -88,13 +88,13 @@ class PreferencesRepositoryTest : BaseTest() {
         val testObserver = TestObserver<Boolean>()
 
         given(mockUserPreferences.getAnalyticsEnabled())
-                .willReturn(true)
+            .willReturn(true)
 
         // Act
         preferencesRepository.getAnalyticsEnabled()
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertSingleOnCompleteWithNoErrors(testObserver)
@@ -108,9 +108,9 @@ class PreferencesRepositoryTest : BaseTest() {
 
         // Act
         preferencesRepository.setAnalyticsEnabled(true)
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertCompletableOnComplete(testObserver)
@@ -123,13 +123,13 @@ class PreferencesRepositoryTest : BaseTest() {
         val testObserver = TestObserver<Boolean>()
 
         given(mockUserPreferences.getNumberRangeEnabled())
-                .willReturn(true)
+            .willReturn(true)
 
         // Act
         preferencesRepository.getNumberRangeEnabled()
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertSingleOnCompleteWithNoErrors(testObserver)
@@ -143,9 +143,9 @@ class PreferencesRepositoryTest : BaseTest() {
 
         // Act
         preferencesRepository.setNumberRangeEnabled(true)
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertCompletableOnComplete(testObserver)

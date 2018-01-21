@@ -13,8 +13,8 @@ class DeleteGroupItemUseCaseTest : BaseGroupDomainTest() {
     fun deleteGroupItems() {
         // Act
         deleteGroupItemUseCase.deleteGroupItems(getSamplePresentationGroup().items)
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertCompletableOnComplete(testObserver)

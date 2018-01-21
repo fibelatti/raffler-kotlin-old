@@ -11,13 +11,13 @@ import com.fibelatti.raffler.presentation.models.QuickDecision as PresentationMo
 class AddGroupAsQuickDecisionUseCase @Inject constructor(private val database: AppDatabase) {
     fun addGroupAsQuickDecision(group: Group): Completable {
         val quickDecision = QuickDecision(
-                group.id.toString(),
-                LOCALE_NONE,
-                group.name,
-                group.concatenatedGroupItemNames)
+            group.id.toString(),
+            LOCALE_NONE,
+            group.name,
+            group.concatenatedGroupItemNames)
 
         database.getQuickDecisionRepository()
-                .addQuickDecision(quickDecision)
+            .addQuickDecision(quickDecision)
 
         return Completable.complete()
     }

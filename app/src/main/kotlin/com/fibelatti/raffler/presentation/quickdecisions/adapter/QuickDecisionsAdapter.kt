@@ -14,11 +14,11 @@ interface ViewType : BaseViewType {
 }
 
 class QuickDecisionsAdapter @Inject constructor(
-        private val quickDecisionDelegateAdapter: QuickDecisionDelegateAdapter,
-        private val addNewDelegateAdapter: AddNewDelegateAdapter
+    private val quickDecisionDelegateAdapter: QuickDecisionDelegateAdapter,
+    private val addNewDelegateAdapter: AddNewDelegateAdapter
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
-        QuickDecisionDelegateAdapter.Listener,
-        AddNewDelegateAdapter.Listener {
+    QuickDecisionDelegateAdapter.Listener,
+    AddNewDelegateAdapter.Listener {
     interface Listener : QuickDecisionDelegateAdapter.Listener, AddNewDelegateAdapter.Listener
 
     var listener: Listener? = null
@@ -36,17 +36,17 @@ class QuickDecisionsAdapter @Inject constructor(
         }
 
     private val delegateAdapters = mapOf(
-            ViewType.ADD_NEW to addNewDelegateAdapter,
-            ViewType.QUICK_DECISION to quickDecisionDelegateAdapter
+        ViewType.ADD_NEW to addNewDelegateAdapter,
+        ViewType.QUICK_DECISION to quickDecisionDelegateAdapter
     )
 
     override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
-            delegateAdapters[getItemViewType(position)]!!.onBindViewHolder(holder, items[position])
+        delegateAdapters[getItemViewType(position)]!!.onBindViewHolder(holder, items[position])
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-            delegateAdapters[viewType]!!.onCreateViewHolder(parent)
+        delegateAdapters[viewType]!!.onCreateViewHolder(parent)
 
     override fun getItemViewType(position: Int): Int = items[position].getViewType()
 

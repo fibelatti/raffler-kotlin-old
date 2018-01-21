@@ -8,12 +8,12 @@ import javax.inject.Inject
 
 class GetPreferencesUseCase @Inject constructor(private val preferencesRepository: PreferencesRepositoryContract) {
     fun getPreferences(): Single<Preferences> =
-            Single.zip(
-                    preferencesRepository.getRouletteMusicEnabled(),
-                    preferencesRepository.getCrashReportEnabled(),
-                    preferencesRepository.getAnalyticsEnabled(),
-                    preferencesRepository.getNumberRangeEnabled(),
-                    Function4 { rouletteMusicEnabled, crashReportEnabled, analyticsEnabled, numberRangeEnabled ->
-                        PreferencesMapper.toPresentationModel(rouletteMusicEnabled, crashReportEnabled, analyticsEnabled, numberRangeEnabled)
-                    })
+        Single.zip(
+            preferencesRepository.getRouletteMusicEnabled(),
+            preferencesRepository.getCrashReportEnabled(),
+            preferencesRepository.getAnalyticsEnabled(),
+            preferencesRepository.getNumberRangeEnabled(),
+            Function4 { rouletteMusicEnabled, crashReportEnabled, analyticsEnabled, numberRangeEnabled ->
+                PreferencesMapper.toPresentationModel(rouletteMusicEnabled, crashReportEnabled, analyticsEnabled, numberRangeEnabled)
+            })
 }

@@ -25,10 +25,10 @@ class GroupRepositoryTest : BaseDbTest() {
 
         // Act
         appDatabase.getGroupRepository()
-                .getGroupById(GROUP_ID)
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .getGroupById(GROUP_ID)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertSingleOnCompleteWithNoErrors(testObserver)
@@ -44,10 +44,10 @@ class GroupRepositoryTest : BaseDbTest() {
 
         // Act
         appDatabase.getGroupRepository()
-                .getGroupById(GROUP_ID)
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .getGroupById(GROUP_ID)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertSingleOnCompleteWithNoErrors(testObserver)
@@ -66,10 +66,10 @@ class GroupRepositoryTest : BaseDbTest() {
 
         // Assert
         appDatabase.getGroupRepository()
-                .getAllGroups()
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .getAllGroups()
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         assertSingleOnCompleteWithNoErrors(testObserver)
         assertTrue(testObserver.values()[0].isEmpty())
@@ -82,10 +82,10 @@ class GroupRepositoryTest : BaseDbTest() {
 
         // Act
         appDatabase.getGroupRepository()
-                .getAllGroups()
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .getAllGroups()
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertSingleOnCompleteWithNoErrors(testObserver)
@@ -100,10 +100,10 @@ class GroupRepositoryTest : BaseDbTest() {
 
         // Act
         appDatabase.getGroupRepository()
-                .getAllGroups()
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .getAllGroups()
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertSingleOnCompleteWithNoErrors(testObserver)

@@ -18,14 +18,14 @@ class GetQuickDecisionsUseCase @Inject constructor(private val database: AppData
             LOCALE_EN
 
         return database.getQuickDecisionRepository()
-                .fetchAllQuickDecisions()
-                .flattenAsObservable<QuickDecision> { list -> list }
-                .filter { quickDecision ->
-                    quickDecision.locale == locale || quickDecision.locale == LOCALE_NONE
-                }
-                .map { quickDecision ->
-                    QuickDecisionMapper.toPresentationModel(quickDecision)
-                }
-                .toList()
+            .fetchAllQuickDecisions()
+            .flattenAsObservable<QuickDecision> { list -> list }
+            .filter { quickDecision ->
+                quickDecision.locale == locale || quickDecision.locale == LOCALE_NONE
+            }
+            .map { quickDecision ->
+                QuickDecisionMapper.toPresentationModel(quickDecision)
+            }
+            .toList()
     }
 }

@@ -18,13 +18,13 @@ class GetGroupsUseCaseTest : BaseGroupDomainTest() {
     fun getAllGroups() {
         // Arrange
         given(mockGroupRepository.getAllGroups())
-                .willReturn(Single.just(listOf(getSampleDatabaseResponse())))
+            .willReturn(Single.just(listOf(getSampleDatabaseResponse())))
 
         // Act
         getGroupUseCase.getAllGroups()
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserverList)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserverList)
 
         // Assert
         assertSingleOnCompleteWithNoErrors(testObserverList)
@@ -36,13 +36,13 @@ class GetGroupsUseCaseTest : BaseGroupDomainTest() {
     fun getAllGroupsEmpty() {
         // Arrange
         given(mockGroupRepository.getAllGroups())
-                .willReturn(Single.error(mockException))
+            .willReturn(Single.error(mockException))
 
         // Act
         getGroupUseCase.getAllGroups()
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserverList)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserverList)
 
         // Assert
         assertSingleOnCompleteWithNoErrors(testObserverList)
@@ -54,13 +54,13 @@ class GetGroupsUseCaseTest : BaseGroupDomainTest() {
     fun getGroupById() {
         // Arrange
         given(mockGroupRepository.getGroupById(GROUP_ID))
-                .willReturn(Single.just(getSampleDatabaseResponse()))
+            .willReturn(Single.just(getSampleDatabaseResponse()))
 
         // Act
         getGroupUseCase.getGroupById(GROUP_ID)
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertSingleOnCompleteWithNoErrors(testObserver)
@@ -71,13 +71,13 @@ class GetGroupsUseCaseTest : BaseGroupDomainTest() {
     fun getGroupByIdError() {
         // Arrange
         given(mockGroupRepository.getGroupById(GROUP_ID))
-                .willReturn(Single.error(mockException))
+            .willReturn(Single.error(mockException))
 
         // Act
         getGroupUseCase.getGroupById(GROUP_ID)
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         testObserver.assertError(mockException)

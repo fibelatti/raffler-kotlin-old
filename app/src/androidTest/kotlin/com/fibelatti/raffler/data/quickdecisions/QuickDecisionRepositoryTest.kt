@@ -26,14 +26,14 @@ class QuickDecisionRepositoryTest : BaseDbTest() {
 
         // Act
         appDatabase.getQuickDecisionRepository()
-                .addQuickDecision(quickDecision)
+            .addQuickDecision(quickDecision)
 
         // Assert
         appDatabase.getQuickDecisionRepository()
-                .fetchAllQuickDecisions()
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .fetchAllQuickDecisions()
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         assertSingleOnCompleteWithNoErrors(testObserver)
         assertTrue(testObserver.values()[0].isNotEmpty())
@@ -53,27 +53,27 @@ class QuickDecisionRepositoryTest : BaseDbTest() {
         val quickDecision = QuickDecision(QUICK_DECISION_ID, QUICK_DECISION_LOCALE, QUICK_DECISION_NAME, QUICK_DECISION_VALUES)
 
         appDatabase.getQuickDecisionRepository()
-                .addQuickDecision(quickDecision)
+            .addQuickDecision(quickDecision)
 
         appDatabase.getQuickDecisionRepository()
-                .fetchAllQuickDecisions()
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserverArrange)
+            .fetchAllQuickDecisions()
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserverArrange)
 
         assertSingleOnCompleteWithNoErrors(testObserverArrange)
         assertTrue(testObserverArrange.values()[0].isNotEmpty())
 
         // Act
         appDatabase.getQuickDecisionRepository()
-                .deleteQuickDecisionById(QUICK_DECISION_ID)
+            .deleteQuickDecisionById(QUICK_DECISION_ID)
 
         // Assert
         appDatabase.getQuickDecisionRepository()
-                .fetchAllQuickDecisions()
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserverAssert)
+            .fetchAllQuickDecisions()
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserverAssert)
 
         assertSingleOnCompleteWithNoErrors(testObserverAssert)
         assertTrue(testObserverAssert.values()[0].isEmpty())

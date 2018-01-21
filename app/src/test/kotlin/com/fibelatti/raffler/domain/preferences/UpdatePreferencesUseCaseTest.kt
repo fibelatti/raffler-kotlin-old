@@ -24,9 +24,9 @@ class UpdatePreferencesUseCaseTest : BaseTest() {
 
         // Act
         updatePreferencesUseCase.updatePreferences(preferences)
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertCompletableOnComplete(testObserver)
@@ -42,9 +42,9 @@ class UpdatePreferencesUseCaseTest : BaseTest() {
 
         // Act
         updatePreferencesUseCase.updatePreferences(preferences)
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertCompletableOnComplete(testObserver)
@@ -55,13 +55,13 @@ class UpdatePreferencesUseCaseTest : BaseTest() {
 
     private fun arrangeRepository(value: Boolean) {
         given(mockPreferencesRepository.setRouletteMusicEnabled(value))
-                .willReturn(Completable.complete())
+            .willReturn(Completable.complete())
         given(mockPreferencesRepository.setCrashReportEnabled(value))
-                .willReturn(Completable.complete())
+            .willReturn(Completable.complete())
         given(mockPreferencesRepository.setAnalyticsEnabled(value))
-                .willReturn(Completable.complete())
+            .willReturn(Completable.complete())
         given(mockPreferencesRepository.setNumberRangeEnabled(value))
-                .willReturn(Completable.complete())
+            .willReturn(Completable.complete())
     }
 
     private fun verifyRepository(value: Boolean) {

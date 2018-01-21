@@ -10,8 +10,7 @@ interface BaseContract {
     interface View {
         val rootLayout: FrameLayout?
 
-        fun getPresentationComponent(activity: FragmentActivity)
-                = App.appComponent.plus(ActivityModule(activity), PresenterModule())
+        fun getPresentationComponent(activity: FragmentActivity) = App.appComponent.plus(ActivityModule(activity), PresenterModule())
 
         fun showProgress()
 

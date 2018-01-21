@@ -21,9 +21,9 @@ import kotlinx.android.synthetic.main.fragment_recycler_view.*
 import javax.inject.Inject
 
 class QuickDecisionsFragment :
-        BaseFragment(),
-        QuickDecisionsContract.View,
-        QuickDecisionsAdapter.Listener {
+    BaseFragment(),
+    QuickDecisionsContract.View,
+    QuickDecisionsAdapter.Listener {
 
     companion object {
         val TAG: String = QuickDecisionsFragment::class.java.simpleName
@@ -51,7 +51,7 @@ class QuickDecisionsFragment :
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater.inflate(R.layout.fragment_recycler_view, container, false)
+        inflater.inflate(R.layout.fragment_recycler_view, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -70,7 +70,8 @@ class QuickDecisionsFragment :
     }
 
     override fun handleError(errorMessage: String?) {
-        showErrorLayout({ recoverFromError() }, errorMessage ?: getString(R.string.generic_msg_error))
+        showErrorLayout({ recoverFromError() }, errorMessage
+            ?: getString(R.string.generic_msg_error))
     }
 
     override fun onNetworkError() {
@@ -85,9 +86,9 @@ class QuickDecisionsFragment :
 
         context?.let {
             val colorList = calculateColorGradient(
-                    getColor(it, R.color.colorAccent),
-                    getColor(it, R.color.colorPrimary),
-                    dataSet.size - 1)
+                getColor(it, R.color.colorAccent),
+                getColor(it, R.color.colorPrimary),
+                dataSet.size - 1)
 
             adapter.colorList = colorList
         }
@@ -98,8 +99,8 @@ class QuickDecisionsFragment :
     override fun onQuickDecisionResult(result: String, isOdd: Boolean) {
         context?.let {
             val intentBuilder: QuickDecisionResultActivity.IntentBuilder = QuickDecisionResultActivity.IntentBuilder(it)
-                    .addExtraResult(result)
-                    .addExtraIsOdd(isOdd)
+                .addExtraResult(result)
+                .addExtraIsOdd(isOdd)
 
             startActivity(intentBuilder.build())
         }

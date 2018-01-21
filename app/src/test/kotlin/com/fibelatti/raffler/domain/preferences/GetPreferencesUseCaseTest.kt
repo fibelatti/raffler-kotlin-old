@@ -23,9 +23,9 @@ class GetPreferencesUseCaseTest : BaseTest() {
 
         // Act
         getPreferencesUseCase.getPreferences()
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertSingleOnCompleteWithNoErrors(testObserver)
@@ -47,9 +47,9 @@ class GetPreferencesUseCaseTest : BaseTest() {
 
         // Act
         getPreferencesUseCase.getPreferences()
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertSingleOnCompleteWithNoErrors(testObserver)
@@ -64,12 +64,12 @@ class GetPreferencesUseCaseTest : BaseTest() {
 
     private fun arrangeRepository(value: Boolean) {
         given(mockPreferencesRepository.getRouletteMusicEnabled())
-                .willReturn(Single.just(value))
+            .willReturn(Single.just(value))
         given(mockPreferencesRepository.getCrashReportEnabled())
-                .willReturn(Single.just(value))
+            .willReturn(Single.just(value))
         given(mockPreferencesRepository.getAnalyticsEnabled())
-                .willReturn(Single.just(value))
+            .willReturn(Single.just(value))
         given(mockPreferencesRepository.getNumberRangeEnabled())
-                .willReturn(Single.just(value))
+            .willReturn(Single.just(value))
     }
 }

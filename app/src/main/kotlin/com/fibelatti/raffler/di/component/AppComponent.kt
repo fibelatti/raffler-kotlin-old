@@ -9,7 +9,7 @@ import com.fibelatti.raffler.di.scope.AppScope
 import dagger.Component
 
 @Component(
-        modules = [AppModule::class, RepositoryModule::class]
+    modules = [AppModule::class, RepositoryModule::class]
 )
 @AppScope
 interface AppComponent {

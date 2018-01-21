@@ -8,12 +8,12 @@ import com.fibelatti.raffler.presentation.models.GroupItem as PresentationModel
 
 class GetGroupItemsUseCase @Inject constructor(private val database: AppDatabase) {
     fun getAllGroupItemsByGroupId(groupId: Long): Single<List<PresentationModel>> =
-            database.getGroupItemRepository()
-                    .getAllGroupItemsByGroupId(groupId)
-                    .onErrorReturn { emptyList() }
-                    .flattenAsObservable<GroupItem> { list -> list }
-                    .map { groupItem ->
-                        GroupItemMapper.toPresentationModel(groupItem)
-                    }
-                    .toList()
+        database.getGroupItemRepository()
+            .getAllGroupItemsByGroupId(groupId)
+            .onErrorReturn { emptyList() }
+            .flattenAsObservable<GroupItem> { list -> list }
+            .map { groupItem ->
+                GroupItemMapper.toPresentationModel(groupItem)
+            }
+            .toList()
 }

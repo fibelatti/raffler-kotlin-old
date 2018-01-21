@@ -9,6 +9,5 @@ import dagger.Provides
 @Module
 class RepositoryModule {
     @Provides
-    fun providePreferencesRepository(userPreferencesContract: UserPreferencesContract): PreferencesRepositoryContract
-            = PreferencesRepository(userPreferencesContract)
+    fun providePreferencesRepository(userPreferencesContract: UserPreferencesContract): PreferencesRepositoryContract = PreferencesRepository(userPreferencesContract)
 }

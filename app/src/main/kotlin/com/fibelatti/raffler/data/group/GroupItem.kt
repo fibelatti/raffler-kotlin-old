@@ -6,7 +6,7 @@ import com.fibelatti.raffler.data.group.GroupItem.Companion.TABLE_NAME
 
 @Entity(tableName = TABLE_NAME,
     foreignKeys = [
-    ForeignKey(entity = Group::class, parentColumns = [Group.COLUMN_ID], childColumns = [(GroupItem.COLUMN_GROUP_ID)], onDelete = CASCADE)])
+        ForeignKey(entity = Group::class, parentColumns = [Group.COLUMN_ID], childColumns = [(GroupItem.COLUMN_GROUP_ID)], onDelete = CASCADE)])
 data class GroupItem(
     @ColumnInfo(name = COLUMN_ID)
     @PrimaryKey(autoGenerate = true)

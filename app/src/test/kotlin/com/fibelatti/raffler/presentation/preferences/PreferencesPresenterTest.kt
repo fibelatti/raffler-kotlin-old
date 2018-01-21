@@ -12,7 +12,7 @@ import org.mockito.BDDMockito.given
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 
-class PreferencesPresenterTest: BaseTest() {
+class PreferencesPresenterTest : BaseTest() {
     private val mockGetPreferencesUseCase = mock(GetPreferencesUseCase::class.java)
     private val mockUpdatePreferencesUseCase = mock(UpdatePreferencesUseCase::class.java)
     private val mockView = mock(PreferencesContract.View::class.java)
@@ -24,7 +24,7 @@ class PreferencesPresenterTest: BaseTest() {
     @Before
     fun setup() {
         given(mockException.message)
-                .willReturn(GENERIC_ERROR_MESSAGE)
+            .willReturn(GENERIC_ERROR_MESSAGE)
         preferencesPresenter.attachView(mockView)
     }
 
@@ -32,7 +32,7 @@ class PreferencesPresenterTest: BaseTest() {
     fun testGetPreferencesIsSuccessful() {
         // Arrange
         given(mockGetPreferencesUseCase.getPreferences())
-                .willReturn(Single.just(mockPreferences))
+            .willReturn(Single.just(mockPreferences))
 
         // Act
         preferencesPresenter.getPreferences()
@@ -47,7 +47,7 @@ class PreferencesPresenterTest: BaseTest() {
     fun testGetPreferencesError() {
         // Arrange
         given(mockGetPreferencesUseCase.getPreferences())
-                .willReturn(Single.error(mockException))
+            .willReturn(Single.error(mockException))
 
         // Act
         preferencesPresenter.getPreferences()
@@ -62,7 +62,7 @@ class PreferencesPresenterTest: BaseTest() {
     fun testUpdatePreferencesIsSuccessful() {
         // Arrange
         given(mockUpdatePreferencesUseCase.updatePreferences(mockPreferences))
-                .willReturn(Completable.complete())
+            .willReturn(Completable.complete())
 
         // Act
         preferencesPresenter.updatePreferences(mockPreferences)
@@ -75,9 +75,9 @@ class PreferencesPresenterTest: BaseTest() {
     fun testUpdatePreferencesError() {
         // Arrange
         given(mockUpdatePreferencesUseCase.updatePreferences(mockPreferences))
-                .willReturn(Completable.error(mockException))
+            .willReturn(Completable.error(mockException))
         given(mockException.message)
-                .willReturn(GENERIC_ERROR_MESSAGE)
+            .willReturn(GENERIC_ERROR_MESSAGE)
 
         // Act
         preferencesPresenter.updatePreferences(mockPreferences)

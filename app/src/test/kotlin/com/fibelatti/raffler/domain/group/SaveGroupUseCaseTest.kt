@@ -19,13 +19,13 @@ class SaveGroupUseCaseTest : BaseGroupDomainTest() {
     fun saveGroup() {
         // Arrange
         `when`(mockDatabase.runInTransaction(any()))
-                .thenAnswer { mockedRunnable(it.arguments[0] as Runnable) }
+            .thenAnswer { mockedRunnable(it.arguments[0] as Runnable) }
 
         // Act
         saveGroupUseCase.saveGroup(getSamplePresentationGroup())
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertCompletableOnComplete(testObserver)

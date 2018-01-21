@@ -1,7 +1,7 @@
 ext.appInfo = [
     // Application
-    appName : 'Raffler',
-    applicationId : 'com.fibelatti.raffler',
+    appName      : 'Raffler',
+    applicationId: 'com.fibelatti.raffler',
 
     // Version information
     versionMajor : 2,

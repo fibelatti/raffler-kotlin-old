@@ -43,22 +43,22 @@ class GetQuickDecisionsUseCaseTest : BaseTest() {
     @Before
     fun setup() {
         given(mockAppDatabase.getQuickDecisionRepository())
-                .willReturn(mockQuickDecisionsRepository)
+            .willReturn(mockQuickDecisionsRepository)
         given(mockQuickDecisionsRepository.fetchAllQuickDecisions())
-                .willReturn(Single.just(getSampleData()))
+            .willReturn(Single.just(getSampleData()))
     }
 
     @Test
     fun getAllQuickDecisionsLocaleEn() {
         // Arrange
         given(mockLocale.language)
-                .willReturn(LOCALE_EN)
+            .willReturn(LOCALE_EN)
 
         // Act
         getQuickDecisionsUseCase.getAllQuickDecisions()
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertSingleOnCompleteWithNoErrors(testObserver)
@@ -72,13 +72,13 @@ class GetQuickDecisionsUseCaseTest : BaseTest() {
     fun getAllQuickDecisionsLocaleEs() {
         // Arrange
         given(mockLocale.language)
-                .willReturn(LOCALE_ES)
+            .willReturn(LOCALE_ES)
 
         // Act
         getQuickDecisionsUseCase.getAllQuickDecisions()
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertSingleOnCompleteWithNoErrors(testObserver)
@@ -92,13 +92,13 @@ class GetQuickDecisionsUseCaseTest : BaseTest() {
     fun getAllQuickDecisionsUnsupportedLocale() {
         // Arrange
         given(mockLocale.language)
-                .willReturn(LOCALE_FR)
+            .willReturn(LOCALE_FR)
 
         // Act
         getQuickDecisionsUseCase.getAllQuickDecisions()
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertSingleOnCompleteWithNoErrors(testObserver)

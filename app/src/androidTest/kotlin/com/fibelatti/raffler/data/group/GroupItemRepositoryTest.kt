@@ -33,10 +33,10 @@ class GroupItemRepositoryTest : BaseDbTest() {
 
         // Act
         appDatabase.getGroupItemRepository()
-                .getAllGroupItemsByGroupId(GROUP_ID)
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .getAllGroupItemsByGroupId(GROUP_ID)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         val result = testObserver.values()[0]
@@ -55,24 +55,24 @@ class GroupItemRepositoryTest : BaseDbTest() {
 
         // Act
         appDatabase.getGroupItemRepository()
-                .deleteGroupItemsByGroupId(GROUP_ID)
+            .deleteGroupItemsByGroupId(GROUP_ID)
 
         // Assert
         appDatabase.getGroupItemRepository()
-                .getAllGroupItemsByGroupId(GROUP_ID)
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .getAllGroupItemsByGroupId(GROUP_ID)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
         val result = testObserver.values()[0]
 
         assertSingleOnCompleteWithNoErrors(testObserver)
         assertEquals(0, result.size)
 
         appDatabase.getGroupItemRepository()
-                .getAllGroupItemsByGroupId(GROUP_ID_OTHER)
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserverOther)
+            .getAllGroupItemsByGroupId(GROUP_ID_OTHER)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserverOther)
         val resultOther = testObserverOther.values()[0]
 
         assertSingleOnCompleteWithNoErrors(testObserverOther)
@@ -87,14 +87,14 @@ class GroupItemRepositoryTest : BaseDbTest() {
 
         // Act
         appDatabase.getGroupItemRepository()
-                .deleteGroupItemsById(Collections.singletonList(GROUP_ITEM_ID_1))
+            .deleteGroupItemsById(Collections.singletonList(GROUP_ITEM_ID_1))
 
         // Assert
         appDatabase.getGroupItemRepository()
-                .getAllGroupItemsByGroupId(GROUP_ID)
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .getAllGroupItemsByGroupId(GROUP_ID)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
         val result = testObserver.values()[0]
 
         assertSingleOnCompleteWithNoErrors(testObserver)

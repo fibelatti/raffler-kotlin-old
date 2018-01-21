@@ -11,7 +11,7 @@ class AdapterModule {
     @Provides
     fun provideQuickDecisionsAdapter(quickDecisionDelegateAdapter: QuickDecisionDelegateAdapter,
                                      addNewDelegateAdapter: AddNewDelegateAdapter) =
-            QuickDecisionsAdapter(quickDecisionDelegateAdapter, addNewDelegateAdapter)
+        QuickDecisionsAdapter(quickDecisionDelegateAdapter, addNewDelegateAdapter)
 
     @Provides
     fun provideQuickDecisionDelegateAdapter() = QuickDecisionDelegateAdapter()

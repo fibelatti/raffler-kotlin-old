@@ -25,14 +25,14 @@ class QuickDecisionsPresenterTest : BaseTest() {
     private val mockGroup = mock(Group::class.java)
 
     private val quickDecisionPresenter = QuickDecisionsPresenter(testSchedulerProvider,
-            mockGetQuickDecisionsUseCase,
-            mockAddGroupAsQuickDecisionUseCase,
-            mockGetGroupUseCase)
+        mockGetQuickDecisionsUseCase,
+        mockAddGroupAsQuickDecisionUseCase,
+        mockGetGroupUseCase)
 
     @Before
     fun setup() {
         given(mockException.message)
-                .willReturn(GENERIC_ERROR_MESSAGE)
+            .willReturn(GENERIC_ERROR_MESSAGE)
 
         quickDecisionPresenter.attachView(mockView)
     }
@@ -41,7 +41,7 @@ class QuickDecisionsPresenterTest : BaseTest() {
     fun bootstrap() {
         // Arrange
         given(mockGetQuickDecisionsUseCase.getAllQuickDecisions())
-                .willReturn(Single.just(listOf(mockQuickDecision)))
+            .willReturn(Single.just(listOf(mockQuickDecision)))
 
         // Act
         quickDecisionPresenter.bootstrap()
@@ -56,7 +56,7 @@ class QuickDecisionsPresenterTest : BaseTest() {
     fun bootstrapError() {
         // Arrange
         given(mockGetQuickDecisionsUseCase.getAllQuickDecisions())
-                .willReturn(Single.error(mockException))
+            .willReturn(Single.error(mockException))
 
         // Act
         quickDecisionPresenter.bootstrap()
@@ -73,7 +73,7 @@ class QuickDecisionsPresenterTest : BaseTest() {
         val randomValue = "Random value"
 
         given(mockQuickDecision.items)
-                .willReturn(listOf(randomValue))
+            .willReturn(listOf(randomValue))
 
         // Act
         quickDecisionPresenter.getQuickDecisionResult(mockQuickDecision)
@@ -86,7 +86,7 @@ class QuickDecisionsPresenterTest : BaseTest() {
     fun addNewQuickDecisionNoGroups() {
         // Arrange
         given(mockGetGroupUseCase.getAllGroups())
-                .willReturn(Single.just(emptyList()))
+            .willReturn(Single.just(emptyList()))
 
         // Act
         quickDecisionPresenter.addNewQuickDecision()
@@ -99,7 +99,7 @@ class QuickDecisionsPresenterTest : BaseTest() {
     fun addNewQuickDecisionWithGroups() {
         // Arrange
         given(mockGetGroupUseCase.getAllGroups())
-                .willReturn(Single.just(listOf(mockGroup)))
+            .willReturn(Single.just(listOf(mockGroup)))
 
         // Act
         quickDecisionPresenter.addNewQuickDecision()
@@ -112,9 +112,9 @@ class QuickDecisionsPresenterTest : BaseTest() {
     fun addGroupToQuickDecisions() {
         // Arrange
         given(mockAddGroupAsQuickDecisionUseCase.addGroupAsQuickDecision(mockGroup))
-                .willReturn(Completable.complete())
+            .willReturn(Completable.complete())
         given(mockGetQuickDecisionsUseCase.getAllQuickDecisions())
-                .willReturn(Single.just(listOf(mockQuickDecision)))
+            .willReturn(Single.just(listOf(mockQuickDecision)))
 
         // Act
         quickDecisionPresenter.addGroupToQuickDecisions(mockGroup)
@@ -129,7 +129,7 @@ class QuickDecisionsPresenterTest : BaseTest() {
     fun addGroupToQuickDecisionsError() {
         // Arrange
         given(mockAddGroupAsQuickDecisionUseCase.addGroupAsQuickDecision(mockGroup))
-                .willReturn(Completable.error(mockException))
+            .willReturn(Completable.error(mockException))
 
         // Act
         quickDecisionPresenter.addGroupToQuickDecisions(mockGroup)

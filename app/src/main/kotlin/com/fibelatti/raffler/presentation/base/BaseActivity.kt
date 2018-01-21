@@ -65,13 +65,14 @@ abstract class BaseActivity : AppCompatActivity(), BaseContract.View {
     }
 
     override fun handleError(errorMessage: String?) {
-        dialogHelper.newOkDialog(errorMessage ?: getString(R.string.generic_msg_error), getErrorDialogListener())
-                .show()
+        dialogHelper.newOkDialog(errorMessage
+            ?: getString(R.string.generic_msg_error), getErrorDialogListener())
+            .show()
     }
 
     override fun onNetworkError() {
         dialogHelper.newOkDialog(getString(R.string.network_msg_error), getErrorDialogListener())
-                .show()
+            .show()
     }
 
     protected fun showErrorLayout(retryButtonListener: () -> Unit, errorMessage: String = getString(R.string.generic_msg_error)) {

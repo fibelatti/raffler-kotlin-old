@@ -17,9 +17,9 @@ import kotlinx.android.synthetic.main.layout_toolbar_default.*
 import javax.inject.Inject
 
 class HomeActivity :
-        BaseActivity(),
-        NavigationContract.View,
-        BottomNavigationView.OnNavigationItemSelectedListener {
+    BaseActivity(),
+    NavigationContract.View,
+    BottomNavigationView.OnNavigationItemSelectedListener {
 
     companion object {
         private const val BUNDLE_SELECTED_ITEM_ID = "SELECTED_ITEM_ID"

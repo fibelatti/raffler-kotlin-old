@@ -15,13 +15,13 @@ class DeleteGroupUseCaseTest : BaseGroupDomainTest() {
     fun deleteGroup() {
         // Arrange
         Mockito.`when`(mockDatabase.runInTransaction(ArgumentMatchers.any()))
-                .thenAnswer { mockedRunnable(it.arguments[0] as Runnable) }
+            .thenAnswer { mockedRunnable(it.arguments[0] as Runnable) }
 
         // Act
         deleteGroupUseCase.deleteGroup(getSamplePresentationGroup())
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertCompletableOnComplete(testObserver)

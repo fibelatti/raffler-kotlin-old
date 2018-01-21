@@ -23,7 +23,7 @@ class AddGroupAsQuickDecisionUseCaseTest : BaseTest() {
     @Before
     fun setup() {
         given(mockAppDatabase.getQuickDecisionRepository())
-                .willReturn(mockQuickDecisionsRepository)
+            .willReturn(mockQuickDecisionsRepository)
     }
 
     @Test
@@ -38,9 +38,9 @@ class AddGroupAsQuickDecisionUseCaseTest : BaseTest() {
 
         // Act
         addGroupAsQuickDecisionUseCase.addGroupAsQuickDecision(group)
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserver)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserver)
 
         // Assert
         assertCompletableOnComplete(testObserver)

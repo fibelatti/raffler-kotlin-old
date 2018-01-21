@@ -16,13 +16,13 @@ class GetGroupItemsUseCaseTest : BaseGroupDomainTest() {
     fun getAllGroupItems() {
         // Arrange
         given(mockGroupItemRepository.getAllGroupItemsByGroupId(GROUP_ID))
-                .willReturn(Single.just(listOf(getSampleDataGroupItem1(), getSampleDataGroupItem2())))
+            .willReturn(Single.just(listOf(getSampleDataGroupItem1(), getSampleDataGroupItem2())))
 
         // Act
         getGroupItemsUseCase.getAllGroupItemsByGroupId(GROUP_ID)
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserverList)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserverList)
 
         // Assert
         assertSingleOnCompleteWithNoErrors(testObserverList)
@@ -37,13 +37,13 @@ class GetGroupItemsUseCaseTest : BaseGroupDomainTest() {
     fun getAllGroupItemsEmpty() {
         // Arrange
         given(mockGroupItemRepository.getAllGroupItemsByGroupId(GROUP_ID))
-                .willReturn(Single.error(mockException))
+            .willReturn(Single.error(mockException))
 
         // Act
         getGroupItemsUseCase.getAllGroupItemsByGroupId(GROUP_ID)
-                .subscribeOn(testSchedulerProvider.io())
-                .observeOn(testSchedulerProvider.mainThread())
-                .subscribe(testObserverList)
+            .subscribeOn(testSchedulerProvider.io())
+            .observeOn(testSchedulerProvider.mainThread())
+            .subscribe(testObserverList)
 
         // Assert
         assertSingleOnCompleteWithNoErrors(testObserverList)

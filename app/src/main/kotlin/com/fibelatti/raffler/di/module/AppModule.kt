@@ -38,11 +38,11 @@ class AppModule(private var app: App) {
     @Provides
     @AppScope
     fun providesDatabase(@AppQualifier context: Context) = Room.databaseBuilder(context,
-            AppDatabase::class.java, DATABASE_NAME)
-            .addMigrations(AppDatabase.MigrationTo4, AppDatabase.MigrationTo5)
-            .addCallback(AppDatabase.RoomCallback)
-            .fallbackToDestructiveMigration()
-            .build()
+        AppDatabase::class.java, DATABASE_NAME)
+        .addMigrations(AppDatabase.MigrationTo4, AppDatabase.MigrationTo5)
+        .addCallback(AppDatabase.RoomCallback)
+        .fallbackToDestructiveMigration()
+        .build()
 
     @Provides
     fun provideLocaleDefault(): Locale = Locale.getDefault()

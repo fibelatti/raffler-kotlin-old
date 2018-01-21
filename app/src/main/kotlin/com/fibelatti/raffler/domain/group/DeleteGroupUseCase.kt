@@ -9,9 +9,9 @@ class DeleteGroupUseCase @Inject constructor(private val database: AppDatabase) 
     fun deleteGroup(group: Group): Completable {
         database.runInTransaction({
             database.getGroupRepository()
-                    .deleteGroupById(group.id)
+                .deleteGroupById(group.id)
             database.getQuickDecisionRepository()
-                    .deleteQuickDecisionById(group.id.toString())
+                .deleteQuickDecisionById(group.id.toString())
         })
 
         return Completable.complete()
