@@ -7,15 +7,14 @@ import com.fibelatti.raffler.core.extensions.inflate
 import com.fibelatti.raffler.core.extensions.withItIfNotNull
 import com.fibelatti.raffler.presentation.base.BaseDelegateAdapter
 import com.fibelatti.raffler.presentation.base.BaseViewType
+import com.fibelatti.raffler.presentation.common.ObservableView
 import com.fibelatti.raffler.presentation.models.QuickDecision
 import kotlinx.android.synthetic.main.list_item_quick_decision.view.*
 
-class QuickDecisionDelegateAdapter : BaseDelegateAdapter {
-    interface Listener {
-        fun onQuickDecisionClicked(quickDecision: QuickDecision)
-    }
+class QuickDecisionDelegateAdapter :
+    BaseDelegateAdapter {
 
-    var listener: Listener? = null
+    val itemClickObservable = ObservableView<QuickDecision>()
     var colorList: List<Int> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder = DataViewHolder(parent)
@@ -32,7 +31,7 @@ class QuickDecisionDelegateAdapter : BaseDelegateAdapter {
 
                 itemView.textView_quickDecisionName.text = name
 
-                itemView.setOnClickListener({ listener?.onQuickDecisionClicked(quickDecision = this) })
+                itemView.setOnClickListener { itemClickObservable.emitNext(this) }
             }
         }
     }

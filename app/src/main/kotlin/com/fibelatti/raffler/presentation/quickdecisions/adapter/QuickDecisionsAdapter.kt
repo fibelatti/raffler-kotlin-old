@@ -5,7 +5,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.fibelatti.raffler.presentation.base.BaseDelegateAdapter
 import com.fibelatti.raffler.presentation.base.BaseViewType
+import com.fibelatti.raffler.presentation.models.AddNewPlaceholder
 import com.fibelatti.raffler.presentation.models.QuickDecision
+import io.reactivex.Observable
 import javax.inject.Inject
 
 interface ViewType : BaseViewType {
@@ -18,17 +20,7 @@ interface ViewType : BaseViewType {
 class QuickDecisionsAdapter @Inject constructor(
     private val quickDecisionDelegateAdapter: QuickDecisionDelegateAdapter,
     private val addNewDelegateAdapter: AddNewDelegateAdapter
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
-    QuickDecisionDelegateAdapter.Listener,
-    AddNewDelegateAdapter.Listener {
-    interface Listener : QuickDecisionDelegateAdapter.Listener, AddNewDelegateAdapter.Listener
-
-    var listener: Listener? = null
-        set(value) {
-            field = value
-            quickDecisionDelegateAdapter.listener = this
-            addNewDelegateAdapter.listener = this
-        }
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var items: MutableList<BaseViewType> = ArrayList()
     var colorList: List<Int> = ArrayList()
         set(value) {
@@ -55,13 +47,9 @@ class QuickDecisionsAdapter @Inject constructor(
 
     override fun getItemViewType(position: Int): Int = items[position].getViewType()
 
-    override fun onQuickDecisionClicked(quickDecision: QuickDecision) {
-        listener?.onQuickDecisionClicked(quickDecision)
-    }
+    fun getQuickDecisionClickEvent(): Observable<QuickDecision> = quickDecisionDelegateAdapter.itemClickObservable.getObservable()
 
-    override fun onAddQuickDecisionClicked() {
-        listener?.onAddQuickDecisionClicked()
-    }
+    fun getAddQuickDecisionClickEvent(): Observable<AddNewPlaceholder> = addNewDelegateAdapter.itemClickObservable.getObservable()
 
     fun addManyToList(listItems: List<BaseViewType>) {
         items.clear()
