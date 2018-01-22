@@ -26,4 +26,10 @@ interface BaseContract {
 
         fun detachView()
     }
+
+    interface ReactivePresenter {
+        fun <V> bind(view: V)
+
+        fun unbind()
+    }
 }
