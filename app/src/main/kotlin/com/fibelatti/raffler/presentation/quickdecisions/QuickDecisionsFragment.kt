@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.fibelatti.raffler.R
+import com.fibelatti.raffler.presentation.base.BaseContract
 import com.fibelatti.raffler.presentation.base.BaseFragment
 import com.fibelatti.raffler.presentation.common.ItemOffsetDecoration
 import com.fibelatti.raffler.presentation.common.calculateColorGradient
@@ -17,13 +18,13 @@ import com.fibelatti.raffler.presentation.models.Group
 import com.fibelatti.raffler.presentation.models.QuickDecision
 import com.fibelatti.raffler.presentation.quickdecisions.adapter.QuickDecisionsAdapter
 import com.fibelatti.raffler.presentation.quickdecisions.adapter.ViewType
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_recycler_view.*
 import javax.inject.Inject
 
 class QuickDecisionsFragment :
     BaseFragment(),
-    QuickDecisionsContract.View,
-    QuickDecisionsAdapter.Listener {
+    QuickDecisionsContract.ReactiveView {
 
     companion object {
         val TAG: String = QuickDecisionsFragment::class.java.simpleName
@@ -32,7 +33,7 @@ class QuickDecisionsFragment :
     }
 
     @Inject
-    lateinit var quickDecisionsPresenter: QuickDecisionsContract.Presenter
+    lateinit var quickDecisionsPresenter: BaseContract.ReactivePresenter
     @Inject
     lateinit var adapter: QuickDecisionsAdapter
 
@@ -45,9 +46,6 @@ class QuickDecisionsFragment :
         activity?.let {
             getPresentationComponent(it).inject(this)
         }
-
-        quickDecisionsPresenter.attachView(this)
-        adapter.listener = this
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
@@ -61,12 +59,12 @@ class QuickDecisionsFragment :
 
     override fun onResume() {
         super.onResume()
-        quickDecisionsPresenter.bootstrap()
+        quickDecisionsPresenter.bind(this)
     }
 
-    override fun onDetach() {
-        quickDecisionsPresenter.detachView()
-        super.onDetach()
+    override fun onPause() {
+        quickDecisionsPresenter.unbind()
+        super.onPause()
     }
 
     override fun handleError(errorMessage: String?) {
@@ -77,6 +75,10 @@ class QuickDecisionsFragment :
     override fun onNetworkError() {
         handleError(getString(R.string.network_msg_error))
     }
+
+    override fun getQuickDecisionResult(): Observable<QuickDecision> = adapter.getQuickDecisionClickEvent()
+
+    override fun addNewQuickDecision(): Observable<AddNewPlaceholder> = adapter.getAddQuickDecisionClickEvent()
 
     override fun onDataLoaded(quickDecisions: List<QuickDecision>) {
         val dataSet = ArrayList<ViewType>()
@@ -118,14 +120,6 @@ class QuickDecisionsFragment :
         // TODO implement after implementing groups
     }
 
-    override fun onAddQuickDecisionClicked() {
-        quickDecisionsPresenter.addNewQuickDecision()
-    }
-
-    override fun onQuickDecisionClicked(quickDecision: QuickDecision) {
-        quickDecisionsPresenter.getQuickDecisionResult(quickDecision)
-    }
-
     private fun setUpLayout() {
         showDismissibleHint(layout_hintContainer, hintMessage = getString(R.string.quick_decision_dismissible_hint))
     }
@@ -137,6 +131,7 @@ class QuickDecisionsFragment :
     }
 
     private fun recoverFromError() {
-        quickDecisionsPresenter.bootstrap()
+        quickDecisionsPresenter.unbind()
+        quickDecisionsPresenter.bind(this)
     }
 }
