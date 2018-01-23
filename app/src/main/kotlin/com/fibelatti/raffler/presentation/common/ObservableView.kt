@@ -1,10 +1,10 @@
 package com.fibelatti.raffler.presentation.common
 
 import io.reactivex.Observable
-import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.PublishSubject
 
 class ObservableView<Emits> {
-    private val subject = BehaviorSubject.create<Emits>()
+    private val subject = PublishSubject.create<Emits>()
 
     fun getObservable(): Observable<Emits> = subject
 
