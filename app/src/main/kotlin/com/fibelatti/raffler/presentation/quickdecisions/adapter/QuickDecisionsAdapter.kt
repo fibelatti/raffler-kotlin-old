@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.fibelatti.raffler.presentation.base.BaseDelegateAdapter
 import com.fibelatti.raffler.presentation.base.BaseViewType
-import com.fibelatti.raffler.presentation.models.AddNewPlaceholder
 import com.fibelatti.raffler.presentation.models.QuickDecision
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -49,7 +48,7 @@ class QuickDecisionsAdapter @Inject constructor(
 
     fun getQuickDecisionClickEvent(): Observable<QuickDecision> = quickDecisionDelegateAdapter.itemClickObservable.getObservable()
 
-    fun getAddQuickDecisionClickEvent(): Observable<AddNewPlaceholder> = addNewDelegateAdapter.itemClickObservable.getObservable()
+    fun getAddQuickDecisionClickEvent(): Observable<Unit> = addNewDelegateAdapter.itemClickObservable.getObservable()
 
     fun addManyToList(listItems: List<BaseViewType>) {
         items.clear()

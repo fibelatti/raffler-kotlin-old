@@ -78,7 +78,7 @@ class QuickDecisionsFragment :
 
     override fun getQuickDecisionResult(): Observable<QuickDecision> = adapter.getQuickDecisionClickEvent()
 
-    override fun addNewQuickDecision(): Observable<AddNewPlaceholder> = adapter.getAddQuickDecisionClickEvent()
+    override fun addNewQuickDecision(): Observable<Unit> = adapter.getAddQuickDecisionClickEvent()
 
     override fun onDataLoaded(quickDecisions: List<QuickDecision>) {
         val dataSet = ArrayList<ViewType>()

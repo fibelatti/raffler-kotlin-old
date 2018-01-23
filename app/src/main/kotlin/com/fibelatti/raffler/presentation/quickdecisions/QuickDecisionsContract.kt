@@ -1,7 +1,6 @@
 package com.fibelatti.raffler.presentation.quickdecisions
 
 import com.fibelatti.raffler.presentation.base.BaseContract
-import com.fibelatti.raffler.presentation.models.AddNewPlaceholder
 import com.fibelatti.raffler.presentation.models.Group
 import com.fibelatti.raffler.presentation.models.QuickDecision
 import io.reactivex.Observable
@@ -33,7 +32,7 @@ interface QuickDecisionsContract {
         // Produces
         fun getQuickDecisionResult(): Observable<QuickDecision>
 
-        fun addNewQuickDecision(): Observable<AddNewPlaceholder>
+        fun addNewQuickDecision(): Observable<Unit>
 
         // Consumes
         fun onDataLoaded(quickDecisions: List<QuickDecision>)
