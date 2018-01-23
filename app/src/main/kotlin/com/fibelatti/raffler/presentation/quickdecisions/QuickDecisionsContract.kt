@@ -1,9 +1,9 @@
 package com.fibelatti.raffler.presentation.quickdecisions
 
 import com.fibelatti.raffler.presentation.base.BaseContract
+import com.fibelatti.raffler.presentation.common.ObservableView
 import com.fibelatti.raffler.presentation.models.Group
 import com.fibelatti.raffler.presentation.models.QuickDecision
-import io.reactivex.Observable
 
 interface QuickDecisionsContract {
     interface Presenter : BaseContract.Presenter<View> {
@@ -30,9 +30,9 @@ interface QuickDecisionsContract {
 
     interface ReactiveView : BaseContract.View {
         // Produces
-        fun getQuickDecisionResult(): Observable<QuickDecision>
+        fun getQuickDecisionResult(): ObservableView<QuickDecision>
 
-        fun addNewQuickDecision(): Observable<Unit>
+        fun addNewQuickDecision(): ObservableView<Unit>
 
         // Consumes
         fun onDataLoaded(quickDecisions: List<QuickDecision>)

@@ -12,13 +12,13 @@ import com.fibelatti.raffler.R
 import com.fibelatti.raffler.presentation.base.BaseContract
 import com.fibelatti.raffler.presentation.base.BaseFragment
 import com.fibelatti.raffler.presentation.common.ItemOffsetDecoration
+import com.fibelatti.raffler.presentation.common.ObservableView
 import com.fibelatti.raffler.presentation.common.calculateColorGradient
 import com.fibelatti.raffler.presentation.models.AddNewPlaceholder
 import com.fibelatti.raffler.presentation.models.Group
 import com.fibelatti.raffler.presentation.models.QuickDecision
 import com.fibelatti.raffler.presentation.quickdecisions.adapter.QuickDecisionsAdapter
 import com.fibelatti.raffler.presentation.quickdecisions.adapter.ViewType
-import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_recycler_view.*
 import javax.inject.Inject
 
@@ -76,9 +76,9 @@ class QuickDecisionsFragment :
         handleError(getString(R.string.network_msg_error))
     }
 
-    override fun getQuickDecisionResult(): Observable<QuickDecision> = adapter.getQuickDecisionClickEvent()
+    override fun getQuickDecisionResult(): ObservableView<QuickDecision> = adapter.getQuickDecisionClickEvent()
 
-    override fun addNewQuickDecision(): Observable<Unit> = adapter.getAddQuickDecisionClickEvent()
+    override fun addNewQuickDecision(): ObservableView<Unit> = adapter.getAddQuickDecisionClickEvent()
 
     override fun onDataLoaded(quickDecisions: List<QuickDecision>) {
         val dataSet = ArrayList<ViewType>()

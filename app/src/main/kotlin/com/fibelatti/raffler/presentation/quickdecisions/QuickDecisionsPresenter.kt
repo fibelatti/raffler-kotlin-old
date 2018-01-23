@@ -33,8 +33,12 @@ class QuickDecisionsPresenter(schedulerProvider: SchedulerProvider,
                 { view.handleError(errorMessage = it.message) }
             )
 
-        view.getQuickDecisionResult().subscribeUntilDetached({ getQuickDecisionResult(view, quickDecision = it) })
-        view.addNewQuickDecision().subscribeUntilDetached({ addNewQuickDecision(view) })
+        view.getQuickDecisionResult()
+            .getObservable()
+            .subscribeUntilDetached({ getQuickDecisionResult(view, quickDecision = it) })
+        view.addNewQuickDecision()
+            .getObservable()
+            .subscribeUntilDetached({ addNewQuickDecision(view) })
     }
 
     private fun getQuickDecisionResult(view: QuickDecisionsContract.ReactiveView, quickDecision: QuickDecision) {

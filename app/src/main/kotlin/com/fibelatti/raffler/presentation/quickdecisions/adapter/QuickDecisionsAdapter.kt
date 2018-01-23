@@ -5,8 +5,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.fibelatti.raffler.presentation.base.BaseDelegateAdapter
 import com.fibelatti.raffler.presentation.base.BaseViewType
+import com.fibelatti.raffler.presentation.common.ObservableView
 import com.fibelatti.raffler.presentation.models.QuickDecision
-import io.reactivex.Observable
 import javax.inject.Inject
 
 interface ViewType : BaseViewType {
@@ -46,9 +46,9 @@ class QuickDecisionsAdapter @Inject constructor(
 
     override fun getItemViewType(position: Int): Int = items[position].getViewType()
 
-    fun getQuickDecisionClickEvent(): Observable<QuickDecision> = quickDecisionDelegateAdapter.itemClickObservable.getObservable()
+    fun getQuickDecisionClickEvent(): ObservableView<QuickDecision> = quickDecisionDelegateAdapter.itemClickObservable
 
-    fun getAddQuickDecisionClickEvent(): Observable<Unit> = addNewDelegateAdapter.itemClickObservable.getObservable()
+    fun getAddQuickDecisionClickEvent(): ObservableView<Unit> = addNewDelegateAdapter.itemClickObservable
 
     fun addManyToList(listItems: List<BaseViewType>) {
         items.clear()
