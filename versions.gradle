@@ -32,7 +32,6 @@ ext.versions = [
     daggerVersion            : '2.7',
     rxJavaVersion            : '2.1.6',
     rxAndroidVersion         : '2.0.1',
-    rxBinding                : '2.0.0',
     roomVersion              : '1.0.0',
     crashlyticsVersion       : '2.8.0',
     answersVersion           : '1.4.1',
@@ -68,9 +67,6 @@ ext.libraries = [
     // Rx
     rxJava            : "io.reactivex.rxjava2:rxjava:$versions.rxJavaVersion",
     rxAndroid         : "io.reactivex.rxjava2:rxandroid:$versions.rxAndroidVersion",
-
-    rxBinding         : "com.jakewharton.rxbinding2:rxbinding-kotlin:$versions.rxBinding",
-    rxBindingKotlin   : "com.jakewharton.rxbinding2:rxbinding-kotlin:$versions.rxBinding",
 
     // Persistence
     room              : "android.arch.persistence.room:rxjava2:$versions.roomVersion",
