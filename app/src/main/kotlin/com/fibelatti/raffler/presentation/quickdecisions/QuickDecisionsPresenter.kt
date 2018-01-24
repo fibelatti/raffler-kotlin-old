@@ -7,7 +7,7 @@ import com.fibelatti.raffler.presentation.base.BasePresenter
 import com.fibelatti.raffler.presentation.common.SchedulerProvider
 import com.fibelatti.raffler.presentation.models.Group
 import com.fibelatti.raffler.presentation.models.QuickDecision
-import java.util.*
+import java.util.Random
 
 class QuickDecisionsPresenter(schedulerProvider: SchedulerProvider,
                               private val getQuickDecisionsUseCase: GetQuickDecisionsUseCase,

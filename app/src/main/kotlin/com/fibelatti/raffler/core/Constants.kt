@@ -1,6 +1,6 @@
 package com.fibelatti.raffler.core
 
-import java.util.*
+import java.util.Arrays
 
 const val PLAY_STORE_BASE_URL = "http://play.google.com/store/apps/details"
 

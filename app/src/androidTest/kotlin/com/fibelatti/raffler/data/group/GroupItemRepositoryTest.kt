@@ -5,7 +5,7 @@ import com.fibelatti.raffler.data.BaseDbTest
 import io.reactivex.observers.TestObserver
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.*
+import java.util.Collections
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 

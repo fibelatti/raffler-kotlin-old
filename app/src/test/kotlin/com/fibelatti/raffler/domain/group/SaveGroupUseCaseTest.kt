@@ -6,10 +6,6 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
-import com.fibelatti.raffler.data.group.Group as GroupDataModel
-import com.fibelatti.raffler.data.group.GroupItem as GroupItemDataModel
-import com.fibelatti.raffler.presentation.models.Group as GroupPresentationModel
-import com.fibelatti.raffler.presentation.models.GroupItem as GroupItemPresentationModel
 
 class SaveGroupUseCaseTest : BaseGroupDomainTest() {
     private val saveGroupUseCase = SaveGroupUseCase(mockDatabase)

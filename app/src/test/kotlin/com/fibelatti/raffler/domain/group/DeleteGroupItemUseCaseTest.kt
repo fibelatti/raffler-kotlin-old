@@ -19,6 +19,5 @@ class DeleteGroupItemUseCaseTest : BaseGroupDomainTest() {
         // Assert
         assertCompletableOnComplete(testObserver)
         Mockito.verify(mockGroupItemRepository).deleteGroupItemsById(listOf(GROUP_ITEM_ID_1, GROUP_ITEM_ID_2))
-
     }
 }

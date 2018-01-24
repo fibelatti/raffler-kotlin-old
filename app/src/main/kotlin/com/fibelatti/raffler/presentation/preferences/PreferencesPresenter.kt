@@ -31,7 +31,6 @@ class PreferencesPresenter(
                 ::handleUpdateSuccess,
                 ::handleError
             )
-
     }
 
     private fun handleGetSuccess(preferences: Preferences) {

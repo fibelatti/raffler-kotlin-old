@@ -14,7 +14,7 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.BDDMockito.given
 import org.mockito.Mockito.mock
-import java.util.*
+import java.util.Locale
 import com.fibelatti.raffler.data.quickdecision.QuickDecision as DataModel
 import com.fibelatti.raffler.presentation.models.QuickDecision as PresentationModel
 
