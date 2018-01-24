@@ -8,7 +8,6 @@ data class Group(val id: Long, val name: String, val items: List<GroupItem>) : P
     val groupItemNames: List<String>
         get() = items.map { item -> item.name }
 
-
     val concatenatedGroupItemNames: String
         get() = items.joinToString(",") { item -> item.name }
 
@@ -37,5 +36,3 @@ data class Group(val id: Long, val name: String, val items: List<GroupItem>) : P
         val CREATOR = createParcel { Group(it) }
     }
 }
-
-

@@ -13,7 +13,7 @@ import com.fibelatti.raffler.di.qualifier.AppQualifier
 import com.fibelatti.raffler.di.scope.AppScope
 import dagger.Module
 import dagger.Provides
-import java.util.*
+import java.util.Locale
 
 @Module
 class AppModule(private var app: App) {
