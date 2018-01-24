@@ -33,7 +33,7 @@ before_script:
   - adb shell input keyevent 82 &
 
 script:
-  - ./gradlew clean detektCheck test connectedAndroidTest assemble
+  - ./gradlew clean test connectedAndroidTest assemble
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock

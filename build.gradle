@@ -1,6 +1,7 @@
 buildscript {
     apply from: 'versions.gradle'
     apply from: 'app-info.gradle'
+    apply from: 'detekt.gradle'
 
     repositories {
         mavenCentral()
@@ -20,25 +21,12 @@ buildscript {
     }
 }
 
-plugins {
-    id "io.gitlab.arturbosch.detekt" version "1.0.0.RC6-2"
-}
-
 allprojects {
     repositories {
         mavenCentral()
         jcenter()
         google()
         maven { url 'https://maven.fabric.io/public' }
-    }
-}
-
-detekt {
-    version = versions.detekt
-    profile("main") {
-        input = "$projectDir/app/src/main/kotlin"
-        config = "$projectDir/detekt.yml"
-        filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
     }
 }
 
