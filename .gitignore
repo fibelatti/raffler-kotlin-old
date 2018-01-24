@@ -27,6 +27,7 @@ gradle.properties
 .idea/vcs.xml
 .idea/gradle.xml
 .idea/runConfigurations.xml
+.idea/codeStyleSettings.xml
 *.iml
 
 # Local configuration file (sdk path, etc)

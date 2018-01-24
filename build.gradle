@@ -1,6 +1,7 @@
 buildscript {
     apply from: 'versions.gradle'
     apply from: 'app-info.gradle'
+    apply from: 'ktlint.gradle'
     apply from: 'detekt.gradle'
 
     repositories {
@@ -30,6 +31,6 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
+clean {
     delete rootProject.buildDir
 }
