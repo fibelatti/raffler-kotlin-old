@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.fibelatti.raffler.R
 import com.fibelatti.raffler.core.extensions.inflate
+import com.fibelatti.raffler.core.extensions.withItIfNotNull
 import com.fibelatti.raffler.presentation.base.BaseDelegateAdapter
 import com.fibelatti.raffler.presentation.base.BaseViewType
 import com.fibelatti.raffler.presentation.models.QuickDecision
@@ -20,17 +21,19 @@ class QuickDecisionDelegateAdapter : BaseDelegateAdapter {
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder = DataViewHolder(parent)
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: BaseViewType) {
-        (holder as DataViewHolder).bind(item as QuickDecision)
+        (holder as? DataViewHolder)?.bind(item as? QuickDecision)
     }
 
     internal inner class DataViewHolder(parent: ViewGroup) :
         RecyclerView.ViewHolder(parent.inflate(R.layout.list_item_quick_decision)) {
-        fun bind(item: QuickDecision) = with(itemView) {
-            layout_cardView.setCardBackgroundColor(colorList[layoutPosition % colorList.size])
+        fun bind(item: QuickDecision?) = apply {
+            withItIfNotNull(item) {
+                itemView.layout_cardView.setCardBackgroundColor(colorList[layoutPosition % colorList.size])
 
-            textView_quickDecisionName.text = item.name
+                itemView.textView_quickDecisionName.text = name
 
-            setOnClickListener({ listener?.onQuickDecisionClicked(item) })
+                itemView.setOnClickListener({ listener?.onQuickDecisionClicked(quickDecision = this) })
+            }
         }
     }
 }

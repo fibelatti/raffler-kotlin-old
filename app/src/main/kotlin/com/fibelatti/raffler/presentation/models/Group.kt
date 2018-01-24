@@ -19,7 +19,7 @@ data class Group(val id: Long, val name: String, val items: List<GroupItem>) : P
         get() = items.filter { item -> item.isIncluded }
 
     constructor(parcel: Parcel) : this(
-        parcel.readValue(Long::class.java.classLoader) as Long,
+        parcel.readLong(),
         parcel.readString(),
         mutableListOf<GroupItem>().apply {
             parcel.readList(this, GroupItem::class.java.classLoader)

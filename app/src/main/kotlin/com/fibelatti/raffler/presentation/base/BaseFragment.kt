@@ -82,10 +82,10 @@ abstract class BaseFragment : Fragment(), BaseContract.View {
                 val textViewHintTitle = findViewById<AppCompatTextView>(R.id.textView_hintTitle)
                 val layoutHintBody = findViewById<FrameLayout>(R.id.layout_hintBody)
                 val buttonHintDismiss = findViewById<AppCompatTextView>(R.id.button_hintDismiss)
-                val textViewHintMessage = layoutInflater.inflate(R.layout.layout_dismissible_hint_text, layoutHintBody, false) as AppCompatTextView
+                val textViewHintMessage = layoutInflater.inflate(R.layout.layout_dismissible_hint_text, layoutHintBody, false) as? AppCompatTextView
 
                 textViewHintTitle.text = hintTitle
-                textViewHintMessage.text = hintMessage
+                textViewHintMessage?.text = hintMessage
 
                 layoutHintBody.addView(textViewHintMessage)
 

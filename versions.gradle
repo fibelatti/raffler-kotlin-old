@@ -43,7 +43,11 @@ ext.versions = [
     jUnitVersion             : '4.12',
     mockitoVersion           : '2.10.0',
     supportAnnotationsVersion: '27.0.2',
-    testRunnerVersion        : '1.0.1'
+    testRunnerVersion        : '1.0.1',
+
+    // Tools
+    dexCountPlugin: '0.8.2',
+    detekt: '1.0.0.RC6-2'
 ]
 
 ext.libraries = [

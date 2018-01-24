@@ -6,7 +6,6 @@ import com.fibelatti.raffler.data.quickdecision.QuickDecision
 import com.fibelatti.raffler.presentation.models.Group
 import io.reactivex.Completable
 import javax.inject.Inject
-import com.fibelatti.raffler.presentation.models.QuickDecision as PresentationModel
 
 class AddGroupAsQuickDecisionUseCase @Inject constructor(private val database: AppDatabase) {
     fun addGroupAsQuickDecision(group: Group): Completable {

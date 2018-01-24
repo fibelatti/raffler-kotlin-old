@@ -12,10 +12,15 @@ import com.fibelatti.raffler.data.quickdecision.QuickDecision
 import com.fibelatti.raffler.data.quickdecision.QuickDecisionRepositoryContract
 
 const val DATABASE_NAME = "com.fibelatti.raffler.data.db"
-const val DATABASE_VERSION = 5
+//region Old Database Versions
+const val DATABASE_VERSION_3 = 3
+const val DATABASE_VERSION_4 = 4
+//endregion
+
+const val DATABASE_CURRENT_VERSION = 5
 
 @Database(entities = [Group::class, GroupItem::class, QuickDecision::class],
-    version = DATABASE_VERSION,
+    version = DATABASE_CURRENT_VERSION,
     exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun getGroupRepository(): GroupRepositoryContract
@@ -29,7 +34,7 @@ abstract class AppDatabase : RoomDatabase() {
         }
     }
 
-    object MigrationTo4 : Migration(3, 4) {
+    object MigrationTo4 : Migration(DATABASE_VERSION_3, DATABASE_VERSION_4) {
         override fun migrate(database: SupportSQLiteDatabase) {
             database.execSQL(QuickDecision.DROP_TABLE)
             database.execSQL(QuickDecision.CREATE_TABLE)
@@ -38,7 +43,7 @@ abstract class AppDatabase : RoomDatabase() {
         }
     }
 
-    object MigrationTo5 : Migration(4, 5) {
+    object MigrationTo5 : Migration(DATABASE_VERSION_4, DATABASE_CURRENT_VERSION) {
         override fun migrate(database: SupportSQLiteDatabase) {
             database.execSQL("drop table if exists settings")
 

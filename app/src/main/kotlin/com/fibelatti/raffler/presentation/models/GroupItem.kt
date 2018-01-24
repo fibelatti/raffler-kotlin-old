@@ -3,12 +3,13 @@ package com.fibelatti.raffler.presentation.models
 import android.os.Parcel
 import android.os.Parcelable
 import com.fibelatti.raffler.core.extensions.createParcel
+import com.fibelatti.raffler.core.extensions.readBoolean
 
 data class GroupItem(val id: Long, val name: String, val isIncluded: Boolean = true) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readValue(Long::class.java.classLoader) as Long,
+        parcel.readLong(),
         parcel.readString(),
-        parcel.readValue(Boolean::class.java.classLoader) as Boolean)
+        parcel.readBoolean())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeValue(id)
