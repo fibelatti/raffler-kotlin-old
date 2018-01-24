@@ -9,3 +9,5 @@ inline fun <reified T : Parcelable> createParcel(
         override fun createFromParcel(source: Parcel): T? = createFromParcel(source)
         override fun newArray(size: Int): Array<out T?> = arrayOfNulls(size)
     }
+
+fun Parcel.readBoolean() = this.readInt() == 1

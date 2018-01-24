@@ -1,6 +1,5 @@
 package com.fibelatti.raffler.presentation.base
 
-import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.support.annotation.CallSuper
@@ -9,23 +8,14 @@ import android.support.v7.widget.AppCompatButton
 import android.support.v7.widget.AppCompatTextView
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import com.fibelatti.raffler.R
 import com.fibelatti.raffler.presentation.common.DialogHelper
 import javax.inject.Inject
 
-fun AppCompatActivity.hideKeyboard() {
-    val view = this.currentFocus
-    view?.let {
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(it.windowToken, 0)
-    }
-}
-
 abstract class BaseActivity : AppCompatActivity(), BaseContract.View {
     @Inject
-    lateinit protected var dialogHelper: DialogHelper
+    protected lateinit var dialogHelper: DialogHelper
 
     private lateinit var progressBarLayout: View
     private lateinit var placeholderRetryLayout: View
@@ -112,10 +102,10 @@ abstract class BaseActivity : AppCompatActivity(), BaseContract.View {
                 val textViewHintTitle = findViewById<AppCompatTextView>(R.id.textView_hintTitle)
                 val layoutHintBody = findViewById<FrameLayout>(R.id.layout_hintBody)
                 val buttonHintDismiss = findViewById<AppCompatTextView>(R.id.button_hintDismiss)
-                val textViewHintMessage = layoutInflater.inflate(R.layout.layout_dismissible_hint_text, layoutHintBody, false) as AppCompatTextView
+                val textViewHintMessage = layoutInflater.inflate(R.layout.layout_dismissible_hint_text, layoutHintBody, false) as? AppCompatTextView
 
                 textViewHintTitle.text = hintTitle
-                textViewHintMessage.text = hintMessage
+                textViewHintMessage?.text = hintMessage
 
                 layoutHintBody.addView(textViewHintMessage)
 

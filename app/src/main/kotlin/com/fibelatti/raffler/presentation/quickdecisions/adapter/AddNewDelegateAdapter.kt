@@ -19,7 +19,7 @@ class AddNewDelegateAdapter : BaseDelegateAdapter {
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder = ViewHolder(parent)
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: BaseViewType) {
-        (holder as ViewHolder).bind()
+        (holder as? ViewHolder)?.bind()
     }
 
     internal inner class ViewHolder(parent: ViewGroup) :
