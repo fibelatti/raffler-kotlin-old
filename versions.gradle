@@ -46,7 +46,8 @@ ext.versions = [
     testRunnerVersion        : '1.0.1',
 
     // Tools
-    dexCountPlugin: '0.8.2'
+    dexCountPlugin: '0.8.2',
+    detekt: '1.0.0.RC6-2'
 ]
 
 ext.libraries = [
