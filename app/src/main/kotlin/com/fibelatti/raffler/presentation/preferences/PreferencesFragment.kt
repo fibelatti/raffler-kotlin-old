@@ -14,12 +14,18 @@ import com.fibelatti.raffler.core.PLAY_STORE_BASE_URL
 import com.fibelatti.raffler.core.extensions.snackbar
 import com.fibelatti.raffler.core.extensions.withItIfNotNull
 import com.fibelatti.raffler.presentation.base.BaseFragment
+import com.fibelatti.raffler.presentation.common.ObservableView
 import com.fibelatti.raffler.presentation.models.Preferences
-import kotlinx.android.synthetic.main.fragment_preferences.*
-import kotlinx.android.synthetic.main.layout_preferences_analytics_opt_out.*
-import kotlinx.android.synthetic.main.layout_preferences_crash_report_opt_out.*
-import kotlinx.android.synthetic.main.layout_preferences_include_range.*
-import kotlinx.android.synthetic.main.layout_preferences_roulette_music.*
+import kotlinx.android.synthetic.main.fragment_preferences.button_rate
+import kotlinx.android.synthetic.main.fragment_preferences.button_share
+import kotlinx.android.synthetic.main.fragment_preferences.layout_root
+import kotlinx.android.synthetic.main.fragment_preferences.textView_appVersion
+import kotlinx.android.synthetic.main.layout_preferences_analytics_opt_out.checkBox_analyticsOptOut
+import kotlinx.android.synthetic.main.layout_preferences_analytics_opt_out.textView_analyticsOptOut
+import kotlinx.android.synthetic.main.layout_preferences_crash_report_opt_out.checkBox_crashReportOptOut
+import kotlinx.android.synthetic.main.layout_preferences_crash_report_opt_out.textView_crashReportOptOut
+import kotlinx.android.synthetic.main.layout_preferences_include_range.checkBox_includeRange
+import kotlinx.android.synthetic.main.layout_preferences_roulette_music.checkBox_rouletteMusic
 import javax.inject.Inject
 
 class PreferencesFragment :
@@ -40,14 +46,14 @@ class PreferencesFragment :
     override val rootLayout: FrameLayout?
         get() = layout_root
 
+    private val observablePreferences = ObservableView<Preferences>()
+
     override fun onAttach(context: Context?) {
         super.onAttach(context)
 
         activity?.let {
             getPresentationComponent(it).inject(this)
         }
-
-        preferencesPresenter.attachView(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
@@ -60,13 +66,15 @@ class PreferencesFragment :
 
     override fun onResume() {
         super.onResume()
-        preferencesPresenter.getPreferences()
+        preferencesPresenter.bind(this)
     }
 
-    override fun onDetach() {
-        preferencesPresenter.detachView()
-        super.onDetach()
+    override fun onPause() {
+        preferencesPresenter.unbind()
+        super.onPause()
     }
+
+    override fun updatePreferences(): ObservableView<Preferences> = observablePreferences
 
     override fun handleError(errorMessage: String?) {
         showErrorLayout({ recoverFromError() }, errorMessage
@@ -106,26 +114,26 @@ class PreferencesFragment :
     private fun setListeners() {
         checkBox_rouletteMusic.setOnCheckedChangeListener { _, isChecked ->
             preferences.rouletteMusicEnabled = isChecked
-            preferencesPresenter.updatePreferences(preferences)
+            observablePreferences.emitNext(preferences)
         }
 
         textView_crashReportOptOut.movementMethod = LinkMovementMethod.getInstance()
 
         checkBox_crashReportOptOut.setOnCheckedChangeListener { _, isChecked ->
             preferences.crashReportEnabled = isChecked
-            preferencesPresenter.updatePreferences(preferences)
+            observablePreferences.emitNext(preferences)
         }
 
         textView_analyticsOptOut.movementMethod = LinkMovementMethod.getInstance()
 
         checkBox_analyticsOptOut.setOnCheckedChangeListener { _, isChecked ->
             preferences.analyticsEnabled = isChecked
-            preferencesPresenter.updatePreferences(preferences)
+            observablePreferences.emitNext(preferences)
         }
 
         checkBox_includeRange.setOnCheckedChangeListener { _, isChecked ->
             preferences.numberRangeEnabled = isChecked
-            preferencesPresenter.updatePreferences(preferences)
+            observablePreferences.emitNext(preferences)
         }
 
         button_share.setOnClickListener {
@@ -147,6 +155,7 @@ class PreferencesFragment :
     }
 
     private fun recoverFromError() {
-        preferencesPresenter.getPreferences()
+        preferencesPresenter.unbind()
+        preferencesPresenter.bind(this)
     }
 }

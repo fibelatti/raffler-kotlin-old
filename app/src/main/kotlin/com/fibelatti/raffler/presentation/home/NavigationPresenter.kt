@@ -2,20 +2,23 @@ package com.fibelatti.raffler.presentation.home
 
 import com.fibelatti.raffler.presentation.base.BasePresenter
 import com.fibelatti.raffler.presentation.common.SchedulerProvider
+import com.fibelatti.raffler.presentation.home.NavigationContract.View
 
 class NavigationPresenter(schedulerProvider: SchedulerProvider) :
     BasePresenter<NavigationContract.View>(schedulerProvider),
     NavigationContract.Presenter {
 
-    override fun onQuickDecisionsClicked() {
-        view?.goToQuickDecisions()
-    }
+    override fun bind(view: View) {
+        super.bind(view)
 
-    override fun onGroupsClicked() {
-        view?.goToGroups()
-    }
-
-    override fun onPreferencesClicked() {
-        view?.goToPreferences()
+        view.quickDecisionsClicked()
+            .getObservable()
+            .subscribeUntilDetached { view.goToQuickDecisions() }
+        view.groupsClicked()
+            .getObservable()
+            .subscribeUntilDetached { view.goToGroups() }
+        view.preferencesClicked()
+            .getObservable()
+            .subscribeUntilDetached { view.goToPreferences() }
     }
 }

@@ -3,6 +3,7 @@ package com.fibelatti.raffler.presentation.preferences
 import com.fibelatti.raffler.BaseTest
 import com.fibelatti.raffler.domain.preferences.GetPreferencesUseCase
 import com.fibelatti.raffler.domain.preferences.UpdatePreferencesUseCase
+import com.fibelatti.raffler.presentation.common.ObservableView
 import com.fibelatti.raffler.presentation.models.Preferences
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -10,6 +11,7 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.BDDMockito.given
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 
 class PreferencesPresenterTest : BaseTest() {
@@ -21,11 +23,14 @@ class PreferencesPresenterTest : BaseTest() {
 
     private val preferencesPresenter = PreferencesPresenter(testSchedulerProvider, mockGetPreferencesUseCase, mockUpdatePreferencesUseCase)
 
+    private val observablePreferences = ObservableView<Preferences>()
+
     @Before
     fun setup() {
         given(mockException.message)
             .willReturn(GENERIC_ERROR_MESSAGE)
-        preferencesPresenter.attachView(mockView)
+        given(mockView.updatePreferences())
+            .willReturn(observablePreferences)
     }
 
     @Test
@@ -35,7 +40,7 @@ class PreferencesPresenterTest : BaseTest() {
             .willReturn(Single.just(mockPreferences))
 
         // Act
-        preferencesPresenter.getPreferences()
+        preferencesPresenter.bind(mockView)
 
         // Assert
         verify(mockView).showProgress()
@@ -50,7 +55,7 @@ class PreferencesPresenterTest : BaseTest() {
             .willReturn(Single.error(mockException))
 
         // Act
-        preferencesPresenter.getPreferences()
+        preferencesPresenter.bind(mockView)
 
         // Assert
         verify(mockView).showProgress()
@@ -61,29 +66,38 @@ class PreferencesPresenterTest : BaseTest() {
     @Test
     fun testUpdatePreferencesIsSuccessful() {
         // Arrange
+        given(mockGetPreferencesUseCase.getPreferences())
+            .willReturn(Single.just(mockPreferences))
         given(mockUpdatePreferencesUseCase.updatePreferences(mockPreferences))
             .willReturn(Completable.complete())
 
         // Act
-        preferencesPresenter.updatePreferences(mockPreferences)
+        preferencesPresenter.bind(mockView)
+        observablePreferences.emitNext(mockPreferences)
 
         // Assert
+        verify(mockView, times(2)).showProgress()
+        verify(mockView, times(2)).hideProgress()
         verify(mockView).onPreferencesUpdated()
     }
 
     @Test
     fun testUpdatePreferencesError() {
         // Arrange
+        given(mockGetPreferencesUseCase.getPreferences())
+            .willReturn(Single.just(mockPreferences))
         given(mockUpdatePreferencesUseCase.updatePreferences(mockPreferences))
             .willReturn(Completable.error(mockException))
         given(mockException.message)
             .willReturn(GENERIC_ERROR_MESSAGE)
 
         // Act
-        preferencesPresenter.updatePreferences(mockPreferences)
+        preferencesPresenter.bind(mockView)
+        observablePreferences.emitNext(mockPreferences)
 
         // Assert
-        verify(mockView).hideProgress()
+        verify(mockView, times(2)).showProgress()
+        verify(mockView, times(2)).hideProgress()
         verify(mockView).handleError(GENERIC_ERROR_MESSAGE)
     }
 }

@@ -6,14 +6,11 @@ import com.fibelatti.raffler.R
 import com.fibelatti.raffler.core.extensions.inflate
 import com.fibelatti.raffler.presentation.base.BaseDelegateAdapter
 import com.fibelatti.raffler.presentation.base.BaseViewType
+import com.fibelatti.raffler.presentation.common.ObservableView
 import kotlinx.android.synthetic.main.list_item_quick_decision.view.*
 
 class AddNewDelegateAdapter : BaseDelegateAdapter {
-    interface Listener {
-        fun onAddQuickDecisionClicked()
-    }
-
-    var listener: Listener? = null
+    val itemClickObservable = ObservableView<Unit>()
     var colorList: List<Int> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder = ViewHolder(parent)
@@ -27,7 +24,7 @@ class AddNewDelegateAdapter : BaseDelegateAdapter {
         fun bind() = with(itemView) {
             layout_cardView.setCardBackgroundColor(colorList[layoutPosition % colorList.size])
 
-            setOnClickListener({ listener?.onAddQuickDecisionClicked() })
+            itemView.setOnClickListener { itemClickObservable.emitNext(Unit) }
         }
     }
 }

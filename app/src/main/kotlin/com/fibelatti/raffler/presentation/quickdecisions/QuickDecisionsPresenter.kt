@@ -14,71 +14,79 @@ class QuickDecisionsPresenter(schedulerProvider: SchedulerProvider,
                               private val addGroupAsQuickDecisionUseCase: AddGroupAsQuickDecisionUseCase,
                               private val getGroupsUseCase: GetGroupsUseCase
 ) : QuickDecisionsContract.Presenter, BasePresenter<QuickDecisionsContract.View>(schedulerProvider) {
-    override fun bootstrap() {
-        view?.showProgress()
+    override fun bind(view: QuickDecisionsContract.View) {
+        super.bind(view)
+        view.showProgress()
 
         getQuickDecisionsUseCase.getAllQuickDecisions()
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.mainThread())
-            .subscribe(
-                ::handleGetAllQuickDecisionsSuccess,
-                ::handleError
+            .doFinally({ view.hideProgress() })
+            .subscribeUntilDetached(
+                { view.onDataLoaded(quickDecisions = it) },
+                { view.handleError(errorMessage = it.message) }
             )
+
+        view.quickDecisionClicked()
+            .getObservable()
+            .subscribeUntilDetached({ getQuickDecisionResult(view, quickDecision = it) })
+        view.addNewClicked()
+            .getObservable()
+            .subscribeUntilDetached({ addNewQuickDecision(view) })
+        view.createGroup()
+            .getObservable()
+            .subscribeUntilDetached { addGroupToQuickDecisions(view, group = it) }
     }
 
-    override fun getQuickDecisionResult(quickDecision: QuickDecision) {
+    private fun getQuickDecisionResult(view: QuickDecisionsContract.View, quickDecision: QuickDecision) {
         val randomIndex = Random().nextInt(quickDecision.items.size)
         val isOdd = randomIndex and 0x01 != 0
 
-        view?.onQuickDecisionResult(quickDecision.items[(randomIndex)], isOdd)
+        view.onQuickDecisionResult(quickDecision.items[(randomIndex)], isOdd)
     }
 
-    override fun addNewQuickDecision() {
+    private fun addNewQuickDecision(view: QuickDecisionsContract.View) {
         getGroupsUseCase.getAllGroups()
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.mainThread())
-            .subscribe(
-                ::handleGetAllGroupsSuccess,
-                ::handleError
+            .subscribeUntilDetached(
+                {
+                    when (it.size) {
+                        0 -> view.onGroupCreationRequired()
+                        else -> view.onDisplayUserGroups(it)
+                    }
+                },
+                { view.handleError(it.message) }
             )
     }
 
-    override fun addGroupToQuickDecisions(group: Group) {
-        view?.showProgress()
+    private fun addGroupToQuickDecisions(view: QuickDecisionsContract.View, group: Group) {
+        view.showProgress()
 
         addGroupAsQuickDecisionUseCase.addGroupAsQuickDecision(group)
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.mainThread())
-            .subscribe(
-                ::getUpdatedQuickDecisions,
-                ::handleError
+            .doFinally({ view.hideProgress() })
+            .subscribeUntilDetached(
+                { getUpdatedQuickDecisions(view) },
+                { view.handleError(it.message) }
             )
     }
 
-    private fun handleGetAllQuickDecisionsSuccess(quickDecisions: List<QuickDecision>) {
-        view?.hideProgress()
-        view?.onDataLoaded(quickDecisions)
-    }
+    private fun getUpdatedQuickDecisions(view: QuickDecisionsContract.View) {
+        view.showProgress()
 
-    private fun handleGetAllGroupsSuccess(groups: List<Group>) {
-        when (groups.size) {
-            0 -> view?.onGroupCreationRequired()
-            else -> view?.onDisplayUserGroups(groups)
-        }
-    }
-
-    private fun getUpdatedQuickDecisions() {
         getQuickDecisionsUseCase.getAllQuickDecisions()
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.mainThread())
-            .subscribe(
-                ::handleGetUpdatedQuickDecisionsSuccess,
-                ::handleError
+            .doFinally({ view.hideProgress() })
+            .subscribeUntilDetached(
+                { handleGetUpdatedQuickDecisionsSuccess(view, quickDecisions = it) },
+                { view.handleError(it.message) }
             )
     }
 
-    private fun handleGetUpdatedQuickDecisionsSuccess(quickDecisions: List<QuickDecision>) {
-        view?.hideProgress()
-        view?.onQuickDecisionsUpdated(quickDecisions)
+    private fun handleGetUpdatedQuickDecisionsSuccess(view: QuickDecisionsContract.View, quickDecisions: List<QuickDecision>) {
+        view.onQuickDecisionsUpdated(quickDecisions)
     }
 }
