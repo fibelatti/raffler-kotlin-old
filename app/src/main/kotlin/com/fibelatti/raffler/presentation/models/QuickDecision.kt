@@ -2,7 +2,7 @@ package com.fibelatti.raffler.presentation.models
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.fibelatti.raffler.core.extensions.createParcel
+import com.fibelatti.raffler.data.common.createParcel
 import com.fibelatti.raffler.presentation.quickdecisions.adapter.ViewType
 
 data class QuickDecision(

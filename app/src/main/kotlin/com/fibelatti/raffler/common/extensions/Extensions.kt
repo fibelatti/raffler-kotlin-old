@@ -1,4 +1,4 @@
-package com.fibelatti.raffler.core.extensions
+package com.fibelatti.raffler.common.extensions
 
 import android.content.SharedPreferences
 

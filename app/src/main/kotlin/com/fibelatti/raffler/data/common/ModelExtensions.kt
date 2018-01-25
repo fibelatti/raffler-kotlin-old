@@ -1,4 +1,4 @@
-package com.fibelatti.raffler.core.extensions
+package com.fibelatti.raffler.data.common
 
 import android.os.Parcel
 import android.os.Parcelable

@@ -2,8 +2,8 @@ package com.fibelatti.raffler.presentation.models
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.fibelatti.raffler.core.extensions.createParcel
-import com.fibelatti.raffler.core.extensions.readBoolean
+import com.fibelatti.raffler.data.common.createParcel
+import com.fibelatti.raffler.data.common.readBoolean
 
 data class GroupItem(val id: Long, val name: String, val isIncluded: Boolean = true) : Parcelable {
     constructor(parcel: Parcel) : this(

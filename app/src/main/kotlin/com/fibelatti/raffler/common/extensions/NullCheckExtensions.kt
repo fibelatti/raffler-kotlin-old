@@ -1,4 +1,4 @@
-package com.fibelatti.raffler.core.extensions
+package com.fibelatti.raffler.common.extensions
 
 inline fun <T, R> T?.ifNotNullThisElseThat(ifNotNull: (T) -> R, ifNull: () -> R) {
     if (this != null) ifNotNull(this) else ifNull()

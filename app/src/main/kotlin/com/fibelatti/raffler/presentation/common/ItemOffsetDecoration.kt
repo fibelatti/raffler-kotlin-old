@@ -6,7 +6,7 @@ import android.support.annotation.DimenRes
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.fibelatti.raffler.core.extensions.withItIfNotNull
+import com.fibelatti.raffler.common.extensions.withItIfNotNull
 
 class ItemOffsetDecoration(private val itemOffset: Int) : RecyclerView.ItemDecoration() {
 

@@ -8,7 +8,7 @@ import android.support.v4.content.ContextCompat
 import android.view.MenuItem
 import android.widget.FrameLayout
 import com.fibelatti.raffler.R
-import com.fibelatti.raffler.core.extensions.inTransaction
+import com.fibelatti.raffler.presentation.common.inTransaction
 import com.fibelatti.raffler.presentation.base.BaseActivity
 import com.fibelatti.raffler.presentation.common.ObservableView
 import com.fibelatti.raffler.presentation.preferences.PreferencesFragment

@@ -1,9 +1,9 @@
 package com.fibelatti.raffler.domain.quickdecision
 
 import com.fibelatti.raffler.BaseTest
-import com.fibelatti.raffler.core.LOCALE_EN
-import com.fibelatti.raffler.core.LOCALE_ES
-import com.fibelatti.raffler.core.LOCALE_NONE
+import com.fibelatti.raffler.common.LOCALE_EN
+import com.fibelatti.raffler.common.LOCALE_ES
+import com.fibelatti.raffler.common.LOCALE_NONE
 import com.fibelatti.raffler.data.localdatastorage.AppDatabase
 import com.fibelatti.raffler.data.quickdecision.QuickDecisionRepositoryContract
 import io.reactivex.Single

@@ -1,8 +1,8 @@
 package com.fibelatti.raffler.domain.quickdecision
 
-import com.fibelatti.raffler.core.LOCALE_EN
-import com.fibelatti.raffler.core.LOCALE_NONE
-import com.fibelatti.raffler.core.SUPPORTED_LOCALES
+import com.fibelatti.raffler.common.LOCALE_EN
+import com.fibelatti.raffler.common.LOCALE_NONE
+import com.fibelatti.raffler.common.SUPPORTED_LOCALES
 import com.fibelatti.raffler.data.localdatastorage.AppDatabase
 import com.fibelatti.raffler.data.quickdecision.QuickDecision
 import io.reactivex.Single
