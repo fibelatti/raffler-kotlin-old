@@ -1,4 +1,4 @@
-package com.fibelatti.raffler.core
+package com.fibelatti.raffler.common
 
 import java.util.Arrays
 

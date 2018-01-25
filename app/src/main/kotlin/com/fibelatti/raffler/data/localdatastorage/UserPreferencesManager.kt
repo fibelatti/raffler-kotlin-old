@@ -1,7 +1,7 @@
 package com.fibelatti.raffler.data.localdatastorage
 
 import android.content.SharedPreferences
-import com.fibelatti.raffler.core.extensions.applyWithEditor
+import com.fibelatti.raffler.common.extensions.applyWithEditor
 
 private const val USER_PREFERENCES_ROULETTE_MUSIC_ENABLED = "user_preferences_roulette_music_enabled"
 private const val USER_PREFERENCES_CRASH_REPORT_ENABLED = "user_preferences_crash_report_enabled"

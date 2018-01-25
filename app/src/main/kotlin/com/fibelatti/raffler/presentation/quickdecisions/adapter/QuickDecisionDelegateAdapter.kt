@@ -3,8 +3,8 @@ package com.fibelatti.raffler.presentation.quickdecisions.adapter
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.fibelatti.raffler.R
-import com.fibelatti.raffler.core.extensions.inflate
-import com.fibelatti.raffler.core.extensions.withItIfNotNull
+import com.fibelatti.raffler.presentation.common.inflate
+import com.fibelatti.raffler.common.extensions.withItIfNotNull
 import com.fibelatti.raffler.presentation.base.BaseDelegateAdapter
 import com.fibelatti.raffler.presentation.base.BaseViewType
 import com.fibelatti.raffler.presentation.common.ObservableView

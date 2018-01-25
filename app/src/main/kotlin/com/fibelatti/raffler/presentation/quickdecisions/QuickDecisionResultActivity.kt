@@ -7,12 +7,15 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.widget.FrameLayout
 import com.fibelatti.raffler.R
-import com.fibelatti.raffler.core.extensions.ifNotNullThisElseThat
+import com.fibelatti.raffler.common.extensions.ifNotNullThisElseThat
+import com.fibelatti.raffler.common.extensions.withItIfNotNull
 import com.fibelatti.raffler.presentation.base.BaseActivity
 import com.fibelatti.raffler.presentation.base.BaseIntentBuilder
 import com.fibelatti.raffler.presentation.common.changeImageColor
-import com.fibelatti.raffler.presentation.common.convertDrawableToBitmap
-import kotlinx.android.synthetic.main.activity_quick_decision_result.*
+import com.fibelatti.raffler.presentation.common.convertToBitmap
+import kotlinx.android.synthetic.main.activity_quick_decision_result.fab_close
+import kotlinx.android.synthetic.main.activity_quick_decision_result.layout_root
+import kotlinx.android.synthetic.main.activity_quick_decision_result.text_result
 
 class QuickDecisionResultActivity
     : BaseActivity() {
@@ -64,11 +67,10 @@ class QuickDecisionResultActivity
         val color = ContextCompat.getColor(this, if (isOdd) R.color.colorAccent else R.color.colorPrimary)
         val sourceDrawable = ContextCompat.getDrawable(this, R.drawable.ic_close_white_24dp)
 
-        sourceDrawable?.let {
-            val sourceBitmap = convertDrawableToBitmap(it)
-            val changedBitmap = changeImageColor(sourceBitmap, color)
-
-            fab_close.setImageBitmap(changedBitmap)
+        withItIfNotNull(sourceDrawable) {
+            val bitmap = convertToBitmap()
+            bitmap.changeImageColor(color)
+            fab_close.setImageBitmap(bitmap)
         }
 
         text_result.text = result

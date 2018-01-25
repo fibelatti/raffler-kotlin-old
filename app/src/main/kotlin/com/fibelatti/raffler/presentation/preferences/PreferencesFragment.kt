@@ -10,9 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.fibelatti.raffler.R
-import com.fibelatti.raffler.core.PLAY_STORE_BASE_URL
-import com.fibelatti.raffler.core.extensions.snackbar
-import com.fibelatti.raffler.core.extensions.withItIfNotNull
+import com.fibelatti.raffler.common.PLAY_STORE_BASE_URL
+import com.fibelatti.raffler.presentation.common.snackbar
+import com.fibelatti.raffler.common.extensions.withItIfNotNull
 import com.fibelatti.raffler.presentation.base.BaseFragment
 import com.fibelatti.raffler.presentation.common.ObservableView
 import com.fibelatti.raffler.presentation.models.Preferences
