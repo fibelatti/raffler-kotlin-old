@@ -20,6 +20,7 @@ class PreferencesPresenter(
         getPreferencesUseCase.getPreferences()
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.mainThread())
+            .doFinally({ view.hideProgress() })
             .subscribeUntilDetached(
                 { handleGetSuccess(view, preferences = it) },
                 { view.handleError(errorMessage = it.message) }
@@ -31,9 +32,11 @@ class PreferencesPresenter(
     }
 
     private fun updatePreferences(view: PreferencesContract.View, preferences: Preferences) {
+        view.showProgress()
         updatePreferencesUseCase.updatePreferences(preferences)
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.mainThread())
+            .doFinally({ view.hideProgress() })
             .subscribeUntilDetached(
                 { handleUpdateSuccess(view) },
                 { view.handleError(errorMessage = it.message) }
@@ -41,7 +44,6 @@ class PreferencesPresenter(
     }
 
     private fun handleGetSuccess(view: PreferencesContract.View, preferences: Preferences) {
-        view.hideProgress()
         view.onPreferencesFetched(preferences)
     }
 

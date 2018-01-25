@@ -60,12 +60,13 @@ class QuickDecisionsPresenter(schedulerProvider: SchedulerProvider,
             )
     }
 
-    fun addGroupToQuickDecisions(view: QuickDecisionsContract.View, group: Group) {
+    private fun addGroupToQuickDecisions(view: QuickDecisionsContract.View, group: Group) {
         view.showProgress()
 
         addGroupAsQuickDecisionUseCase.addGroupAsQuickDecision(group)
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.mainThread())
+            .doFinally({ view.hideProgress() })
             .subscribeUntilDetached(
                 { getUpdatedQuickDecisions(view) },
                 { view.handleError(it.message) }
@@ -73,9 +74,12 @@ class QuickDecisionsPresenter(schedulerProvider: SchedulerProvider,
     }
 
     private fun getUpdatedQuickDecisions(view: QuickDecisionsContract.View) {
+        view.showProgress()
+
         getQuickDecisionsUseCase.getAllQuickDecisions()
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.mainThread())
+            .doFinally({ view.hideProgress() })
             .subscribeUntilDetached(
                 { handleGetUpdatedQuickDecisionsSuccess(view, quickDecisions = it) },
                 { view.handleError(it.message) }
@@ -83,7 +87,6 @@ class QuickDecisionsPresenter(schedulerProvider: SchedulerProvider,
     }
 
     private fun handleGetUpdatedQuickDecisionsSuccess(view: QuickDecisionsContract.View, quickDecisions: List<QuickDecision>) {
-        view.hideProgress()
         view.onQuickDecisionsUpdated(quickDecisions)
     }
 }

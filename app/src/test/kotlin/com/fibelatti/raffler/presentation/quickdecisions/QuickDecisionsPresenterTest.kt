@@ -13,6 +13,7 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.BDDMockito.given
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 
 class QuickDecisionsPresenterTest : BaseTest() {
@@ -138,14 +139,16 @@ class QuickDecisionsPresenterTest : BaseTest() {
         observableGroup.emitNext(mockGroup)
 
         // Assert
-        verify(mockView).showProgress()
-        verify(mockView).hideProgress()
+        verify(mockView, times(3)).showProgress()
+        verify(mockView, times(3)).hideProgress()
         verify(mockView).onQuickDecisionsUpdated(listOf(mockQuickDecision))
     }
 
     @Test
     fun addGroupToQuickDecisionsError() {
         // Arrange
+        given(mockGetQuickDecisionsUseCase.getAllQuickDecisions())
+            .willReturn(Single.just(listOf(mockQuickDecision)))
         given(mockAddGroupAsQuickDecisionUseCase.addGroupAsQuickDecision(mockGroup))
             .willReturn(Completable.error(mockException))
 
@@ -154,8 +157,8 @@ class QuickDecisionsPresenterTest : BaseTest() {
         observableGroup.emitNext(mockGroup)
 
         // Assert
-        verify(mockView).showProgress()
-        verify(mockView).hideProgress()
+        verify(mockView, times(2)).showProgress()
+        verify(mockView, times(2)).hideProgress()
         verify(mockView).handleError(GENERIC_ERROR_MESSAGE)
     }
 }
