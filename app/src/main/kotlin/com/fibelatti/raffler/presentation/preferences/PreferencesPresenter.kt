@@ -5,40 +5,47 @@ import com.fibelatti.raffler.domain.preferences.UpdatePreferencesUseCase
 import com.fibelatti.raffler.presentation.base.BasePresenter
 import com.fibelatti.raffler.presentation.common.SchedulerProvider
 import com.fibelatti.raffler.presentation.models.Preferences
+import com.fibelatti.raffler.presentation.preferences.PreferencesContract.View
 
 class PreferencesPresenter(
     schedulerProvider: SchedulerProvider,
     private val getPreferencesUseCase: GetPreferencesUseCase,
     private val updatePreferencesUseCase: UpdatePreferencesUseCase
 ) : PreferencesContract.Presenter, BasePresenter<PreferencesContract.View>(schedulerProvider) {
-    override fun getPreferences() {
-        view?.showProgress()
+    override fun bind(view: View) {
+        super.bind(view)
+
+        view.showProgress()
 
         getPreferencesUseCase.getPreferences()
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.mainThread())
-            .subscribe(
-                ::handleGetSuccess,
-                ::handleError
+            .subscribeUntilDetached(
+                { handleGetSuccess(view, preferences = it) },
+                { view.handleError(errorMessage = it.message) }
             )
+
+        view.updatePreferences()
+            .getObservable()
+            .subscribeUntilDetached { updatePreferences(view, preferences = it) }
     }
 
-    override fun updatePreferences(preferences: Preferences) {
+    private fun updatePreferences(view: PreferencesContract.View, preferences: Preferences) {
         updatePreferencesUseCase.updatePreferences(preferences)
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.mainThread())
-            .subscribe(
-                ::handleUpdateSuccess,
-                ::handleError
+            .subscribeUntilDetached(
+                { handleUpdateSuccess(view) },
+                { view.handleError(errorMessage = it.message) }
             )
     }
 
-    private fun handleGetSuccess(preferences: Preferences) {
-        view?.hideProgress()
-        view?.onPreferencesFetched(preferences)
+    private fun handleGetSuccess(view: PreferencesContract.View, preferences: Preferences) {
+        view.hideProgress()
+        view.onPreferencesFetched(preferences)
     }
 
-    private fun handleUpdateSuccess() {
-        view?.onPreferencesUpdated()
+    private fun handleUpdateSuccess(view: PreferencesContract.View) {
+        view.onPreferencesUpdated()
     }
 }

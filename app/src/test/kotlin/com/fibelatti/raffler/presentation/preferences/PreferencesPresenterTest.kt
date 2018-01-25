@@ -3,6 +3,7 @@ package com.fibelatti.raffler.presentation.preferences
 import com.fibelatti.raffler.BaseTest
 import com.fibelatti.raffler.domain.preferences.GetPreferencesUseCase
 import com.fibelatti.raffler.domain.preferences.UpdatePreferencesUseCase
+import com.fibelatti.raffler.presentation.common.ObservableView
 import com.fibelatti.raffler.presentation.models.Preferences
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -21,11 +22,14 @@ class PreferencesPresenterTest : BaseTest() {
 
     private val preferencesPresenter = PreferencesPresenter(testSchedulerProvider, mockGetPreferencesUseCase, mockUpdatePreferencesUseCase)
 
+    private val observablePreferences = ObservableView<Preferences>()
+
     @Before
     fun setup() {
         given(mockException.message)
             .willReturn(GENERIC_ERROR_MESSAGE)
-        preferencesPresenter.attachView(mockView)
+        given(mockView.updatePreferences())
+            .willReturn(observablePreferences)
     }
 
     @Test
@@ -35,7 +39,7 @@ class PreferencesPresenterTest : BaseTest() {
             .willReturn(Single.just(mockPreferences))
 
         // Act
-        preferencesPresenter.getPreferences()
+        preferencesPresenter.bind(mockView)
 
         // Assert
         verify(mockView).showProgress()
@@ -50,7 +54,7 @@ class PreferencesPresenterTest : BaseTest() {
             .willReturn(Single.error(mockException))
 
         // Act
-        preferencesPresenter.getPreferences()
+        preferencesPresenter.bind(mockView)
 
         // Assert
         verify(mockView).showProgress()
@@ -65,7 +69,8 @@ class PreferencesPresenterTest : BaseTest() {
             .willReturn(Completable.complete())
 
         // Act
-        preferencesPresenter.updatePreferences(mockPreferences)
+        preferencesPresenter.bind(mockView)
+        observablePreferences.emitNext(mockPreferences)
 
         // Assert
         verify(mockView).onPreferencesUpdated()
@@ -80,7 +85,8 @@ class PreferencesPresenterTest : BaseTest() {
             .willReturn(GENERIC_ERROR_MESSAGE)
 
         // Act
-        preferencesPresenter.updatePreferences(mockPreferences)
+        preferencesPresenter.bind(mockView)
+        observablePreferences.emitNext(mockPreferences)
 
         // Assert
         verify(mockView).hideProgress()

@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.fibelatti.raffler.R
-import com.fibelatti.raffler.presentation.base.BaseContract
 import com.fibelatti.raffler.presentation.base.BaseFragment
 import com.fibelatti.raffler.presentation.common.ItemOffsetDecoration
 import com.fibelatti.raffler.presentation.common.ObservableView
@@ -19,12 +18,14 @@ import com.fibelatti.raffler.presentation.models.Group
 import com.fibelatti.raffler.presentation.models.QuickDecision
 import com.fibelatti.raffler.presentation.quickdecisions.adapter.QuickDecisionsAdapter
 import com.fibelatti.raffler.presentation.quickdecisions.adapter.ViewType
-import kotlinx.android.synthetic.main.fragment_recycler_view.*
+import kotlinx.android.synthetic.main.fragment_recycler_view.layout_hintContainer
+import kotlinx.android.synthetic.main.fragment_recycler_view.layout_root
+import kotlinx.android.synthetic.main.fragment_recycler_view.recyclerView_cardItems
 import javax.inject.Inject
 
 class QuickDecisionsFragment :
     BaseFragment(),
-    QuickDecisionsContract.ReactiveView {
+    QuickDecisionsContract.View {
 
     companion object {
         val TAG: String = QuickDecisionsFragment::class.java.simpleName
@@ -33,7 +34,7 @@ class QuickDecisionsFragment :
     }
 
     @Inject
-    lateinit var quickDecisionsPresenter: BaseContract.ReactivePresenter
+    lateinit var quickDecisionsPresenter: QuickDecisionsContract.Presenter
     @Inject
     lateinit var adapter: QuickDecisionsAdapter
 
@@ -76,9 +77,13 @@ class QuickDecisionsFragment :
         handleError(getString(R.string.network_msg_error))
     }
 
-    override fun getQuickDecisionResult(): ObservableView<QuickDecision> = adapter.getQuickDecisionClickEvent()
+    override fun quickDecisionClicked(): ObservableView<QuickDecision> = adapter.getQuickDecisionClickEvent()
 
-    override fun addNewQuickDecision(): ObservableView<Unit> = adapter.getAddQuickDecisionClickEvent()
+    override fun addNewClicked(): ObservableView<Unit> = adapter.getAddQuickDecisionClickEvent()
+
+    override fun createGroup(): ObservableView<Group> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     override fun onDataLoaded(quickDecisions: List<QuickDecision>) {
         val dataSet = ArrayList<ViewType>()

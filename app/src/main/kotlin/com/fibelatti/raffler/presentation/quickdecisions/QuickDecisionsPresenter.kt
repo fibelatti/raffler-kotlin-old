@@ -3,7 +3,7 @@ package com.fibelatti.raffler.presentation.quickdecisions
 import com.fibelatti.raffler.domain.group.GetGroupsUseCase
 import com.fibelatti.raffler.domain.quickdecision.AddGroupAsQuickDecisionUseCase
 import com.fibelatti.raffler.domain.quickdecision.GetQuickDecisionsUseCase
-import com.fibelatti.raffler.presentation.base.BaseReactivePresenter
+import com.fibelatti.raffler.presentation.base.BasePresenter
 import com.fibelatti.raffler.presentation.common.SchedulerProvider
 import com.fibelatti.raffler.presentation.models.Group
 import com.fibelatti.raffler.presentation.models.QuickDecision
@@ -13,15 +13,9 @@ class QuickDecisionsPresenter(schedulerProvider: SchedulerProvider,
                               private val getQuickDecisionsUseCase: GetQuickDecisionsUseCase,
                               private val addGroupAsQuickDecisionUseCase: AddGroupAsQuickDecisionUseCase,
                               private val getGroupsUseCase: GetGroupsUseCase
-) : BaseReactivePresenter(schedulerProvider) {
-    override fun <V> bind(view: V) {
+) : QuickDecisionsContract.Presenter, BasePresenter<QuickDecisionsContract.View>(schedulerProvider) {
+    override fun bind(view: QuickDecisionsContract.View) {
         super.bind(view)
-        when (view) {
-            is QuickDecisionsContract.ReactiveView -> bindActivity(view)
-        }
-    }
-
-    private fun bindActivity(view: QuickDecisionsContract.ReactiveView) {
         view.showProgress()
 
         getQuickDecisionsUseCase.getAllQuickDecisions()
@@ -33,22 +27,25 @@ class QuickDecisionsPresenter(schedulerProvider: SchedulerProvider,
                 { view.handleError(errorMessage = it.message) }
             )
 
-        view.getQuickDecisionResult()
+        view.quickDecisionClicked()
             .getObservable()
             .subscribeUntilDetached({ getQuickDecisionResult(view, quickDecision = it) })
-        view.addNewQuickDecision()
+        view.addNewClicked()
             .getObservable()
             .subscribeUntilDetached({ addNewQuickDecision(view) })
+        view.createGroup()
+            .getObservable()
+            .subscribeUntilDetached { addGroupToQuickDecisions(view, group = it) }
     }
 
-    private fun getQuickDecisionResult(view: QuickDecisionsContract.ReactiveView, quickDecision: QuickDecision) {
+    private fun getQuickDecisionResult(view: QuickDecisionsContract.View, quickDecision: QuickDecision) {
         val randomIndex = Random().nextInt(quickDecision.items.size)
         val isOdd = randomIndex and 0x01 != 0
 
         view.onQuickDecisionResult(quickDecision.items[(randomIndex)], isOdd)
     }
 
-    private fun addNewQuickDecision(view: QuickDecisionsContract.ReactiveView) {
+    private fun addNewQuickDecision(view: QuickDecisionsContract.View) {
         getGroupsUseCase.getAllGroups()
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.mainThread())
@@ -63,7 +60,7 @@ class QuickDecisionsPresenter(schedulerProvider: SchedulerProvider,
             )
     }
 
-    fun addGroupToQuickDecisions(view: QuickDecisionsContract.ReactiveView, group: Group) {
+    fun addGroupToQuickDecisions(view: QuickDecisionsContract.View, group: Group) {
         view.showProgress()
 
         addGroupAsQuickDecisionUseCase.addGroupAsQuickDecision(group)
@@ -75,7 +72,7 @@ class QuickDecisionsPresenter(schedulerProvider: SchedulerProvider,
             )
     }
 
-    private fun getUpdatedQuickDecisions(view: QuickDecisionsContract.ReactiveView) {
+    private fun getUpdatedQuickDecisions(view: QuickDecisionsContract.View) {
         getQuickDecisionsUseCase.getAllQuickDecisions()
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.mainThread())
@@ -85,7 +82,7 @@ class QuickDecisionsPresenter(schedulerProvider: SchedulerProvider,
             )
     }
 
-    private fun handleGetUpdatedQuickDecisionsSuccess(view: QuickDecisionsContract.ReactiveView, quickDecisions: List<QuickDecision>) {
+    private fun handleGetUpdatedQuickDecisionsSuccess(view: QuickDecisionsContract.View, quickDecisions: List<QuickDecision>) {
         view.hideProgress()
         view.onQuickDecisionsUpdated(quickDecisions)
     }

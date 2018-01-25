@@ -10,10 +10,12 @@ import android.widget.FrameLayout
 import com.fibelatti.raffler.R
 import com.fibelatti.raffler.core.extensions.inTransaction
 import com.fibelatti.raffler.presentation.base.BaseActivity
+import com.fibelatti.raffler.presentation.common.ObservableView
 import com.fibelatti.raffler.presentation.preferences.PreferencesFragment
 import com.fibelatti.raffler.presentation.quickdecisions.QuickDecisionsFragment
-import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.layout_toolbar_default.*
+import kotlinx.android.synthetic.main.activity_home.layout_bottomNavigation
+import kotlinx.android.synthetic.main.activity_home.layout_root
+import kotlinx.android.synthetic.main.layout_toolbar_default.toolbar
 import javax.inject.Inject
 
 class HomeActivity :
@@ -48,6 +50,10 @@ class HomeActivity :
     override val rootLayout: FrameLayout?
         get() = layout_root
 
+    private val observableQuickDecisionsTab = ObservableView<Unit>()
+    private val observableGroupsTab = ObservableView<Unit>()
+    private val observablePreferencesTab = ObservableView<Unit>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -56,15 +62,18 @@ class HomeActivity :
 
         savedInstanceState?.let { restoreFromState(it) }
 
-        presenter.attachView(this)
-
         initFragments()
         setUpLayout()
     }
 
-    override fun onDestroy() {
-        presenter.detachView()
-        super.onDestroy()
+    override fun onResume() {
+        super.onResume()
+        presenter.bind(this)
+    }
+
+    override fun onPause() {
+        presenter.unbind()
+        super.onPause()
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -80,14 +89,20 @@ class HomeActivity :
             item.isChecked = true
 
             when (item.itemId) {
-                R.id.menuItem_quickDecisions -> presenter.onQuickDecisionsClicked()
-                R.id.menuItem_myGroups -> presenter.onGroupsClicked()
-                R.id.menuItem_preferences -> presenter.onPreferencesClicked()
+                R.id.menuItem_quickDecisions -> observableQuickDecisionsTab.emitNext(Unit)
+                R.id.menuItem_myGroups -> observableGroupsTab.emitNext(Unit)
+                R.id.menuItem_preferences -> observablePreferencesTab.emitNext(Unit)
             }
         }
 
         return true
     }
+
+    override fun quickDecisionsClicked(): ObservableView<Unit> = observableQuickDecisionsTab
+
+    override fun groupsClicked(): ObservableView<Unit> = observablePreferencesTab
+
+    override fun preferencesClicked(): ObservableView<Unit> = observablePreferencesTab
 
     override fun goToQuickDecisions() {
         updateContent(CURRENT_VIEW_QUICK_DECISIONS)

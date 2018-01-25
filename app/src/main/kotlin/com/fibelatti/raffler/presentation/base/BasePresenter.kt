@@ -1,20 +1,53 @@
 package com.fibelatti.raffler.presentation.base
 
+import android.support.annotation.CallSuper
 import com.fibelatti.raffler.presentation.common.SchedulerProvider
+import io.reactivex.Completable
+import io.reactivex.Observable
+import io.reactivex.Single
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 
-abstract class BasePresenter<V : BaseContract.View>(protected val schedulerProvider: SchedulerProvider) : BaseContract.Presenter<V> {
-    protected var view: V? = null
+abstract class BasePresenter<in V : BaseContract.View>(protected val schedulerProvider: SchedulerProvider) :
+    BaseContract.Presenter<V> {
 
-    override fun attachView(view: V) {
-        this.view = view
+    private lateinit var viewDisposables: CompositeDisposable
+
+    //region protected Observable, Single & Completable extensions
+    protected fun <T> Observable<T>.subscribeUntilDetached(onNext: (T) -> Unit):
+        Disposable = subscribe(onNext).apply { disposeOnDetach(disposable = this) }
+
+    protected fun <T> Observable<T>.subscribeUntilDetached(onNext: (T) -> Unit,
+                                                           onError: (Throwable) -> Unit):
+        Disposable = subscribe(onNext, onError).apply { disposeOnDetach(disposable = this) }
+
+    protected fun <T> Observable<T>.subscribeUntilDetached(onNext: (T) -> Unit,
+                                                           onError: (Throwable) -> Unit,
+                                                           onComplete: () -> Unit):
+        Disposable = subscribe(onNext, onError, onComplete).apply { disposeOnDetach(disposable = this) }
+
+    protected fun <T> Single<T>.subscribeUntilDetached(onComplete: (T) -> Unit):
+        Disposable = subscribe(onComplete).apply { disposeOnDetach(disposable = this) }
+
+    protected fun <T> Single<T>.subscribeUntilDetached(onComplete: (T) -> Unit,
+                                                       onError: (Throwable) -> Unit):
+        Disposable = subscribe(onComplete, onError).apply { disposeOnDetach(disposable = this) }
+
+    protected fun Completable.subscribeUntilDetached(onComplete: () -> Unit,
+                                                     onError: (Throwable) -> Unit):
+        Disposable = subscribe(onComplete, onError).apply { disposeOnDetach(disposable = this) }
+    //endregion
+
+    @CallSuper
+    override fun bind(view: V) {
+        viewDisposables = CompositeDisposable()
     }
 
-    override fun detachView() {
-        view = null
+    override fun unbind() {
+        viewDisposables.dispose()
     }
 
-    protected fun handleError(error: Throwable = Exception()) {
-        view?.hideProgress()
-        view?.handleError(error.message)
+    private fun disposeOnDetach(disposable: Disposable) {
+        viewDisposables.add(disposable)
     }
 }

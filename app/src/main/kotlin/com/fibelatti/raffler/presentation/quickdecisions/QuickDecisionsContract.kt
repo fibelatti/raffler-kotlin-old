@@ -6,33 +6,15 @@ import com.fibelatti.raffler.presentation.models.Group
 import com.fibelatti.raffler.presentation.models.QuickDecision
 
 interface QuickDecisionsContract {
-    interface Presenter : BaseContract.Presenter<View> {
-        fun bootstrap()
-
-        fun getQuickDecisionResult(quickDecision: QuickDecision)
-
-        fun addNewQuickDecision()
-
-        fun addGroupToQuickDecisions(group: Group)
-    }
+    interface Presenter : BaseContract.Presenter<View>
 
     interface View : BaseContract.View {
-        fun onDataLoaded(quickDecisions: List<QuickDecision>)
-
-        fun onQuickDecisionResult(result: String, isOdd: Boolean)
-
-        fun onDisplayUserGroups(groups: List<Group>)
-
-        fun onGroupCreationRequired()
-
-        fun onQuickDecisionsUpdated(quickDecisions: List<QuickDecision>)
-    }
-
-    interface ReactiveView : BaseContract.View {
         // Produces
-        fun getQuickDecisionResult(): ObservableView<QuickDecision>
+        fun quickDecisionClicked(): ObservableView<QuickDecision>
 
-        fun addNewQuickDecision(): ObservableView<Unit>
+        fun addNewClicked(): ObservableView<Unit>
+
+        fun createGroup(): ObservableView<Group>
 
         // Consumes
         fun onDataLoaded(quickDecisions: List<QuickDecision>)

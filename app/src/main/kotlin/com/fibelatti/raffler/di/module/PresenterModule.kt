@@ -5,13 +5,13 @@ import com.fibelatti.raffler.domain.preferences.GetPreferencesUseCase
 import com.fibelatti.raffler.domain.preferences.UpdatePreferencesUseCase
 import com.fibelatti.raffler.domain.quickdecision.AddGroupAsQuickDecisionUseCase
 import com.fibelatti.raffler.domain.quickdecision.GetQuickDecisionsUseCase
-import com.fibelatti.raffler.presentation.base.BaseContract
 import com.fibelatti.raffler.presentation.common.AppSchedulerProvider
 import com.fibelatti.raffler.presentation.common.SchedulerProvider
 import com.fibelatti.raffler.presentation.home.NavigationContract
 import com.fibelatti.raffler.presentation.home.NavigationPresenter
 import com.fibelatti.raffler.presentation.preferences.PreferencesContract
 import com.fibelatti.raffler.presentation.preferences.PreferencesPresenter
+import com.fibelatti.raffler.presentation.quickdecisions.QuickDecisionsContract
 import com.fibelatti.raffler.presentation.quickdecisions.QuickDecisionsPresenter
 import dagger.Module
 import dagger.Provides
@@ -30,7 +30,7 @@ class PresenterModule {
                                        getQuickDecisionsUseCase: GetQuickDecisionsUseCase,
                                        addGroupAsQuickDecisionUseCase: AddGroupAsQuickDecisionUseCase,
                                        getGroupsUseCase: GetGroupsUseCase):
-        BaseContract.ReactivePresenter = QuickDecisionsPresenter(schedulerProvider, getQuickDecisionsUseCase, addGroupAsQuickDecisionUseCase, getGroupsUseCase)
+        QuickDecisionsContract.Presenter = QuickDecisionsPresenter(schedulerProvider, getQuickDecisionsUseCase, addGroupAsQuickDecisionUseCase, getGroupsUseCase)
 
     @Provides
     fun providePreferencesPresenter(schedulerProvider: SchedulerProvider,
